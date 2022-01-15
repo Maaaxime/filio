@@ -25,9 +25,6 @@
                                     Name</th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    E-mail</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Roles</th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -37,17 +34,31 @@
                         <tbody>
                             @foreach ($data as $key => $user)
                             <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <img class="h-10 w-10 rounded-full"
+                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                                                alt="">
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                <a href="{{ route('users.show',$user->id) }}">{{ $user->name }}</a>
+                                            </div>
+                                            <div class="text-sm text-gray-500">
+                                                {{ $user->email }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
                                     @if(!empty($user->getRoleNames()))
                                     @foreach($user->getRoleNames() as $v)
                                     <label class="badge badge-success">{{ $v }}</label>
                                     @endforeach
                                     @endif
                                 </td>
-                                <td>
-                                    <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     @can('user-mngt')
                                     <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
                                     {!! Form::open(['method' => 'DELETE','route' =>

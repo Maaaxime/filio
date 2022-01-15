@@ -31,9 +31,11 @@
                         <tbody>
                             @foreach ($roles as $key => $role)
                             <tr>
-                                <td>{{ $role->name }}</td>
-                                <td>
-                                    <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                <a class="btn btn-info"
+                                        href="{{ route('roles.show',$role->id) }}">{{ $role->name }}</a></td>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     @can('role-mngt')
                                     <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
                                     {!! Form::open(['method' => 'DELETE','route' =>
