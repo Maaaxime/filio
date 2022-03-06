@@ -3,5 +3,16 @@
             {{ __('message.dashboard') }}
     </x-slot>
 
-    <p>{{ __('auth.loggedIn') }}</p>
+    <article>
+        <p>Il y a actuellement :
+            <ul>
+                <li>
+                    <a href="{{ url('/admin/users') }}">{{ $users }} utilisateurs. </a>
+                </li>
+                <li>
+                    <a href="{{ url('/admin/roles') }}">{{ $roles }} rôles.</a>
+                </li>
+            </ul>
+        </p>
+    </article>
 </x-app-layout>
