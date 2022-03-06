@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Users Management') }}
+            {{ __('message.usersManagement') }}
         </h2>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('users.index') }}">< Back</a>

@@ -18,7 +18,9 @@ class PermissionTableSeeder extends Seeder
             'role-list',
             'role-mngt',
             'user-list',
-            'user-mngt'
+            'user-mngt',
+            'company-list',
+            'company-mngt',
          ];
 
          foreach ($permissions as $permission) {
