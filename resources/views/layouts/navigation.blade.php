@@ -28,7 +28,7 @@
                     </form>
                 </li>
             @else
-                <li><a href="{{ route('login') }}" class="secondary">{{ __('message.logIn') }}</a></li>
+                <li><a href="{{ route('login') }}" class="secondary">{{ __('auth.logIn') }}</a></li>
             @endauth
         @endif
     </ul>
