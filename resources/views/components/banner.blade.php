@@ -8,8 +8,8 @@
             </a>
             <header>
                 <hgroup>
-                    <h2>{{ __('Whoops!') }}</h2>
-                    <h3>{{ __('There were some problems with your input.') }}</h3>
+                    <h2>{{ __('message.whoops') }}</h2>
+                    <h3>{{ __('message.whoopsDetails') }}</h3>
                 </hgroup>
             </header>
             <ul>

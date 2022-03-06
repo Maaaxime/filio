@@ -12,18 +12,18 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <input type="text" name="email" placeholder="Login" type="email" aria-label="Login" :value="old('email')" required autofocu>
-            <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required>
+            <input type="text" name="email" placeholder="{{ __('auth.logIn') }}" type="email" aria-label="{{ __('auth.email') }}" :value="old('email')" required autofocu>
+            <input type="password" name="password" placeholder="{{ __('auth.password') }}" aria-label="{{ __('auth.password') }}" autocomplete="current-password" required>
             <fieldset>
               <label for="remember_me">
                 <input type="checkbox" role="switch" id="remember_me" name="remember">
-                {{ __('Remember me') }}
+                {{ __('auth.rememberMe') }}
               </label>
             </fieldset>
-            <button type="submit" class="contrast">Login</button>
+            <button type="submit" class="contrast">{{ __('auth.logIn') }}</button>
             @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                        {{ __('auth.password-forget') }}
                     </a>
                 @endif
         </form>

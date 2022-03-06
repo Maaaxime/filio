@@ -1,8 +1,8 @@
 <article class="grid" style="padding: 0;">
     <div>
         <hgroup>
-            <h1>{{ __('message.logIn') }}</h1>
-            <h2>{{ __('message.logInDetails') }}</h2>
+            <h1>{{ __('auth.logIn') }}</h1>
+            <h2>{{ __('auth.logInDetails') }}</h2>
         </hgroup>
         {{ $slot }}
     </div>

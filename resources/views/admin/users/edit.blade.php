@@ -18,20 +18,20 @@
         {!! Form::text('name', null, ['placeholder' => __('message.name'), 'class' => '', 'disabled' => $readonly]) !!}
     </label>
     <label for="email">
-        {{ __('message.email') }}
-        {!! Form::text('email', null, ['placeholder' => __('message.email'), 'class' => '', 'disabled' => $readonly]) !!}
+        {{ __('auth.email') }}
+        {!! Form::text('email', null, ['placeholder' => __('auth.email'), 'class' => '', 'disabled' => $readonly]) !!}
     </label>
     <div class="grid">
         <div>
             <label for="password" class="">
-                {{ __('message.password') }}
-                {!! Form::password('password', ['placeholder' => __('message.password'), 'class' => '', 'disabled' => $readonly]) !!}
+                {{ __('auth.password') }}
+                {!! Form::password('password', ['placeholder' => __('auth.password'), 'class' => '', 'disabled' => $readonly]) !!}
             </label>
         </div>
         <div>
             <label for="confirm-password" class="">
-                {{ __('message.password-confirm') }}
-                {!! Form::password('confirm-password', ['placeholder' => __('message.password-confirm'), 'class' => '', 'disabled' => $readonly]) !!}
+                {{ __('auth.password-confirm') }}
+                {!! Form::password('confirm-password', ['placeholder' => __('auth.password-confirm'), 'class' => '', 'disabled' => $readonly]) !!}
             </label>
         </div>
     </div>

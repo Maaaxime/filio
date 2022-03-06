@@ -24,7 +24,7 @@
                         @csrf
                         <a href="route('logout')" onclick="event.preventDefault();
                                                         this.closest('form').submit();" class="secondary">
-                            {{ __('message.logOut') }}</a>
+                            {{ __('auth.logOut') }}</a>
                     </form>
                 </li>
             @else

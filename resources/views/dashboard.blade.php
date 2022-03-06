@@ -3,5 +3,5 @@
             {{ __('message.dashboard') }}
     </x-slot>
 
-    <p>{{ __('message.loggedIn') }}</p>
+    <p>{{ __('auth.loggedIn') }}</p>
 </x-app-layout>

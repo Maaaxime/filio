@@ -3,7 +3,8 @@
     </x-slot>
 
     <x-auth-card>
-        <p>{{ __('This is a secure area of the application. Please confirm your password before continuing.') }}</p>
+        <p>{{ __('auth.password-confirmDetails') }}</p>
+        
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -11,7 +12,8 @@
             @csrf
 
             <!-- Password -->
-            <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required>
+            <input type="password" name="password" placeholder="{{ __('auth.password') }}"
+                aria-label="{{ __('auth.password') }}" autocomplete="current-password" required>
             <button type="submit" class="contrast">{{ __('auth.confirm') }}</button>
         </form>
     </x-auth-card>

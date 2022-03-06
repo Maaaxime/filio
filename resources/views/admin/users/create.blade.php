@@ -18,20 +18,20 @@
         {!! Form::text('name', null, ['placeholder' => __('message.name'), 'class' => '']) !!}
     </label>
     <label for="email">
-        {{ __('message.email') }}
-        {!! Form::text('email', null, ['placeholder' => __('message.email'), 'class' => '']) !!}
+        {{ __('auth.email') }}
+        {!! Form::text('email', null, ['placeholder' => __('auth.email'), 'class' => '']) !!}
     </label>
     <div class="grid">
         <div>
             <label for="password" class="">
-                {{ __('message.password') }}
-                {!! Form::password('password', ['placeholder' => __('message.password'), 'class' => '']) !!}
+                {{ __('auth.password') }}
+                {!! Form::password('password', ['placeholder' => __('auth.password'), 'class' => '']) !!}
             </label>
         </div>
         <div>
             <label for="confirm-password" class="">
-                {{ __('message.password-confirm') }}
-                {!! Form::password('confirm-password', ['placeholder' => __('message.password-confirm'), 'class' => '']) !!}
+                {{ __('auth.password-confirm') }}
+                {!! Form::password('confirm-password', ['placeholder' => __('auth.password-confirm'), 'class' => '']) !!}
             </label>
         </div>
     </div>
