@@ -15,7 +15,7 @@
     <x-banner />
 
     {!! Form::open(['route' => 'roles.store', 'method' => 'POST']) !!}
-    <label for="firstname">
+    <label for="name">
         {{ __('message.name') }}
         {!! Form::text('name', null, ['placeholder' => __('message.name'), 'class' => '']) !!}
     </label>

@@ -20,10 +20,14 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
-Route::group(['middleware' => ['auth','role:Admin'],'prefix' => 'admin'], function() {
+Route::group(['middleware' => ['auth', 'role:Admin'], 'prefix' => 'admin'], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
     Route::resource('companies', 'CompanyController');
 });
 
-require __DIR__.'/auth.php';
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('childs', 'ChildrenController');
+});
+
+require __DIR__ . '/auth.php';

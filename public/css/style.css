@@ -212,3 +212,12 @@ article>div {
         padding: 2rem;
     }
 }
+
+details[open]>summary {
+    margin-top: 0;
+    margin-bottom: 2.25rem;
+    color: var(--color);
+    font-weight: 700;
+    font-family: var(--font-family);
+    font-size: 1.5rem;
+}

@@ -12,6 +12,9 @@
                 <li>
                     <a href="{{ url('/admin/roles') }}">{{ $roles }} rôles.</a>
                 </li>
+                <li>
+                    <a href="{{ url('/childs') }}">{{ $childs }} enfants.</a>
+                </li>
             </ul>
         </p>
     </article>

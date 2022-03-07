@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Children;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
@@ -14,7 +15,8 @@ class PageController extends Controller
     {
         $roles = Role::all()->count();
         $users = User::all()->count();
-
-        return view('dashboard',compact('roles','users'));
+        $childs = Children::all()->count();
+        
+        return view('dashboard',compact('roles','users','childs'));
     }
 }
