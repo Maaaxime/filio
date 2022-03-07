@@ -119,6 +119,13 @@ class UserController extends Controller
                 DB::table('model_has_roles')->where('model_id', $id)->delete();
 
                 $user->assignRole($request->input('roles'));
+
+                if ($request->hasFile('image')) {
+                    $filename = $request->image->getClientOriginalName();
+                    $request->image->storeAs('images', $filename, 'public');
+                    $user->update(['image' => $filename]);
+                }
+
                 return redirect()->route('users.index')
                     ->with('success', 'User updated successfully');
                 break;

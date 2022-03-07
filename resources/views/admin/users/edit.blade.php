@@ -14,15 +14,26 @@
 
     <x-banner />
 
-    {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
-    <label for="name">
-        {{ __('message.name') }}
-        {!! Form::text('name', null, ['placeholder' => __('message.name'), 'class' => '', 'disabled' => $readonly]) !!}
-    </label>
-    <label for="email">
-        {{ __('auth.email') }}
-        {!! Form::text('email', null, ['placeholder' => __('auth.email'), 'class' => '', 'disabled' => $readonly]) !!}
-    </label>
+    {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id], 'enctype' => 'multipart/form-data']) !!}
+    <div class="grid">
+        <div>
+            @if ($user->image)
+                <img class="image rounded-circle" src="{{ asset('/storage/images/' . $user->image) }}"
+                    alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+            @endif
+            {{ Form::file('image', null, ['name' => 'image', 'class' => '']) }}
+        </div>
+        <div>
+            <label for="name">
+                {{ __('message.name') }}
+                {!! Form::text('name', null, ['placeholder' => __('message.name'), 'class' => '', 'disabled' => $readonly]) !!}
+            </label>
+            <label for="email">
+                {{ __('auth.email') }}
+                {!! Form::text('email', null, ['placeholder' => __('auth.email'), 'class' => '', 'disabled' => $readonly]) !!}
+            </label>
+        </div>
+    </div>
     <div class="grid">
         <div>
             <label for="password" class="">
