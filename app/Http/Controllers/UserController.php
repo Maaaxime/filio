@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -115,15 +117,24 @@ class UserController extends Controller
                 }
 
                 $user = User::find($id);
+                $oldImage = 'public/images/' . $user->image;
+
                 $user->update($input);
                 DB::table('model_has_roles')->where('model_id', $id)->delete();
 
                 $user->assignRole($request->input('roles'));
 
                 if ($request->hasFile('image')) {
-                    $filename = $request->image->getClientOriginalName();
-                    $request->image->storeAs('images', $filename, 'public');
+                    $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
+                    $filename = 'User_' . $id . '_ProfilePicture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
                     $user->update(['image' => $filename]);
+                    
+                    $request->image->storeAs('images',  $filename, 'public');
+
+                    if(Storage::exists($oldImage)) {
+                        Storage::delete($oldImage);
+                    }
+                    
                 }
 
                 return redirect()->route('users.index')

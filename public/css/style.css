@@ -59,7 +59,8 @@ i {
 }
 
 .img-circle {
-    border-radius: 50%;
+    border-radius:50%;
+    background-size: cover;
 }
 
 .h-10 {
@@ -68,6 +69,14 @@ i {
 
 .w-10 {
     width: 2.5rem;
+}
+
+.h-20 {
+    height: 5rem;
+}
+
+.w-20 {
+    width: 5rem;
 }
 
 table td,

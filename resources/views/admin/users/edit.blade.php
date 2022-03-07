@@ -18,8 +18,7 @@
     <div class="grid">
         <div>
             @if ($user->image)
-                <img class="image rounded-circle" src="{{ asset('/storage/images/' . $user->image) }}"
-                    alt="profile_image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+            <div class="w-20 h-20 img-circle" style="background-image: url('{{ asset('/storage/images/' . $user->image) }}')"></div>
             @endif
             {{ Form::file('image', null, ['name' => 'image', 'class' => '']) }}
         </div>

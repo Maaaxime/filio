@@ -34,8 +34,8 @@
                         <div class="grid flex items-center">
                             <div class="flex-shrink-0 h-10 w-10">
                                 @if ($user->image)
-                                    <img class="h-10 w-10 img-circle"
-                                        src="{{ asset('/storage/images/' . $user->image) }}">
+                                <div class="w-10 h-10 img-circle" style="background-image: url('{{ asset('/storage/images/' . $user->image) }}')"></div>
+            
                                 @endif
                             </div>
                             <div>
