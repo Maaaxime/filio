@@ -55,6 +55,7 @@ i {
     justify-content: center;
     align-items: center;
     vertical-align: middle;
+    margin-right: 0.25rem;
 }
 
 .img-circle {

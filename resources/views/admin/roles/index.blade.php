@@ -6,7 +6,7 @@
             </h2>
             <h3>
                 <a href="{{ route('roles.create') }}">
-                    <span class="icon"><i class="gg-add"></i></span> {{ __('message.add') }}
+                    <span class="icon"><i class="gg-add"></i></span>{{ __('message.add') }}
                 </a>
             </h3>
         </hgroup>
@@ -37,6 +37,6 @@
         </tbody>
     </table>
 
-    {!! $roles->render() !!}
+    {{ $roles->links('vendor.pagination.custom') }}
 
 </x-app-layout>

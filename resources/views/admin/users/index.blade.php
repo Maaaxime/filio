@@ -6,7 +6,7 @@
             </h2>
             <h3>
                 <a href="{{ route('users.create') }}">
-                    <span class="icon"><i class="gg-add"></i></span> {{ __('message.add') }}
+                    <span class="icon"><i class="gg-add"></i></span>{{ __('message.add') }}
                 </a>
             </h3>
         </hgroup>
@@ -55,7 +55,6 @@
             @endforeach
         </tbody>
     </table>
-
-    {!! $data->render() !!}
+    {{ $data->links('vendor.pagination.custom') }}
 
 </x-app-layout>

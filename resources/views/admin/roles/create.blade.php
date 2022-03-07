@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <hgroup>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="">
                 {{ __('message.rolesManagement') }}
             </h2>
             <h3>
                 <a href="{{ route('roles.index') }}">
-                    <span class="icon"><i class="gg-arrow-left-o"></i></span> {{ __('message.back') }}
+                    <span class="icon"><i class="gg-arrow-left-o"></i></span>{{ __('message.back') }}
                 </a>
             </h3>
         </hgroup>
@@ -29,6 +29,6 @@
             </label>
         @endforeach
     </fieldset>
-    {!! Form::button('<span class="icon"><i class="gg-add"></i></span> ' . __('message.save'), ['class' => 'btn-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
+    {!! Form::button('<span class="icon"><i class="gg-add"></i></span>' . __('message.save'), ['class' => 'btn-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
     {!! Form::close() !!}
 </x-app-layout>

@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <hgroup>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="">
                 {{ __('message.usersManagement') }}
             </h2>
             <h3>
                 <a href="{{ route('users.index') }}">
-                    <span class="icon"><i class="gg-arrow-left-o"></i></span> {{ __('message.back') }}
+                    <span class="icon"><i class="gg-arrow-left-o"></i></span>{{ __('message.back') }}
                 </a>
             </h3>
         </hgroup>
@@ -44,8 +44,8 @@
     </label>
     @can('user-mngt')
         <div class="grid">
-            {!! Form::button('<span class="icon"><i class="gg-remove"></i></span> ' . __('message.remove'), ['class' => 'btn-danger', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
-            {!! Form::button('<span class="icon"><i class="gg-add"></i></span> ' . __('message.save'), ['class' => 'btn-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
+            {!! Form::button('<span class="icon"><i class="gg-remove"></i></span>' . __('message.remove'), ['class' => 'btn-danger', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
+            {!! Form::button('<span class="icon"><i class="gg-add"></i></span>' . __('message.save'), ['class' => 'btn-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
         </div>
     @endcan
     {!! Form::close() !!}
