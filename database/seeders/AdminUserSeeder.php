@@ -17,17 +17,17 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::create(['name' => 'Admin']);
+        $adminRole = Role::create(['name' => 'Admin']);
         $permissions = Permission::pluck('id','id')->all();
-        $role->syncPermissions($permissions);
+        $adminRole->syncPermissions($permissions);
 
-        $role = Role::create(['name' => 'Employee']);
+        $employeeRole = Role::create(['name' => 'Employee']);
         $permissions = Permission::pluck('id','id')->all();
-        $role->syncPermissions($permissions);
+        $employeeRole->syncPermissions($permissions);
 
-        $role = Role::create(['name' => 'Parent']);
+        $parentRole = Role::create(['name' => 'Parent']);
         $permissions = Permission::pluck('id','id')->all();
-        $role->syncPermissions($permissions);
+        $parentRole->syncPermissions($permissions);
 
         // Admin User
         $adminUser = User::create([
@@ -35,7 +35,7 @@ class AdminUserSeeder extends Seeder
             'email' => 'admin@fripouilles.local',
             'password' => bcrypt('123456'),
         ]);
-        $adminUser->assignRole([$role->id]);
+        $adminUser->assignRole([$adminRole->id]);
 
         // Employee User
         $employeeUser = User::create([
@@ -43,7 +43,7 @@ class AdminUserSeeder extends Seeder
             'email' => 'employee@fripouilles.local',
             'password' => bcrypt('123456'),
         ]);
-        $employeeUser->assignRole([$role->id]);
+        $employeeUser->assignRole([$employeeRole->id]);
 
         // Parent User
         $parentUser = User::create([
@@ -51,6 +51,6 @@ class AdminUserSeeder extends Seeder
             'email' => 'parent@fripouilles.local',
             'password' => bcrypt('123456'),
         ]);
-        $parentUser->assignRole([$role->id]);
+        $parentUser->assignRole([$parentRole->id]);
     }
 }
