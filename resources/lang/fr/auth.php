@@ -19,7 +19,7 @@ return [
     'rememberMe' => 'Se souvenir de moi',
     'email' => 'E-mail',
     'password' => 'Mot de passe',
-    'password-confirm' => 'Confimer mot de passe',
+    'password-confirm' => 'Confirmer mot de passe',
     'password-confirmDetails' => 'Il s\'agit d\'une zone sécurisée de l\'application. Veuillez confirmer votre mot de passe avant de continuer.',
     'password-forget' => 'Mot de passe oublié ?',
     'confirm' => 'Confirmer',

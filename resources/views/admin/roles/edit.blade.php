@@ -4,8 +4,10 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('message.rolesManagement') }}
             </h2>
-            <h3><a href="{{ route('roles.index') }}">
-                    {{ __('message.back') }}</a>
+            <h3>
+                <a href="{{ route('roles.index') }}">
+                    <span class="icon"><i class="gg-arrow-left-o"></i></span> {{ __('message.back') }}
+                </a>
             </h3>
         </hgroup>
     </x-slot>
@@ -22,12 +24,17 @@
         <legend>{{ __('message.permissions') }}</legend>
         @foreach ($permission as $value)
             <label for="{{ $value->id }}">
-                {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => '', 'disabled' => $readonly)) }}
-                                                    
+                {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, ['class' => '','disabled' => $readonly]) }}
+
                 {{ $value->name }}<br /><small>{{ $value->description }}</small>
             </label>
         @endforeach
     </fieldset>
-    <button type="submit" class="btn-success" @if ($readonly) disabled @endif>{{ __('message.save') }}</button>
+    @can('role-mngt')
+        <div class="grid">
+            {!! Form::button('<span class="icon"><i class="gg-remove"></i></span> ' . __('message.remove'), ['class' => 'btn-danger', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
+            {!! Form::button('<span class="icon"><i class="gg-add"></i></span> ' . __('message.save'), ['class' => 'btn-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
+        </div>
+    @endcan
     {!! Form::close() !!}
 </x-app-layout>
