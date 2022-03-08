@@ -14,49 +14,56 @@
 
     <x-banner />
 
-    <table role="grid">
-        <thead>
-            <tr>
-                <th scope="col" class="w-10">#</th>
-                <th scope="col">{{ __('message.first_name') }}</th>
-                <th scope="col">{{ __('message.last_name') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($childs as $key => $child)
+    <figure>
+        <table role="grid">
+            <thead>
                 <tr>
-                    <th scope="row">
-                        <a href="{{ route('childs.edit', $child->id) }}">
-                            {{ $child->id }}
-                        </a>
-                    </th>
-                    <td>
-                        <div class="grid flex items-center">
-                            <div class="flex-shrink-0 h-10 w-10">
-                                @if ($child->image)
-                                    <div class="w-10 h-10 img-circle"
-                                        style="background-image: url('{{ asset('/storage/images/' . $child->image) }}')">
-                                    </div>
-                                @endif
-                            </div>
-                            <div>
-                                <a href="{{ route('childs.edit', $child->id) }}">
-                                    {{ $child->first_name }} {{ $child->last_name }}<br />
-                                <small>{{ $child->parents() }}</small></a>
-                                </a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        @foreach ($child->address() as $key => $addrPart)
-                        {{ $addrPart }} <br />
-                    @endforeach
-                    </td>
+                    <th scope="col">{{ __('message.name') }}</th>
+                    <th scope="col">{{ __('message.birthdate') }}</th>
+                    <th scope="col">{{ __('message.address') }}</th>
+                    <th scope="col">{{ __('message.contract_starting_date') }}</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                @foreach ($childs as $key => $child)
+                    <tr class="{{ !$child->isActive() ? 'stripes' : '' }}">
+                        <td>
+                            <div class="grid flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    @if ($child->image)
+                                        <div class="w-10 h-10 img-circle"
+                                            style="background-image: url('{{ asset('/storage/images/' . $child->image) }}')">
+                                        </div>
+                                    @endif
+                                </div>
+                                <div>
+                                    <a href="{{ route('childs.edit', $child->id) }}">
+                                        {{ $child->first_name }} {{ $child->last_name }}<br />
+                                        <small>{{ $child->parents() }}</small></a>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {{ $child->formatAsDate($child->birthdate) }}
+                            @if ($child->isActive())
+                                <span class="badge rounded-pill btn-success"><small><i class="gg-gift icon"></i>
+                                        {{ __('message.days') . $child->remainingDaysBeforeBirthday() }}</small></span>
+                            @endif
+                        </td>
+                        <td>
+                            @foreach ($child->address() as $key => $addrPart)
+                                {{ $addrPart }} <br />
+                            @endforeach
+                        </td>
+                        <td>
+                            {{ $child->formatAsDate($child->contract_starting_date) .(!empty((int) $child->contract_ending_date) ? '-' . $child->formatAsDate($child->contract_ending_date) : '') }}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </figure>
     {{ $childs->links('vendor.pagination.custom') }}
 
 </x-app-layout>

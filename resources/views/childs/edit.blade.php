@@ -14,18 +14,29 @@
 
     <x-banner />
 
-    {!! Form::model($children, ['method' => 'PATCH', 'route' => ['childs.update', $children->id]]) !!}
+    {!! Form::model($children, ['method' => 'PATCH', 'route' => ['childs.update', $children->id], 'enctype' => 'multipart/form-data']) !!}
     <details open>
         <summary>{{ __('message.general') }}</summary>
         <div class="grid">
-            <label for="first_name">
-                {{ __('message.first_name') }}
-                {!! Form::text('first_name', null, ['class' => '', 'disabled' => $readonly]) !!}
-            </label>
-            <label for="last_name">
-                {{ __('message.last_name') }}
-                {!! Form::text('last_name', null, ['class' => '', 'disabled' => $readonly]) !!}
-            </label>
+            <div class="grid">
+                <div>
+                    @if ($children->image)
+                        <div class="w-40 h-40 img-circle"
+                            style="background-image: url('{{ asset('/storage/images/' . $children->image) }}')"></div>
+                    @endif
+                    {{ Form::file('image', null, ['name' => 'image', 'class' => '']) }}
+                </div>
+                <div>
+                    <label for="first_name">
+                        {{ __('message.first_name') }}
+                        {!! Form::text('first_name', null, ['class' => '', 'disabled' => $readonly]) !!}
+                    </label>
+                    <label for="last_name">
+                        {{ __('message.last_name') }}
+                        {!! Form::text('last_name', null, ['class' => '', 'disabled' => $readonly]) !!}
+                    </label>
+                </div>
+            </div>
         </div>
         <div class="grid">
             <label for="birthdate">

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+
 use App\Models\Children;
 use App\Models\User;
-
 class ChildrenController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class ChildrenController extends Controller
      */
     public function index(Request $request)
     {
-        $childs = Children::orderBy('id', 'DESC')->paginate(20);
+        $childs = Children::orderBy('contract_ending_date', 'asc')->orderBy('first_name', 'asc')->paginate(20);
         return view('childs.index', compact('childs'))
             ->with('i', ($request->input('page', 1) - 1) * 20);
     }
@@ -41,11 +43,18 @@ class ChildrenController extends Controller
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'email',
         ]);
 
         $input = $request->all();
         $children = Children::create($input);
+
+        if ($request->hasFile('image')) {
+            $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
+            $filename = 'Children_' . $children->id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
+            $children->update(['image' => $filename]);
+            
+            $request->image->storeAs('images',  $filename, 'public');
+        }
 
         return redirect()->route('childs.index')
             ->with('success', 'Children created successfully');
@@ -89,14 +98,28 @@ class ChildrenController extends Controller
                 $this->validate($request, [
                     'first_name' => 'required',
                     'last_name' => 'required',
-                    'email' => 'email',
                 ]);
         
                 $input = $request->all();
 
                 $children = Children::find($id);
+                $oldImage = 'public/images/' . $children->image;
+
                 $children->update($input);
                 
+                if ($request->hasFile('image')) {
+                    $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
+                    $filename = 'Children_' . $id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
+                    $children->update(['image' => $filename]);
+                    
+                    $request->image->storeAs('images',  $filename, 'public');
+
+                    if(Storage::exists($oldImage)) {
+                        Storage::delete($oldImage);
+                    }
+                    
+                }
+
                 return redirect()->route('childs.index')
                     ->with('success', 'Children updated successfully');
                 break;

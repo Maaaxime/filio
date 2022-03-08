@@ -13,30 +13,24 @@
     </x-slot>
 
     <x-banner />
-
-    <table role="grid">
-        <thead>
-            <tr>
-                <th scope="col" class="w-10">#</th>
-                <th scope="col">{{ __('message.name') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($roles as $key => $role)
+    <figure>
+        <table role="grid">
+            <thead>
                 <tr>
-                    <th scope="row">
-                        <a href="{{ route('roles.edit', $role->id) }}">
-                            {{ $role->id }}
-                        </a>
-                    </th>
-                    <td>
-                        <a href="{{ route('roles.edit', $role->id) }}">{{ $role->name }}</a>
-                    </td>
+                    <th scope="col">{{ __('message.name') }}</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                @foreach ($roles as $key => $role)
+                    <tr>
+                        <td>
+                            <a href="{{ route('roles.edit', $role->id) }}">{{ $role->name }}</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </figure>
     {{ $roles->links('vendor.pagination.custom') }}
 
 </x-app-layout>

@@ -14,19 +14,28 @@
 
     <x-banner />
 
-    {!! Form::open(['route' => 'childs.store', 'method' => 'POST']) !!}
+    {!! Form::open(['route' => 'childs.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
 
     <details open>
         <summary>{{ __('message.general') }}</summary>
         <div class="grid">
-            <label for="first_name">
-                {{ __('message.first_name') }}
-                {!! Form::text('first_name', null, ['class' => '']) !!}
-            </label>
-            <label for="last_name">
-                {{ __('message.last_name') }}
-                {!! Form::text('last_name', null, ['class' => '']) !!}
-            </label>
+            <div class="grid">
+                <div>
+                    <div class="w-40 h-40 img-circle"
+                        style="background-image: url('{{ asset('/storage/images/child.png') }}')"></div>
+                    {{ Form::file('image', null, ['name' => 'image', 'class' => '']) }}
+                </div>
+                <div>
+                    <label for="first_name">
+                        {{ __('message.first_name') }}
+                        {!! Form::text('first_name', null, ['class' => '']) !!}
+                    </label>
+                    <label for="last_name">
+                        {{ __('message.last_name') }}
+                        {!! Form::text('last_name', null, ['class' => '']) !!}
+                    </label>
+                </div>
+            </div>
         </div>
         <div class="grid">
             <label for="birthdate">
