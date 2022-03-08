@@ -59,7 +59,7 @@ return [
     'childsManagement' => 'Enfants',
     'days' => 'J-',
     'childs' => 'Enfant(s)',
-    '' => '',
+    'showProfile' => 'Voir votre profil',
     '' => ''
 
 ];
