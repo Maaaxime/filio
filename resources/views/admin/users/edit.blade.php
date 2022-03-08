@@ -18,7 +18,8 @@
     <div class="grid">
         <div>
             @if ($user->image)
-            <div class="w-40 h-40 img-circle" style="background-image: url('{{ asset('/storage/images/' . $user->image) }}')"></div>
+                <div class="w-40 h-40 img-circle"
+                    style="background-image: url('{{ asset('/storage/images/' . $user->image) }}')"></div>
             @endif
             {{ Form::file('image', null, ['name' => 'image', 'class' => '']) }}
         </div>
@@ -47,11 +48,26 @@
             </label>
         </div>
     </div>
-
-    <label for="roles">
-        {{ __('message.roles') }}
-        {!! Form::select('roles[]', $roles, $userRole, ['class' => '', 'multiple', 'disabled' => $readonly]) !!}
-    </label>
+    <div class="grid">
+        <fieldset>
+            <legend>{{ __('message.roles') }}</legend>
+            @foreach ($roles as $value)
+                <label for="{{ $value->name }}">
+                    {!! Form::checkbox('roles[]', $value->name, in_array($value->name, $userRole), ['class' => '', 'disabled' => $readonly]) !!}
+                    {{ $value->name }}
+                </label>
+            @endforeach
+        </fieldset>
+        <fieldset>
+            <legend>{{ __('message.childs') }}</legend>
+            @foreach ($childs as $value)
+                <label for="{{ $value->id }}">
+                    {!! Form::checkbox('childs[]', $value->id, in_array($value->id, $userChildren), ['class' => '', 'disabled' => $readonly]) !!}
+                    {{ $value->full_name }}
+                </label>
+            @endforeach
+        </fieldset>
+    </div>
     @can('user-mngt')
         <div class="grid">
             {!! Form::button('<span class="icon"><i class="gg-remove"></i></span>' . __('message.remove'), ['class' => 'btn-danger', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}

@@ -37,11 +37,26 @@
             </label>
         </div>
     </div>
-
-    <label for="roles">
-        {{ __('message.roles') }}
-        {!! Form::select('roles[]', $roles, [], ['class' => '', 'multiple']) !!}
-    </label>
+    <div class="grid">
+        <fieldset>
+            <legend>{{ __('message.roles') }}</legend>
+            @foreach ($roles as $value)
+                <label for="{{ $value->name }}">
+                    {!! Form::checkbox('roles[]', $value->name, [], ['class' => '']) !!}
+                    {{ $value->name }}
+                </label>
+            @endforeach
+        </fieldset>
+        <fieldset>
+            <legend>{{ __('message.childs') }}</legend>
+            @foreach ($childs as $value)
+                <label for="{{ $value->id }}">
+                    {!! Form::checkbox('childs[]', $value->id, [], ['class' => '']) !!}
+                    {{ $value->full_name }}
+                </label>
+            @endforeach
+        </fieldset>
+    </div>
     {!! Form::button('<span class="icon"><i class="gg-add"></i></span>' . __('message.save'), ['class' => 'btn-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
     {!! Form::close() !!}
 </x-app-layout>

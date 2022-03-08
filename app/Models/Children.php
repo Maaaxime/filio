@@ -63,6 +63,11 @@ class Children extends Model
         'applicable_rate'
     ];
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     protected function firstName(): Attribute
     {
         return new Attribute(
@@ -95,6 +100,11 @@ class Children extends Model
                 return $this->legal_tutor1_name . ' | ' . $this->legal_tutor2_name;
                 break;
         }
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function address()
@@ -146,10 +156,10 @@ class Children extends Model
     public function remainingDaysBeforeBirthday()
     {
         $today = Carbon::now();
-        $today = $today->setTime(0,0,0,0);
+        $today = $today->setTime(0, 0, 0, 0);
 
         $nextbirthday = Carbon::parse($this->birthdate)->copy()->year(Carbon::now()->year);
-        $nextbirthday->setTime(0,0,0,0);
+        $nextbirthday->setTime(0, 0, 0, 0);
         if ($nextbirthday->isPast()) {
             $nextbirthday = $nextbirthday->copy()->addYear();
         }
@@ -157,8 +167,19 @@ class Children extends Model
         return $today->diffInDays($nextbirthday);
     }
 
-    public function isActive()
+    public function isActive(): Attribute
     {
-        return ((empty((int)$this->contract_ending_date)) || ((!empty((int)$this->contract_ending_date)) && ($this->contract_ending_date > (new \DateTime()))));
+        return new Attribute(
+            get: function () {
+                return ((empty((int)$this->contract_ending_date)) || ((!empty((int)$this->contract_ending_date)) && ($this->contract_ending_date > (new \DateTime()))));
+            }
+        );
+    }
+
+    public function scopeActive($query)
+    {
+        $query->where(function($query) {
+            $query->where('contract_ending_date', '>', new \DateTime());
+        })->orWhereNull('contract_ending_date'); 
     }
 }

@@ -73,13 +73,15 @@ class CreateChildsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::dropIfExists('user_child');
-        Schema::create('user_child', function (Blueprint $table) {
+        Schema::dropIfExists('children_user');
+        Schema::create('children_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('child_id')->unsigned();
+            $table->integer('children_id')->unsigned();
             $table->timestamps();
         });
+
+
     }
 
     /**
@@ -89,7 +91,8 @@ class CreateChildsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_child');
+        Schema::dropIfExists('model_has_childs');
+        Schema::dropIfExists('children_user');
         Schema::dropIfExists('childs');
     }
 }

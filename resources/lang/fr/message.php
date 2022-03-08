@@ -58,7 +58,7 @@ return [
     'legal_tutor2' => 'Informations tuteur 2',
     'childsManagement' => 'Enfants',
     'days' => 'J-',
-    '' => '',
+    'childs' => 'Enfant(s)',
     '' => '',
     '' => ''
 

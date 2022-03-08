@@ -43,4 +43,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function childs()
+    {
+        return $this->belongsToMany(Children::class);
+    }
+    public function assignChildren($childs)
+    {
+        $this->childs()->attach($childs);
+    }
 }

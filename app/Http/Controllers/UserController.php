@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Children;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -33,8 +35,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
-        return view('admin.users.create', compact('roles'));
+        $roles = Role::get();
+        $childs = Children::active()->get();
+        return view('admin.users.create', compact('roles', 'childs'));
     }
 
     /**
@@ -57,6 +60,8 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
+        
+        $user->assignChildren($request->input('childs'));
 
         return redirect()->route('users.index')
             ->with('success', 'User created successfully');
@@ -71,9 +76,13 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = Role::get();
+        $childs = Children::get();
+
         $userRole = $user->roles->pluck('name', 'name')->all();
-        return view('admin.users.edit', compact('user', 'roles', 'userRole'))->with('readonly', true);
+        $userChildren = $user->childs->pluck('id')->all();
+
+        return view('admin.users.edit', compact('user', 'roles', 'userRole','childs','userChildren'))->with('readonly', true);
     }
 
     /**
@@ -85,10 +94,14 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();
-        $userRole = $user->roles->pluck('name', 'name')->all();
+        $roles = Role::get();
+        $childs = Children::get();
 
-        return view('admin.users.edit', compact('user', 'roles', 'userRole'))->with('readonly', false);
+        $userRole = $user->roles->pluck('name', 'name')->all();
+        $userChildren = $user->childs->pluck('id')->all();
+
+        Log::info($userChildren);
+        return view('admin.users.edit', compact('user', 'roles', 'userRole','childs','userChildren'))->with('readonly', false);
     }
 
     /**
@@ -120,21 +133,23 @@ class UserController extends Controller
                 $oldImage = 'public/images/' . $user->image;
 
                 $user->update($input);
-                DB::table('model_has_roles')->where('model_id', $id)->delete();
 
+                DB::table('model_has_roles')->where('model_id', $id)->delete();
                 $user->assignRole($request->input('roles'));
+
+                DB::table('children_user')->where('user_id', $id)->delete();
+                $user->assignChildren($request->input('childs'));
 
                 if ($request->hasFile('image')) {
                     $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
                     $filename = 'User_' . $id . '_ProfilePicture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
                     $user->update(['image' => $filename]);
-                    
+
                     $request->image->storeAs('images',  $filename, 'public');
 
-                    if(Storage::exists($oldImage)) {
+                    if (Storage::exists($oldImage)) {
                         Storage::delete($oldImage);
                     }
-                    
                 }
 
                 return redirect()->route('users.index')
