@@ -167,19 +167,17 @@ class Children extends Model
         return $today->diffInDays($nextbirthday);
     }
 
-    public function isActive(): Attribute
-    {
-        return new Attribute(
-            get: function () {
-                return ((empty((int)$this->contract_ending_date)) || ((!empty((int)$this->contract_ending_date)) && ($this->contract_ending_date > (new \DateTime()))));
-            }
-        );
-    }
-
+    
     public function scopeActive($query)
     {
         $query->where(function($query) {
             $query->where('contract_ending_date', '>', new \DateTime());
         })->orWhereNull('contract_ending_date'); 
+    }
+
+    public function isActive()
+    {
+        return ((empty((int)$this->contract_ending_date)) || ((!empty((int)$this->contract_ending_date)) && ($this->contract_ending_date > (new \DateTime()))));
+            
     }
 }
