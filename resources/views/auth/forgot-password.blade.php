@@ -19,7 +19,7 @@
 
             <!-- Email Address -->
             <input type="text" name="email" placeholder="{{ __('auth.logIn') }}" type="email" aria-label="{{ __('auth.logIn') }}" :value="old('email')" required autofocu>
-            <button type="submit" class="contrast">{{ __('auth.password-resend') }}</button>
+            <button type="submit">{{ __('auth.password-resend') }}</button>
         </form>
     </x-auth-card>
 </x-guest-layout>

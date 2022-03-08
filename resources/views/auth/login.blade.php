@@ -20,7 +20,7 @@
                 {{ __('auth.rememberMe') }}
               </label>
             </fieldset>
-            <button type="submit" class="contrast">{{ __('auth.logIn') }}</button>
+            <button type="submit">{{ __('auth.logIn') }}</button>
             @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}">
                         {{ __('auth.password-forget') }}

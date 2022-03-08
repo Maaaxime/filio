@@ -21,7 +21,7 @@
             <!-- Confirm Password -->
             <input type="password" name="password_confirmation" placeholder="{{ __('auth.password-confirm') }}" aria-label="{{ __('auth.password') }}" required>
 
-            <button type="submit" class="contrast">{{ __('auth.password-reset') }}</button>
+            <button type="submit">{{ __('auth.password-reset') }}</button>
         </form>
     </x-auth-card>
     </x-guest-layout>

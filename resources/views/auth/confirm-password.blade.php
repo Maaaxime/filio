@@ -14,7 +14,7 @@
             <!-- Password -->
             <input type="password" name="password" placeholder="{{ __('auth.password') }}"
                 aria-label="{{ __('auth.password') }}" autocomplete="current-password" required>
-            <button type="submit" class="contrast">{{ __('auth.confirm') }}</button>
+            <button type="submit">{{ __('auth.confirm') }}</button>
         </form>
     </x-auth-card>
     </x-guest-layout>

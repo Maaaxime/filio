@@ -15,12 +15,12 @@
 
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
-            <button type="submit" class="contrast">{{ __('check-emailSend') }}</button>
+            <button type="submit">{{ __('check-emailSend') }}</button>
         </form>
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="contrast"> {{ __('auth.logOut') }}</button>
+            <button type="submit"> {{ __('auth.logOut') }}</button>
         </form>
     </x-auth-card>
     </x-guest-layout>
