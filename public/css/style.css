@@ -228,7 +228,7 @@ details[open]>summary {
     padding: .35em .65em;
     font-size: .75em;
     font-weight: 700;
-    color: #fff;
+    color: var(--primary-inverse);
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
@@ -292,6 +292,10 @@ nav a {
 
 small {
     color: var(--muted-color);
+}
+
+.badge small {
+    color: var(--primary-inverse);
 }
 
 .profile {
