@@ -29,11 +29,13 @@
                     <tr class="{{ !$child->isActive() ? 'stripes' : '' }}">
                         <td>
                             <div class="grid flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10">
+                                <div class="flex-shrink-0 h-10 w-10 index50">
                                     @if ($child->image)
                                         <div class="w-10 h-10 img-circle"
                                             style="background-image: url('{{ asset('/storage/images/' . $child->image) }}')">
+                                            <span class="badge rounded-pill state-badge h-10-1 w-10-1 {{ ($child->isActive()) ? 'btn-success':'btn-danger' }}" ></span>
                                         </div>
+                                        
                                     @endif
                                 </div>
                                 <div>

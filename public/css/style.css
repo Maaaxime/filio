@@ -63,12 +63,28 @@ i {
     background-size: cover;
 }
 
+.h-5 {
+    height: 1rem;
+}
+
+.w-5 {
+    width: 1rem;
+}
+
 .h-10 {
     height: 2.5rem;
 }
 
 .w-10 {
     width: 2.5rem;
+}
+
+.h-10-1 {
+    height: 2.75rem;
+}
+
+.w-10-1 {
+    width: 2.75rem;
 }
 
 .h-20 {
@@ -85,6 +101,10 @@ i {
 
 .w-40 {
     width: 10rem;
+}
+
+.index50 {
+    z-index: 50;
 }
 
 table td,
@@ -235,6 +255,13 @@ details[open]>summary {
     border-radius: .25rem;
 }
 
+.state-badge {
+z-index: -99;
+position: relative;
+left: calc(-0.25rem / 2);
+top: calc(-0.25rem / 2);
+}
+
 .rounded-pill {
     border-radius: 50rem !important;
 }
@@ -317,4 +344,89 @@ small {
 
 .profile:hover a {
     color: var(--primary-inverse);
+}
+
+.tabset>input[type="radio"] {
+    position: absolute;
+    left: -200vw;
+}
+
+.tabset .tab-panel {
+    display: none;
+}
+
+.tabset>input:first-child:checked~.tab-panels>.tab-panel:first-child,
+.tabset>input:nth-child(3):checked~.tab-panels>.tab-panel:nth-child(2),
+.tabset>input:nth-child(5):checked~.tab-panels>.tab-panel:nth-child(3),
+.tabset>input:nth-child(7):checked~.tab-panels>.tab-panel:nth-child(4),
+.tabset>input:nth-child(9):checked~.tab-panels>.tab-panel:nth-child(5),
+.tabset>input:nth-child(11):checked~.tab-panels>.tab-panel:nth-child(6) {
+    display: block;
+}
+
+.tabset>label {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px 25px;
+    border: 0px solid transparent;
+    border-bottom: 0;
+    cursor: pointer;
+    font-weight: var(--font-weight);
+    margin-right: 0;
+}
+
+.tabset>label::after {
+    content: "";
+    position: absolute;
+    left: calc(50% - .5rem);
+    bottom: -0.5rem;
+    width: 1rem;
+    height: 1rem;
+    background: var(--muted-color);
+    border-radius: 50%;
+}
+
+.tabset>label:hover,
+.tabset>input:focus+label {
+    color: var(--primary);
+}
+
+.tabset>label:hover::after,
+.tabset>input:focus+label::after,
+.tabset>input:checked+label::after {
+    background: var(--primary);
+}
+
+.tabset>input:checked+label {
+    border-color: var(--table-border-color);
+    border-bottom: 1px solid var(--primary-inverse);
+    margin-bottom: -1px;
+}
+
+.tab-panel {
+    padding: 30px 0;
+    border-top: 1px solid var(--table-border-color);
+}
+
+.swal2-html-container {
+    font-weight: var(--font-weight) !important;
+    font-size: var(--font-size) !important;
+}
+
+.swal2-styled.swal2-confirm {
+    color: #fff !important;
+    background-color: #5cb85c !important;
+    border-color: #4cae4c !important;
+    border: 0 !important;
+    border-radius: var(--border-radius) !important;
+    font-size: var(--font-size) !important;
+}
+
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+.swal2-styled.swal2-confirm:hover {
+    color: #fff !important;
+    background-color: #449d44 !important;
+    border-color: #398439 !important;
 }

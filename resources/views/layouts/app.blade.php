@@ -18,10 +18,7 @@
 
     <link rel="icon" type="img/png" href="{{ asset('img/favicon.png') }}">
 
-    <style>
-
-
-    </style>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 </head>
 
 <body>
