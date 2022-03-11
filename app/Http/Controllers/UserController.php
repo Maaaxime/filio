@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -112,7 +111,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Log::debug($request);
         switch ($request->input('action')) {
             case 'save':
                 $this->validate($request, [
@@ -147,7 +145,7 @@ class UserController extends Controller
 
                     $request->image->storeAs('images',  $filename, 'public');
 
-                    if (Storage::exists($oldImage)) {
+                    if ((Storage::exists($oldImage)) && ($oldImage != 'public/images/user.png')) {
                         Storage::delete($oldImage);
                     }
                 }
@@ -171,7 +169,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        
+
         return redirect()->route('users.index')
             ->with('success', __('message.successDeleted', ['name' => $user->name]));
     }

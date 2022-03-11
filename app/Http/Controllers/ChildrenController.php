@@ -132,7 +132,7 @@ class ChildrenController extends Controller
                     
                     $request->image->storeAs('images',  $filename, 'public');
 
-                    if(Storage::exists($oldImage)) {
+                    if ((Storage::exists($oldImage)) && ($oldImage != 'public/images/child.png')) {
                         Storage::delete($oldImage);
                     }
                     
