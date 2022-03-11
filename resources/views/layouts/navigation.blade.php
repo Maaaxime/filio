@@ -12,7 +12,7 @@
         <li><a href="{{ url('/dashboard') }}"
                 class={{ request()->routeIs('dashboard') ? 'is-active' : '' }}>{{ __('message.dashboard') }}</a>
         </li>
-        <li><a href="{{ url('/childs/my') }}"
+        <li><a href="{{ url('/my/childs') }}"
                 class={{ request()->routeIs('my.childs') ? 'is-active' : '' }}>{{ __('message.myChilds') }}</a></li>
     </ul>
     <p class="menu-label">

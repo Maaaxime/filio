@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ChildrenController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +29,13 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['aut
 Route::group(['middleware' => ['auth', 'role:Admin'], 'prefix' => 'admin'], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
+    Route::resource('childs', 'ChildrenController');
     Route::resource('companies', 'CompanyController');
 });
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::resource('childs', 'ChildrenController');
+Route::group(['middleware' => ['auth'], 'prefix' => 'my'], function () {
+    Route::get('childs',[ChildrenController::class, 'my'])->name('my.childs');
+    Route::get('profile',[UserController::class,'my'])->name('my.profile');
 });
 
 require __DIR__ . '/auth.php';

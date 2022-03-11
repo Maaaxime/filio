@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -25,6 +26,16 @@ class UserController extends Controller
         $data = User::orderBy('id', 'DESC')->paginate(5);
         return view('admin.users.index', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function my()
+    {
+        return $this->edit(Auth::User()->id);
     }
 
     /**

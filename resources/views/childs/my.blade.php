@@ -7,7 +7,7 @@
             <div class="columns pb-6 is-narrow-mobile">
 
                 @foreach ($childs as $key => $child)
-                    <div class="column is-2">
+                    <div class="column is-2 is-narrow-touch">
                         <a href="{{ route('childs.show', $child->id) }}">
                             <div class="card">
                                 <div class="card-image">

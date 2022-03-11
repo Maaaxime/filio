@@ -10,7 +10,7 @@
                     @endif
                 </div>
                 <div class="colum is-nested">
-                    <a href="{{ route('users.edit', Auth::user()->id) }}">
+                    <a href="{{ route('my.profile') }}">
                         <p class="title is-6">{{ Auth::user()->name }}</p>
                         <p class="subtitle is-7">{{ __('message.showProfile') }}</p>
                     </a>
