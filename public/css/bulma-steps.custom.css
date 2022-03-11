@@ -1,0 +1,11 @@
+.steps:not(.is-hollow) .steps-segment.is-active .steps-marker:not(.is-hollow) {
+    background-color: #00d1b2;
+    color: #fff;
+}
+.steps:not(.is-hollow) .steps-marker:not(.is-hollow) {
+    background-color: #00d1b2;
+    color: #fff;
+}
+.steps-segment:after {
+    background-color: #00d1b2;
+}

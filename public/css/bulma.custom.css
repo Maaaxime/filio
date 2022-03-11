@@ -1,0 +1,58 @@
+body {
+    background-color: #fafafa;
+    overflow: hidden;
+}
+
+.inline-icon {
+    display: inline-block !important;
+    margin: 0 5px;
+}
+
+.hero {
+    margin-bottom: 0.5rem;
+}
+
+.img-circle {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    width: 40px; 
+    height: 40px;
+}
+
+.image {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+table.table.card-header-title {
+    padding-top: 1rem;
+    margin-bottom: 0;
+}
+
+.subtitle.is-7 {
+    font-size: 0.75rem;
+}
+
+
+.page-content {
+    margin: 0.5rem 0.5rem 0.5rem;
+    border-radius: .428rem;
+    background-color: #fff;
+    box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+}
+
+.page-content>.hero {
+    border-radius: .428rem .428rem 0 0;
+}
+
+footer {
+    border-radius: 0 0 .428rem .428rem;
+    margin-top: .5rem;
+}
+
+

@@ -12,32 +12,29 @@
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/pico.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bulma-navs.custom.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/bulma.custom.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/bulma-steps.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bulma-steps.custom.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/bulma-tooltip.min.css') }}">
+
+
+    <script src="https://kit.fontawesome.com/19514b6620.js" crossorigin="anonymous"></script>
     <link href='https://css.gg/css' rel='stylesheet'>
 
     <link rel="icon" type="img/png" href="{{ asset('img/favicon.png') }}">
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bulma.custom.js') }}"></script>
 </head>
 
 <body>
-    @include('layouts.navigation')
-    <!-- Page Heading -->
-
-    <main class="container">
-        <header>
-            <h2>{{ $header }}</h2>
-        </header>
-        <section>
-            {{ $slot }}
-        </section>
-        <footer class="container-fluid">
-            <hr>
-            <p><small>Copyright</small></p>
-        </footer>
-    </main>
-
+    <x-banner />
+    {{ $slot }}
 </body>
 
 </html>

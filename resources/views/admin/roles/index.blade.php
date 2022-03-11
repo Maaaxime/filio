@@ -1,36 +1,34 @@
 <x-app-layout>
-    <x-slot name="header">
-        <hgroup>
-            <h2 class="">
-                {{ __('message.rolesManagement') }}
-            </h2>
-            <h3>
-                <a href="{{ route('roles.create') }}">
-                    <span class="icon"><i class="gg-add"></i></span>{{ __('message.add') }}
-                </a>
-            </h3>
-        </hgroup>
-    </x-slot>
+    <x-content-page>
+        <x-slot name="header">{{ __('message.rolesManagement') }}</x-slot>
+        <x-slot name="headerSubtitle">
+            <a href="{{ route('roles.create') }}">
+                <i class="fa-solid fa-circle-plus"></i> {{ __('message.add') }}
+            </a>
+        </x-slot>
 
-    <x-banner />
-    <figure>
-        <table role="grid">
-            <thead>
-                <tr>
-                    <th scope="col">{{ __('message.name') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($roles as $key => $role)
+        <div class="table-container pr-2 pl-2">
+            <table class="table is-striped is-hoverable is-fullwidth">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="{{ route('roles.edit', $role->id) }}">{{ $role->name }}</a>
-                        </td>
+                        <th scope="col">{{ __('message.name') }}</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </figure>
-    {{ $roles->links('vendor.pagination.custom') }}
-
+                </thead>
+                <tbody>
+                    @foreach ($roles as $key => $role)
+                        <tr>
+                            <td class="is-narrow">
+                                <a href="{{ route('roles.edit', $role->id) }}">
+                                    <p class="title is-5">
+                                        {{ $role->name }}
+                                    </p>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        {{ $roles->links('vendor.pagination.custom') }}
+    </x-content-page>
 </x-app-layout>

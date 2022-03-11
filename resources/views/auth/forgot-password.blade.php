@@ -3,23 +3,32 @@
     </x-slot>
 
     <x-auth-card>
-
-        <p>
-            {{ __('auth.password-forgetDetails') }}
-        </p>
+        <p class="title has-text-centered">{{ __('auth.password-forget') }}</p>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('password.email') }}">
+        <form method="POST" action="{{ route('password.email') }}" class="box">
             @csrf
 
-            <!-- Email Address -->
-            <input type="text" name="email" placeholder="{{ __('auth.logIn') }}" type="email" aria-label="{{ __('auth.logIn') }}" :value="old('email')" required autofocu>
-            <button type="submit">{{ __('auth.password-resend') }}</button>
+            <div class="field">
+                <p class="mb-4">{{ __('auth.password-forgetDetails') }}</p>
+                <div class="control has-icons-left">
+                    <input type="email" name="email" placeholder="{{ __('auth.logIn') }}" class="input"
+                        aria-label="{{ __('auth.email') }}" :value="old('email')" required autofocus>
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+                <button class="button is-success is-fullwidth" type="submit">
+                    {{ __('auth.password-resend') }}
+                </button>
+            </div>
+
+            </div>
         </form>
     </x-auth-card>
-</x-guest-layout>
+</x-app-layout>

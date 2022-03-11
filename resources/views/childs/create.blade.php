@@ -1,218 +1,336 @@
 <x-app-layout>
-    <x-slot name="header">
-        <hgroup>
-            <h2 class="">
-                {{ __('message.childsManagement') }}
-            </h2>
-            <h3>
-                <a href="{{ route('childs.index') }}">
-                    <span class="icon"><i class="gg-arrow-left-o"></i></span>{{ __('message.back') }}
-                </a>
-            </h3>
-        </hgroup>
-    </x-slot>
+    <x-content-page>
+        <x-slot name="header">{{ __('message.childsManagement') }}</x-slot>
+        <x-slot name="headerSubtitle">
+            <a href="{{ route('childs.index') }}">
+                <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
+            </a>
+        </x-slot>
 
-    <x-banner />
-
-    {!! Form::open(['route' => 'childs.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-    <div class="tabset">
-        <input type="radio" name="tabset" id="tab1" aria-controls="tab1-section" checked>
-        <label for="tab1">{{ __('message.general') }}</label>
-        <!-- Tab 2 -->
-        <input type="radio" name="tabset" id="tab2" aria-controls="tab2-section">
-        <label for="tab2">{{ __('message.medical') }}</label>
-        <!-- Tab 3 -->
-        <input type="radio" name="tabset" id="tab3" aria-controls="tab3-section">
-        <label for="tab3">{{ __('message.family_situation') }}</label>
-        <!-- Tab 4 -->
-        <input type="radio" name="tabset" id="tab4" aria-controls="tab4-section">
-        <label for="tab4">{{ __('message.contract') }}</label>
+        {!! Form::open(['route' => 'childs.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box']) !!}
+        <div class="pb-6">
+            <ul class="steps is-medium is-centered has-content-centered is-horizontal">
+                <li class="steps-segment is-active">
+                    <a hef="#" class="has-text-dark" aria-controls="tab1-section">
+                        <span class="steps-marker">
+                            <span class="icon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </span>
+                        <div class="steps-content">
+                            <p class="heading">{{ __('message.general') }}</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="steps-segment">
+                    <a hef="#" class="has-text-dark" aria-controls="tab2-section">
+                        <span class="steps-marker">
+                            <span class="icon">
+                                <i class="fa-solid fa-briefcase-medical"></i>
+                            </span>
+                        </span>
+                        <div class="steps-content">
+                            <p class="heading">{{ __('message.medical') }}</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="steps-segment">
+                    <a hef="#" class="has-text-dark" aria-controls="tab3-section">
+                        <span class="steps-marker">
+                            <span class="icon">
+                                <i class="fa-solid fa-heart"></i>
+                            </span>
+                        </span>
+                        <div class="steps-content">
+                            <p class="heading">{{ __('message.family_situation') }}</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="steps-segment">
+                    <a hef="#" class="has-text-dark" aria-controls="tab4-section">
+                        <span class="steps-marker">
+                            <span class="icon">
+                                <i class="fa-solid fa-file-signature"></i>
+                            </span>
+                        </span>
+                        <div class="steps-content">
+                            <p class="heading">{{ __('message.contract') }}</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="tab-panels">
             <section id="tab1-section" class="tab-panel">
-                <div class="grid">
-                    <div class="grid">
-                        <div>
-                            {{ Form::file('image', null, ['name' => 'image', 'class' => '']) }}
-                        </div>
-                        <div>
-                            <label for="first_name">
-                                {{ __('message.first_name') }}
-                                {!! Form::text('first_name', null, ['class' => '']) !!}
+                <div class="columns pt-6">
+                    <div class="column">
+                        <label class="label">{{ __('message.profilePicture') }}</label>
+                        <div class="file is-boxed">
+                            <label class="file-label" style="width: 100%; height: 100%;">
+                                <input class="file-input" type="file" name="image" style="width: 100%;">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        {{ __('message.uploadProfilePicture') }}
+                                    </span>
+                                </span>
                             </label>
-                            <label for="last_name">
-                                {{ __('message.last_name') }}
-                                {!! Form::text('last_name', null, ['class' => '']) !!}
-                            </label>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">{{ __('message.first_name') }}</label>
+                            <div class="control">
+                                {!! Form::text('first_name', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.last_name') }}</label>
+                            <div class="control">
+                                {!! Form::text('last_name', null, ['class' => 'input']) !!}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="grid">
-                    <label for="birthdate">
-                        {{ __('message.birthdate') }}
-                        {!! Form::date('birthdate', null, ['class' => '']) !!}
-                    </label>
-                    <label for="city_of_birth">
-                        {{ __('message.city_of_birth') }}
-                        {!! Form::text('city_of_birth', null, ['class' => '']) !!}
-                    </label>
-                </div>
-                <div class="grid">
-                    <label for="phone_no">
-                        {{ __('message.phone_no') }}
-                        {!! Form::text('phone_no', null, ['class' => '']) !!}
-                    </label>
-                    <label for="email">
-                        {{ __('message.email') }}
-                        {!! Form::email('email', null, ['class' => '']) !!}
-                    </label>
-                </div>
-
-                <label for="address">
-                    {{ __('message.address') }}
-                    {!! Form::text('address', null, ['class' => '']) !!}
-                </label>
-                <label for="address2">
-                    {{ __('message.address2') }}
-                    {!! Form::text('address2', null, ['class' => '']) !!}
-                </label>
-                <div class="grid">
-                    <label for="postCode">
-                        {{ __('message.postCode') }}
-                        {!! Form::text('postCode', null, ['class' => '']) !!}
-                    </label>
-                    <label for="city">
-                        {{ __('message.city') }}
-                        {!! Form::text('city', null, ['class' => '']) !!}
-                    </label>
-                </div>
-            </section>
-            <section id="tab2-section" class="tab-panel">
-                <label for="blood_type">
-                    {{ __('message.blood_type') }}
-                    {!! Form::text('blood_type', null, ['class' => '']) !!}
-                </label>
-                <div class="grid">
-                    <label for="medical_conditions">
-                        {{ __('message.medical_conditions') }}
-                        {!! Form::textarea('medical_conditions', null, ['rows' => 2, 'class' => '']) !!}
-                    </label>
-                    <label for="medical_medications">
-                        {{ __('message.medical_medications') }}
-                        {!! Form::textarea('medical_medications', null, ['rows' => 2, 'class' => '']) !!}
-                    </label>
-                    <label for="medical_allergies">
-                        {{ __('message.medical_allergies') }}
-                        {!! Form::textarea('medical_allergies', null, ['rows' => 2, 'class' => '']) !!}
-                    </label>
-                </div>
-                <h4>{{ __('message.doctor') }}</h4>
-                <div class="grid">
-                    <div>
-                        <label for="doctor_name">
-                            {{ __('message.doctor_name') }}
-                            {!! Form::text('doctor_name', null, ['class' => '']) !!}
-                        </label>
-                        <label for="doctor_phone_no">
-                            {{ __('message.doctor_phone_no') }}
-                            {!! Form::text('doctor_phone_no', null, ['class' => '']) !!}
-                        </label>
+                <div class="columns">
+                    <div class="column field">
+                        <label class="label">{{ __('message.birthdate') }}</label>
+                        <div class="control">
+                            {!! Form::text('birthdate', null, ['class' => 'input']) !!}
+                        </div>
                     </div>
-                    <label for="doctor_address">
-                        {{ __('message.doctor_address') }}
-                        {!! Form::textarea('doctor_address', null, ['rows' => 5, 'class' => '']) !!}
-                    </label>
-                </div>
-            </section>
-            <section id="tab3-section" class="tab-panel">
-                <div class="grid">
-                    <div>
-                        <h4>{{ __('message.legal_tutor1') }}</h4>
-                        <label for="legal_tutor1_name">
-                            {{ __('message.legal_tutor_name') }}
-                            {!! Form::text('legal_tutor1_name', null, ['class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor1_socialsecurity">
-                            {{ __('message.legal_tutor_socialsecurity') }}
-                            {!! Form::text('legal_tutor1_socialsecurity', null, ['class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor1_caf">
-                            {{ __('message.legal_tutor_caf') }}
-                            {!! Form::text('legal_tutor1_caf', null, ['class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor1_job_title">
-                            {{ __('message.legal_tutor_job_title') }}
-                            {!! Form::text('legal_tutor1_job_title', null, ['class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor1_address">
-                            {{ __('message.legal_tutor_address') }}
-                            {!! Form::textarea('legal_tutor1_address', null, ['rows' => 2, 'class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor1_phone_no">
-                            {{ __('message.legal_tutor_phone_no') }}
-                            {!! Form::text('legal_tutor1_phone_no', null, ['class' => '']) !!}
-                        </label>
-                    </div>
-                    <div>
-                        <h4>{{ __('message.legal_tutor2') }}</h4>
-                        <label for="legal_tutor2_name">
-                            {{ __('message.legal_tutor_name') }}
-                            {!! Form::text('legal_tutor2_name', null, ['class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor2_socialsecurity">
-                            {{ __('message.legal_tutor_socialsecurity') }}
-                            {!! Form::text('legal_tutor2_socialsecurity', null, ['class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor2_caf">
-                            {{ __('message.legal_tutor_caf') }}
-                            {!! Form::text('legal_tutor2_caf', null, ['class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor2_job_title">
-                            {{ __('message.legal_tutor_job_title') }}
-                            {!! Form::text('legal_tutor2_job_title', null, ['class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor2_address">
-                            {{ __('message.legal_tutor_address') }}
-                            {!! Form::textarea('legal_tutor2_address', null, ['rows' => 2, 'class' => '']) !!}
-                        </label>
-                        <label for="legal_tutor2_phone_no">
-                            {{ __('message.legal_tutor_phone_no') }}
-                            {!! Form::text('legal_tutor2_phone_no', null, ['class' => '']) !!}
-                        </label>
+                    <div class="column field">
+                        <label class="label">{{ __('message.city_of_birth') }}</label>
+                        <div class="control">
+                            {!! Form::text('city_of_birth', null, ['class' => 'input']) !!}
+                        </div>
                     </div>
                 </div>
-                <label for="authorized_persons">
-                    {{ __('message.authorized_persons') }}
-                    {!! Form::textarea('authorized_persons', null, ['rows' => 3, 'class' => '']) !!}
-                </label>
-            </section>
-            <section id="tab4-section" class="tab-panel">
-                <div class="grid">
-                    <label for="contract_starting_date">
-                        {{ __('message.contract_starting_date') }}
-                        {!! Form::date('contract_starting_date', null, ['class' => '']) !!}
-                    </label>
-                    <label for="contract_ending_date">
-                        {{ __('message.contract_ending_date') }}
-                        {!! Form::date('contract_ending_date', null, ['class' => '']) !!}
-                    </label>
+                <div class="columns">
+                    <div class="column field">
+                        <label class="label">{{ __('message.phone_no') }}</label>
+                        <div class="control">
+                            {!! Form::text('phone_no', null, ['class' => 'input']) !!}
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">{{ __('message.email') }}</label>
+                        <div class="control">
+                            {!! Form::email('email', null, ['class' => 'input']) !!}
+                        </div>
+                    </div>
                 </div>
-                <div class="grid">
-                    <label for="annual_resources">
-                        {{ __('message.annual_resources') }}
-                        {!! Form::number('annual_resources', null, ['class' => '']) !!}
-                    </label>
-                    <label for="child_care_expenses">
-                        {{ __('message.child_care_expenses') }}
-                        {!! Form::number('child_care_expenses', null, ['class' => '']) !!}
-                    </label>
-                    <label for="alimony_paid">
-                        {{ __('message.alimony_paid') }}
-                        {!! Form::number('alimony_paid', null, ['class' => '']) !!}
-                    </label>
+                <div class="field">
+                    <label class="label">{{ __('message.address') }}</label>
+                    <div class="control">
+                        {!! Form::text('address', null, ['class' => 'input']) !!}
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">{{ __('message.address2') }}</label>
+                    <div class="control">
+                        {!! Form::text('address2', null, ['class' => 'input']) !!}
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column field">
+                        <label class="label">{{ __('message.postCode') }}</label>
+                        <div class="control">
+                            {!! Form::text('postCode', null, ['class' => 'input']) !!}
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">{{ __('message.city') }}</label>
+                        <div class="control">
+                            {!! Form::text('city', null, ['class' => 'input']) !!}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="tab2-section" class="tab-panel is-hidden">
+                <div class="field">
+                    <label class="label">{{ __('message.blood_type') }}</label>
+                    <div class="control">
+                        {!! Form::text('blood_type', null, ['class' => 'input']) !!}
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column field">
+                        <label class="label">{{ __('message.medical_conditions') }}</label>
+                        <div class="control">
+                            {!! Form::textarea('medical_conditions', null, ['rows' => 2, 'class' => 'textarea']) !!}
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">{{ __('message.medical_medications') }}</label>
+                        <div class="control">
+                            {!! Form::textarea('medical_medications', null, ['rows' => 2, 'class' => 'textarea']) !!}
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">{{ __('message.medical_allergies') }}</label>
+                        <div class="control">
+                            {!! Form::textarea('medical_allergies', null, ['rows' => 2, 'class' => 'textarea']) !!}
+                        </div>
+                    </div>
+                </div>
+                <p class="title">{{ __('message.doctor') }}</p>
+                <div class="columns">
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">{{ __('message.doctor_name') }}</label>
+                            <div class="control">
+                                {!! Form::text('doctor_name', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.doctor_phone_no') }}</label>
+                            <div class="control">
+                                {!! Form::text('doctor_phone_no', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">{{ __('message.doctor_address') }}</label>
+                        <div class="control">
+                            {!! Form::textarea('doctor_address', null, ['rows' => 4, 'class' => 'textarea']) !!}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="tab3-section" class="tab-panel is-hidden">
+                <div class="columns">
+                    <div class="column">
+                        <p class="title">{{ __('message.legal_tutor1') }}</p>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_name') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor1_name', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_socialsecurity') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor1_socialsecurity', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_caf') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor1_caf', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_job_title') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor1_job_title', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_address') }}</label>
+                            <div class="control">
+                                {!! Form::textarea('legal_tutor1_address', null, ['rows' => 4, 'class' => 'textarea']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_phone_no') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor1_phone_no', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <p class="title">{{ __('message.legal_tutor2') }}</p>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_name') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor2_name', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_socialsecurity') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor2_socialsecurity', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_caf') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor2_caf', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_job_title') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor2_job_title', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_address') }}</label>
+                            <div class="control">
+                                {!! Form::textarea('legal_tutor2_address', null, ['rows' => 4, 'class' => 'textarea']) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">{{ __('message.legal_tutor_phone_no') }}</label>
+                            <div class="control">
+                                {!! Form::text('legal_tutor2_phone_no', null, ['class' => 'input']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">{{ __('message.authorized_persons') }}</label>
+                    <div class="control">
+                        {!! Form::textarea('authorized_persons', null, ['rows' => 5, 'class' => 'textarea']) !!}
+                    </div>
+                </div>
+            </section>
+            <section id="tab4-section" class="tab-panel is-hidden">
+                <div class="columns">
+                    <div class="column field">
+                        <label class="label">{{ __('message.contract_starting_date') }}</label>
+                        <div class="control">
+                            {!! Form::date('contract_starting_date', null, ['class' => 'input']) !!}
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">{{ __('message.contract_ending_date') }}</label>
+                        <div class="control">
+                            {!! Form::date('contract_ending_date', null, ['class' => 'input']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column field">
+                        <label class="label">{{ __('message.annual_resources') }}</label>
+                        <div class="control">
+                            {!! Form::number('annual_resources', null, ['class' => 'input']) !!}
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">{{ __('message.child_care_expenses') }}</label>
+                        <div class="control">
+                            {!! Form::number('child_care_expenses', null, ['class' => 'input']) !!}
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">{{ __('message.alimony_paid') }}</label>
+                        <div class="control">
+                            {!! Form::number('alimony_paid', null, ['class' => 'input']) !!}
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
-    </div>
-    {!! Form::button('<span class="icon"><i class="gg-add"></i></span>' . __('message.save'), ['class' => 'btn-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
-    {!! Form::close() !!}
+
+        <div class="field is-pulled-right pt-4">
+            <div class="control">
+                {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
+            </div>
+        </div>
+        <div class="is-clearfix"></div>
+    </x-content-page>
 </x-app-layout>

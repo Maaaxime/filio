@@ -3,18 +3,29 @@
     </x-slot>
 
     <x-auth-card>
-        <p>{{ __('auth.password-confirmDetails') }}</p>
-        
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <p class="title">{{ __('auth.password-confirmDetails') }}</p>
 
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
 
             <!-- Password -->
-            <input type="password" name="password" placeholder="{{ __('auth.password') }}"
-                aria-label="{{ __('auth.password') }}" autocomplete="current-password" required>
-            <button type="submit">{{ __('auth.confirm') }}</button>
+            <label for="password" class="label">{{ __('auth.password') }}</label>
+            <div class="control has-icons-left">
+                <input type="password" name="password" placeholder="*******" class="input"
+                    aria-label="{{ __('auth.password') }}" autocomplete="current-password" required>
+
+                <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                </span>
+            </div>
+
+            <div class="field">
+                <button class="button is-success  is-fullwidth" type="submit">
+                    {{ __('auth.confirm') }}
+                </button>
+            </div>
+
+            </div>
         </form>
     </x-auth-card>
-    </x-guest-layout>
+</x-app-layout>

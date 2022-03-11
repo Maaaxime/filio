@@ -8,6 +8,9 @@ use Carbon\Carbon;
 
 use App\Models\Children;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 class ChildrenController extends Controller
 {
     /**
@@ -20,6 +23,17 @@ class ChildrenController extends Controller
         $childs = Children::orderBy('contract_ending_date', 'asc')->orderBy('first_name', 'asc')->paginate(20);
         return view('childs.index', compact('childs'))
             ->with('i', ($request->input('page', 1) - 1) * 20);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function my()
+    {
+        $childs = Auth::User()->childs->all();
+        return view('childs.my', compact('childs'));
     }
 
     /**
@@ -68,6 +82,10 @@ class ChildrenController extends Controller
      */
     public function show($id)
     {
+        if($id == "my") {
+           return $this->my();
+        }
+
         $children = Children::find($id);
         return view('childs.edit', compact('children'))->with('readonly', true);
     }

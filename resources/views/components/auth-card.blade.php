@@ -1,11 +1,11 @@
-<article class="grid" style="padding: 0;">
-    <div>
-        <hgroup>
-            <h1>{{ __('auth.logIn') }}</h1>
-            <h2>{{ __('auth.logInDetails') }}</h2>
-        </hgroup>
-        {{ $slot }}
+<section class="hero is-primary is-fullheight is-fluid">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    {{ $slot }}
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="logo">
-    </div>
-</article>
+</section>
