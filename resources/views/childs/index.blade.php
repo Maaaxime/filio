@@ -22,7 +22,7 @@
                         <tr {{ !$child->isActive() ? 'class="stripes"' : '' }}>
                             <td class="is-narrow">
                                 @if ($child->image)
-                                    <div class="image img-circle"
+                                    <div class="image img-circle is-48x48"
                                         style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');">
                                     </div>
                                 @endif

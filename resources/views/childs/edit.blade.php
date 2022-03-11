@@ -6,6 +6,7 @@
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
+        <x-slot name="headerPicture">{{ $children->image }}</x-slot>
 
         {!! Form::model($children, ['method' => 'PATCH', 'route' => ['childs.update', $children->id], 'enctype' => 'multipart/form-data', 'class' => 'box']) !!}
         <div class="pb-6">

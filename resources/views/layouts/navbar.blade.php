@@ -4,7 +4,7 @@
             <div class="navbar-item columns">
                 <div class="column is-nested">
                     @if (Auth::user()->image)
-                        <div class="img-circle"
+                        <div class="image img-circle is-48x48"
                             style="background-image: url('{{ asset('/storage/images/' . Auth::user()->image) }}');">
                         </div>
                     @endif
