@@ -16,20 +16,20 @@
                 class={{ request()->routeIs('my.childs') ? 'is-active' : '' }}>{{ trans_choice('message.myChilds',Auth()->user()->childs()->count()) }}</a></li>
     </ul>
     <p class="menu-label">
-        {{ __('message.administration') }}
+        {{ __('message.administration') }} {{ Illuminate\Support\Facades\Route::currentRouteName() }}
     </p>
     <ul class="menu-list">
-        <li><a href="{{ url('/childs') }}"
-                class={{ request()->routeIs('admin.childs') ? 'is-active' : '' }}>{{ __('message.childsManagement') }}</a>
+        <li><a href="{{ url('/admin/childs') }}"
+                class={{ request()->routeIs('childs.*') ? 'is-active' : '' }}>{{ __('message.childsManagement') }}</a>
         </li>
         <li>
             <p>{{ __('message.teamManagement') }}</p>
             <ul>
                 <li><a href="{{ url('/admin/users') }}"
-                        class={{ request()->routeIs('admin.users') ? 'is-active' : '' }}>{{ __('message.usersManagement') }}</a>
+                        class={{ request()->routeIs('users.*') ? 'is-active' : '' }}>{{ __('message.usersManagement') }}</a>
                 </li>
                 <li><a href="{{ url('/admin/roles') }}"
-                        class={{ request()->routeIs('admin.roles') ? 'is-active' : '' }}>{{ __('message.rolesManagement') }}</a>
+                        class={{ request()->routeIs('roles.*') ? 'is-active' : '' }}>{{ __('message.rolesManagement') }}</a>
                 </li>
             </ul>
         </li>

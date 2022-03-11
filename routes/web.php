@@ -34,8 +34,8 @@ Route::group(['middleware' => ['auth', 'role:Admin'], 'prefix' => 'admin'], func
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'my'], function () {
-    Route::get('childs',[ChildrenController::class, 'my'])->name('my.childs');
-    Route::get('profile',[UserController::class,'my'])->name('my.profile');
+    Route::get('/childs',[ChildrenController::class, 'my'])->name('my.childs');
+    Route::get('/profile',[UserController::class,'my'])->name('my.profile');
 });
 
 require __DIR__ . '/auth.php';
