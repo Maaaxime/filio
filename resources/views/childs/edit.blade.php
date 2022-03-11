@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ __('message.childsManagement') }} : {{ $children->full_name }}</x-slot>
+        <x-slot name="header">{{ $children->full_name }}</x-slot>
         <x-slot name="headerSubtitle">
             <a href="{{ route('childs.index') }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}

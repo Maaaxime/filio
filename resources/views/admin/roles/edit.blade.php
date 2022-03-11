@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ __('message.rolesManagement') }} : {{ $role->name }}</x-slot>
+        <x-slot name="header">{{ $role->name }}</x-slot>
         <x-slot name="headerSubtitle">
             <a href="{{ route('roles.index') }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
