@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 
 class Children extends Model
@@ -155,6 +156,9 @@ class Children extends Model
 
     public function remainingDaysBeforeBirthday()
     {
+        if (!$this->birthdate)
+            return '';
+
         $today = Carbon::now();
         $today = $today->setTime(0, 0, 0, 0);
 
@@ -167,17 +171,43 @@ class Children extends Model
         return $today->diffInDays($nextbirthday);
     }
 
-    
+    public function age()
+    {
+        $today = Carbon::now()->setTime(0, 0, 0, 0);
+        $birthday = Carbon::parse($this->birthdate)->copy()->setTime(0, 0, 0, 0);
+
+        $noOfMonth = $today->diffInMonths($birthday, true);
+
+        $diffForHumans = '';
+        switch (true) {
+            case ($noOfMonth < 1):
+                break;
+            case ($noOfMonth % 12 == 0):
+            case ($noOfMonth < 12):
+                $diffForHumans = $today->locale(App::currentLocale())->diffForHumans($birthday, true, false);
+                break;
+            case (($noOfMonth > 12) && ($noOfMonth < 24)):
+                $diffForHumans = (12 + $today->diff($birthday->copy()->addYear())->format('%m')) . ' ' .  __('message.months');
+                break;
+            case ($noOfMonth > 36):
+                $diffForHumans = $today->locale(App::currentLocale())->diffForHumans($birthday, true, false);
+                break;
+            default:
+                $diffForHumans = $today->diff($birthday)->format('%y') . ' ' .  __('message.years') .  ' ' .  __('message.and') . ' ' . $today->diff($birthday)->format('%m') . ' ' .  __('message.months');
+                break;
+        }
+        return  $diffForHumans;
+    }
+
     public function scopeActive($query)
     {
-        $query->where(function($query) {
+        $query->where(function ($query) {
             $query->where('contract_ending_date', '>', new \DateTime());
-        })->orWhereNull('contract_ending_date'); 
+        })->orWhereNull('contract_ending_date');
     }
 
     public function isActive()
     {
         return ((empty((int)$this->contract_ending_date)) || ((!empty((int)$this->contract_ending_date)) && ($this->contract_ending_date > (new \DateTime()))));
-            
     }
 }

@@ -70,5 +70,7 @@ return [
     'myChilds' => 'Mon enfant',
     'uploadProfilePicture' => 'Mettre à jour la photo de profil',
     'profilePicture' => 'Photo de profil',
-
+    'months' => 'mois',
+    'years' => 'ans',
+    'and' => 'et'
 ];

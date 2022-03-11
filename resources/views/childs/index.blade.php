@@ -41,13 +41,31 @@
                                 {{ $child->formatAsDate($child->birthdate) }}
                             </td>
                             <td>
-                                <div class="tags has-addons">
-                                    <span class="tag is-primary is-light">
-                                        <i class="fa-solid fa-cake-candles"></i>
-                                    </span>
-                                    <span class="tag is-primary is-light" style="min-width: 47px;">
-                                        {{ __('message.days') . $child->remainingDaysBeforeBirthday() }}
-                                    </span>
+                                <div class="field is-grouped is-grouped-multiline">
+                                    @if ($child->remainingDaysBeforeBirthday())
+                                        <div class="control">
+                                            <div class="tags has-addons">
+                                                <span class="tag is-primary is-light">
+                                                    <i class="fa-solid fa-cake-candles"></i>
+                                                </span>
+                                                <span class="tag is-primary is-light" style="min-width: 47px;">
+                                                    {{ __('message.days') . $child->remainingDaysBeforeBirthday() }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if ($child->age())
+                                        <div class="control">
+                                            <div class="tags has-addons">
+                                                <span class="tag is-warning is-light">
+                                                    <i class="fa-solid fa-baby"></i>
+                                                </span>
+                                                <span class="tag is-warning is-light" style="min-width: 47px;">
+                                                    {{ $child->age() }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </td>
                             <td class="is-hidden-touch">
