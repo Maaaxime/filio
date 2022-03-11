@@ -55,7 +55,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role created successfully');
+            ->with('success', __('message.successCreated', ['name' => $role->name]));
     }
 
     /**
@@ -118,12 +118,10 @@ class RoleController extends Controller
                 $role->syncPermissions($request->input('permission'));
 
                 return redirect()->route('roles.index')
-                    ->with('success', 'Role updated successfully');
+                    ->with('success', __('message.successUpdated', ['name' => $role->name]));
                 break;
             case 'delete':
-                $this->destroy($id);
-                return redirect()->route('roles.index')
-                    ->with('success', 'Role deleted successfully');
+                return $this->destroy($id);
                 break;
         }
     }
@@ -136,8 +134,10 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        DB::table("roles")->where('id', $id)->delete();
+        $role = Role::find($id);
+        $role->delete();
+
         return redirect()->route('roles.index')
-            ->with('success', 'Role deleted successfully');
+            ->with('success', __('message.successDeleted', ['name' => $role->name]));
     }
 }

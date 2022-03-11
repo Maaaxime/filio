@@ -64,6 +64,8 @@ return [
     'alertConfirmDeleteTitle' => 'Êtes-vous certain de vouloir supprimer cet enregistrement ?',
     'alertConfirmDeleteDesc' => 'Si vous le supprimez, il disparaîtra à jamais.',
     'alertOk' => 'Ok !',
+    'alertCancelDeleteButton' => 'Annuler',
+    'alertConfirmDeleteButton' => 'Supprimer',
     'alertCancel' => 'Annuler',
     'credits' => 'Crédits',
     'administration' => 'Administration',
@@ -72,5 +74,8 @@ return [
     'profilePicture' => 'Photo de profil',
     'months' => 'mois',
     'years' => 'ans',
-    'and' => 'et'
+    'and' => 'et',
+    'successCreated' => ':name a été ajouté.',
+    'successUpdated' => ':name a été mis à jour.',
+    'successDeleted' => ':name a été supprimé.',
 ];

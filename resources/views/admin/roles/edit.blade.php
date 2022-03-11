@@ -37,15 +37,19 @@
 
         @if (!$readonly)
             @can('role-mngt')
-                <div class="field is-grouped is-pulled-right pt-4">
-                    <div class="control">
-                        {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-minus"></i></span><span>' . __('message.remove') . '</span>', ['class' => 'button is-danger is-outlined', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
+                <div class="columns is-flex-direction-row-reverse pt-4">
+                    <div class="column field">
+                        <div class="control is-pulled-right">
+                            {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
+                        </div>
                     </div>
-                    <div class="control">
-                        {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
+                    <div class="column field is-pulled-left">
+                        <div class="control">
+                            {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-minus"></i></span><span>' . __('message.remove') . '</span>', ['class' => 'button is-danger is-outlined confirmDelete', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
+                        </div>
                     </div>
+                    <div class="is-clearfix"></div>
                 </div>
-                <div class="is-clearfix"></div>
             @endcan
         @endif
         {!! Form::close() !!}

@@ -22,7 +22,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/bulma-tooltip.min.css') }}">
 
-
+    <link rel="stylesheet" href="{{ asset('css/bulma-sweetalert2.css') }}">
+    
     <script src="https://kit.fontawesome.com/19514b6620.js" crossorigin="anonymous"></script>
     <link href='https://css.gg/css' rel='stylesheet'>
 

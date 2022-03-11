@@ -60,11 +60,11 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-        
+
         $user->assignChildren($request->input('childs'));
 
         return redirect()->route('users.index')
-            ->with('success', 'User created successfully');
+            ->with('success', __('message.successCreated', ['name' => $user->name]));
     }
 
     /**
@@ -82,7 +82,7 @@ class UserController extends Controller
         $userRole = $user->roles->pluck('name', 'name')->all();
         $userChildren = $user->childs->pluck('id')->all();
 
-        return view('admin.users.edit', compact('user', 'roles', 'userRole','childs','userChildren'))->with('readonly', true);
+        return view('admin.users.edit', compact('user', 'roles', 'userRole', 'childs', 'userChildren'))->with('readonly', true);
     }
 
     /**
@@ -100,8 +100,7 @@ class UserController extends Controller
         $userRole = $user->roles->pluck('name', 'name')->all();
         $userChildren = $user->childs->pluck('id')->all();
 
-        Log::info($userChildren);
-        return view('admin.users.edit', compact('user', 'roles', 'userRole','childs','userChildren'))->with('readonly', false);
+        return view('admin.users.edit', compact('user', 'roles', 'userRole', 'childs', 'userChildren'))->with('readonly', false);
     }
 
     /**
@@ -154,12 +153,10 @@ class UserController extends Controller
                 }
 
                 return redirect()->route('users.index')
-                    ->with('success', 'User updated successfully');
+                    ->with('success', __('message.successUpdated', ['name' => $user->name]));
                 break;
             case 'delete':
-                $this->destroy($id);
-                return redirect()->route('users.index')
-                    ->with('success', 'User deleted successfully');
+                return $this->destroy($id);
                 break;
         }
     }
@@ -172,8 +169,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
+        $user = User::find($id);
+        $user->delete();
+        
         return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', __('message.successDeleted', ['name' => $user->name]));
     }
 }

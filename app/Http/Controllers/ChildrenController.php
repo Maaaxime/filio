@@ -71,7 +71,7 @@ class ChildrenController extends Controller
         }
 
         return redirect()->route('childs.index')
-            ->with('success', 'Children created successfully');
+            ->with('success', __('message.successCreated', ['name' => $children->full_name]));
     }
 
     /**
@@ -139,12 +139,10 @@ class ChildrenController extends Controller
                 }
 
                 return redirect()->route('childs.index')
-                    ->with('success', 'Children updated successfully');
+                    ->with('success', __('message.successUpdated', ['name' => $children->full_name]));
                 break;
             case 'delete':
-                $this->destroy($id);
-                return redirect()->route('childs.index')
-                    ->with('success', 'Children deleted successfully');
+                return  $this->destroy($id);
                 break;
         }
     }
@@ -157,8 +155,10 @@ class ChildrenController extends Controller
      */
     public function destroy($id)
     {
-        Children::find($id)->delete();
+        $children = Children::find($id);
+        $children->delete();
+
         return redirect()->route('childs.index')
-            ->with('success', 'Children deleted successfully');
+            ->with('success', __('message.successDeleted', ['name' => $children->full_name]));
     }
 }
