@@ -148,8 +148,8 @@
         @if (!$readonly)
             @can('user-mngt')
                 <div class="columns is-flex-direction-row-reverse pt-4">
-                    <div class="column field">
-                        <div class="control is-pulled-right">
+                    <div class="column field is-pulled-right">
+                        <div class="control">
                             {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
                         </div>
                     </div>
