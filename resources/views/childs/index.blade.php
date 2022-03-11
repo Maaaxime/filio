@@ -69,9 +69,11 @@
                                 </div>
                             </td>
                             <td class="is-hidden-touch">
+                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(implode(",", $child->address())) }}" target="_blank">
                                 @foreach ($child->address() as $key => $addrPart)
                                     {{ $addrPart }} <br />
                                 @endforeach
+                                </a>
                             </td>
                             <td class="is-hidden-touch">
                                 {{ $child->formatAsDate($child->contract_starting_date) .(!empty((int) $child->contract_ending_date) ? '-' . $child->formatAsDate($child->contract_ending_date) : '') }}
