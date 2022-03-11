@@ -69,10 +69,11 @@
                                 </div>
                             </td>
                             <td class="is-hidden-touch">
-                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(implode(",", $child->address())) }}" target="_blank">
-                                @foreach ($child->address() as $key => $addrPart)
-                                    {{ $addrPart }} <br />
-                                @endforeach
+                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(implode(',', $child->address())) }}"
+                                    target="_blank"  class="has-text-dark">
+                                        @foreach ($child->address() as $key => $addrPart)
+                                            {{ $addrPart }} <br />
+                                        @endforeach
                                 </a>
                             </td>
                             <td class="is-hidden-touch">
