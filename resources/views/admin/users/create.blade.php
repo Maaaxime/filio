@@ -2,12 +2,12 @@
     <x-content-page>
         <x-slot name="header">{{ __('message.usersManagement') }}</x-slot>
         <x-slot name="headerSubtitle">
-            <a href="{{ route('users.index') }}">
+            <a href="{{ url()->previous(); }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
 
-        {!! Form::open(['route' => 'users.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box']) !!}
+        {!! Form::open(['route' => 'users.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
         <div class="pb-6">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
                 <li class="steps-segment is-active">
@@ -123,7 +123,7 @@
                                 <tr>
                                     <td class="is-narrow">
                                         @if ($value->image)
-                                            <div class="img-circle is-48x48"
+                                            <div class="image img-circle is-48x48"
                                                 style="background-image: url('{{ asset('/storage/images/' . $value->image) }}');">
                                             </div>
                                         @endif
@@ -144,7 +144,7 @@
         </div>
         @can('user-mngt')
             <div class="field is-pulled-right pt-4">
-                <div class="control">
+                <div class="control is-pulled-right">
                     {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-plus"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
                 </div>
             </div>

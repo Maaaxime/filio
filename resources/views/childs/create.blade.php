@@ -2,12 +2,12 @@
     <x-content-page>
         <x-slot name="header">{{ __('message.childsManagement') }}</x-slot>
         <x-slot name="headerSubtitle">
-            <a href="{{ route('childs.index') }}">
+            <a href="{{ url()->previous(); }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
 
-        {!! Form::open(['route' => 'childs.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box']) !!}
+        {!! Form::open(['route' => 'childs.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
         <div class="pb-6">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
                 <li class="steps-segment is-active">
@@ -327,7 +327,7 @@
         </div>
 
         <div class="field is-pulled-right pt-4">
-            <div class="control">
+            <div class="control is-pulled-right">
                 {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
             </div>
         </div>

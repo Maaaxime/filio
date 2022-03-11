@@ -2,12 +2,12 @@
     <x-content-page>
         <x-slot name="header">{{ $role->name }}</x-slot>
         <x-slot name="headerSubtitle">
-            <a href="{{ route('roles.index') }}">
+            <a href="{{ url()->previous(); }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
 
-        {!! Form::model($role, ['method' => 'PATCH', 'route' => ['roles.update', $role->id], 'class' => 'box']) !!}
+        {!! Form::model($role, ['method' => 'PATCH', 'route' => ['roles.update', $role->id], 'class' => 'box-no-shadow']) !!}
 
         <div class="field">
             <label class="label">{{ __('message.name') }}</label>
@@ -39,7 +39,7 @@
             @can('role-mngt')
                 <div class="columns is-flex-direction-row-reverse pt-4">
                     <div class="column field is-pulled-right">
-                        <div class="control">
+                        <div class="control is-pulled-right">
                             {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
                         </div>
                     </div>

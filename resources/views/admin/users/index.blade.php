@@ -21,7 +21,7 @@
                         <tr>
                             <td class="is-narrow">
                                 @if ($user->image)
-                                    <div class="img-circle is-48x48 image"
+                                    <div class="image img-circle is-48x48 image"
                                         style="background-image: url('{{ asset('/storage/images/' . $user->image) }}');">
                                     </div>
                                 @endif
@@ -50,12 +50,9 @@
                                 @foreach ($user->childs as $child)
                                     @if ($child->image)
                                         <a href="{{ route('childs.show', $child->id) }}">
-                                            <div class="image img-circle is-48x48" style="
-                                            background-image: url('{{ asset('/storage/images/' . $child->image) }}');
-                                            display: inline-block;
-                                            margin-left: calc(-7px); margin-right: calc(-7px);
-                                            box-shadow: 0 0 0 2px #fff, inset 0 0 0 1px rgb(34 41 47 / 7%);
-    cursor: pointer;" data-tooltip="{{ $child->full_name }}">
+                                            <div class="image img-circle img-multi is-48x48"
+                                                style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');"
+                                                data-tooltip="{{ $child->full_name }}">
                                             </div>
                                         </a>
                                     @endif

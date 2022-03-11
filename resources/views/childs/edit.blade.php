@@ -2,13 +2,13 @@
     <x-content-page>
         <x-slot name="header">{{ $children->full_name }}</x-slot>
         <x-slot name="headerSubtitle">
-            <a href="{{ route('childs.index') }}">
+            <a href="{{ url()->previous(); }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
         <x-slot name="headerPicture">{{ $children->image }}</x-slot>
 
-        {!! Form::model($children, ['method' => 'PATCH', 'route' => ['childs.update', $children->id], 'enctype' => 'multipart/form-data', 'class' => 'box']) !!}
+        {!! Form::model($children, ['method' => 'PATCH', 'route' => ['childs.update', $children->id], 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
         <div class="pb-6">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
                 <li class="steps-segment is-active">
@@ -331,7 +331,7 @@
         @if (!$readonly)
         <div class="columns is-flex-direction-row-reverse pt-4">
             <div class="column field is-pulled-right">
-                <div class="control">
+                <div class="control is-pulled-right">
                     {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
                 </div>
             </div>

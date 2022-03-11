@@ -2,13 +2,13 @@
     <x-content-page>
         <x-slot name="header">{{ $user->name }}</x-slot>
         <x-slot name="headerSubtitle">
-            <a href="{{ route('users.index') }}">
+            <a href="{{ url()->previous(); }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
         <x-slot name="headerPicture">{{ $user->image }}</x-slot>
 
-        {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id], 'enctype' => 'multipart/form-data', 'class' => 'box']) !!}
+        {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id], 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
         <div class="pb-6">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
                 <li class="steps-segment is-active">
@@ -125,7 +125,7 @@
                                 <tr>
                                     <td class="is-narrow">
                                         @if ($value->image)
-                                            <div class="img-circle is-48x48"
+                                            <div class="image img-circle is-48x48"
                                                 style="background-image: url('{{ asset('/storage/images/' . $value->image) }}');">
                                             </div>
                                         @endif
@@ -149,7 +149,7 @@
             @can('user-mngt')
                 <div class="columns is-flex-direction-row-reverse pt-4">
                     <div class="column field is-pulled-right">
-                        <div class="control">
+                        <div class="control is-pulled-right">
                             {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
                         </div>
                     </div>

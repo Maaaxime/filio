@@ -3,29 +3,30 @@
         <x-slot name="header">{{ trans_choice('message.myChilds',Auth()->user()->childs()->count()) }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
 
-        <div class="container pr-2 pl-2">
-            <div class="columns pb-6 is-narrow-mobile">
-
-                @foreach ($childs as $key => $child)
-                    <div class="column is-2 is-narrow-touch">
-                        <a href="{{ route('childs.show', $child->id) }}">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image is-4by3"
-                                        style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');">
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <div class="content">
+        <div class="box-no-shadow">
+            @foreach ($childs as $key => $child)
+                <a href="{{ route('childs.show', $child->id) }}">
+                    <div class="card mb-4">
+                        <header class="card-header mt-4">
+                            <table class="table card-header-title">
+                                <tr>
+                                    <td class="is-narrow">
+                                        @if ($child->image)
+                                            <div class="image img-circle is-48x48"
+                                                style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');">
+                                            </div>
+                                        @endif
+                                    </td>
+                                    <td class="content">
                                         <p class="title is-4">{{ $child->first_name }}</p>
                                         <p class="subtitle is-6">{{ $child->last_name }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </header>
                     </div>
-                @endforeach
-            </div>
+                </a>
+            @endforeach
         </div>
     </x-content-page>
 </x-app-layout>

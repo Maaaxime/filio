@@ -16,7 +16,7 @@
                 class={{ request()->routeIs('my.childs') ? 'is-active' : '' }}>{{ trans_choice('message.myChilds',Auth()->user()->childs()->count()) }}</a></li>
     </ul>
     <p class="menu-label">
-        {{ __('message.administration') }} {{ Illuminate\Support\Facades\Route::currentRouteName() }}
+        {{ __('message.administration') }}
     </p>
     <ul class="menu-list">
         <li><a href="{{ url('/admin/childs') }}"
