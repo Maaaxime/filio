@@ -39,9 +39,11 @@
                             </td>
                             <td>
                                 @if (!empty($user->getRoleNames()))
-                                    @foreach ($user->getRoleNames() as $v)
-                                        <span class="tag is-primary is-light">{{ $v }}</span>
-                                    @endforeach
+                                    <div class="tags">
+                                        @foreach ($user->getRoleNames() as $v)
+                                            <span class="tag is-primary is-light">{{ $v }}</span>
+                                        @endforeach
+                                    </div>
                                 @endif
                             </td>
                             <td class="is-hidden-touch">
