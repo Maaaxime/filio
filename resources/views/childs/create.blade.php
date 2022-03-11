@@ -98,7 +98,7 @@
                     <div class="column field">
                         <label class="label">{{ __('message.birthdate') }}</label>
                         <div class="control">
-                            {!! Form::text('birthdate', null, ['class' => 'input']) !!}
+                            {!! Form::date('birthdate', null, ['class' => 'input']) !!}
                         </div>
                     </div>
                     <div class="column field">
