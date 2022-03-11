@@ -32,7 +32,10 @@ class ChildrenController extends Controller
      */
     public function my()
     {
-        $childs = Auth::User()->childs->all();
+        $childs = Auth::User()->childs;
+        if ($childs->count() == 1)
+            return $this->edit($childs->first()->id);
+
         return view('childs.my', compact('childs'));
     }
 
@@ -66,7 +69,7 @@ class ChildrenController extends Controller
             $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
             $filename = 'Children_' . $children->id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
             $children->update(['image' => $filename]);
-            
+
             $request->image->storeAs('images',  $filename, 'public');
         }
 
@@ -82,8 +85,8 @@ class ChildrenController extends Controller
      */
     public function show($id)
     {
-        if($id == "my") {
-           return $this->my();
+        if ($id == "my") {
+            return $this->my();
         }
 
         $children = Children::find($id);
@@ -117,25 +120,24 @@ class ChildrenController extends Controller
                     'first_name' => 'required',
                     'last_name' => 'required',
                 ]);
-        
+
                 $input = $request->all();
 
                 $children = Children::find($id);
                 $oldImage = 'public/images/' . $children->image;
 
                 $children->update($input);
-                
+
                 if ($request->hasFile('image')) {
                     $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
                     $filename = 'Children_' . $id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
                     $children->update(['image' => $filename]);
-                    
+
                     $request->image->storeAs('images',  $filename, 'public');
 
                     if ((Storage::exists($oldImage)) && ($oldImage != 'public/images/child.png')) {
                         Storage::delete($oldImage);
                     }
-                    
                 }
 
                 return redirect()->route('childs.index')

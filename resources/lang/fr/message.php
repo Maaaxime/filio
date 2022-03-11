@@ -69,7 +69,7 @@ return [
     'alertCancel' => 'Annuler',
     'credits' => 'Crédits',
     'administration' => 'Administration',
-    'myChilds' => 'Mon enfant',
+    'myChilds' => 'Mon enfant|Mes enfants',
     'uploadProfilePicture' => 'Mettre à jour la photo de profil',
     'profilePicture' => 'Photo de profil',
     'months' => 'mois',

@@ -13,17 +13,17 @@
                 class={{ request()->routeIs('dashboard') ? 'is-active' : '' }}>{{ __('message.dashboard') }}</a>
         </li>
         <li><a href="{{ url('/my/childs') }}"
-                class={{ request()->routeIs('my.childs') ? 'is-active' : '' }}>{{ __('message.myChilds') }}</a></li>
+                class={{ request()->routeIs('my.childs') ? 'is-active' : '' }}>{{ trans_choice('message.myChilds',Auth()->user()->childs()->count()) }}</a></li>
     </ul>
     <p class="menu-label">
         {{ __('message.administration') }}
     </p>
     <ul class="menu-list">
         <li><a href="{{ url('/childs') }}"
-                class={{ request()->routeIs('childs*') ? 'is-active' : '' }}>{{ __('message.childsManagement') }}</a>
+                class={{ request()->routeIs('admin.childs') ? 'is-active' : '' }}>{{ __('message.childsManagement') }}</a>
         </li>
         <li>
-            <a>{{ __('message.teamManagement') }}</a>
+            <p>{{ __('message.teamManagement') }}</p>
             <ul>
                 <li><a href="{{ url('/admin/users') }}"
                         class={{ request()->routeIs('admin.users') ? 'is-active' : '' }}>{{ __('message.usersManagement') }}</a>

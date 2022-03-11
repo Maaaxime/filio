@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-content-page>
         <x-slot name="header">{{ __('message.dashboard') }}</x-slot>
-        <x-slot name="headerSubtitle">test</x-slot>
+        <x-slot name="headerSubtitle"></x-slot>
 
         <nav class="level is-mobile">
             <div class="level-item has-text-centered">

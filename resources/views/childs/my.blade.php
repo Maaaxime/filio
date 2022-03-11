@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ __('message.childsManagement') }}</x-slot>
+        <x-slot name="header">{{ trans_choice('message.myChilds',Auth()->user()->childs()->count()) }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
 
         <div class="container pr-2 pl-2">
