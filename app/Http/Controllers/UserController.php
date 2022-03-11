@@ -113,6 +113,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Log::debug($request);
         switch ($request->input('action')) {
             case 'save':
                 $this->validate($request, [

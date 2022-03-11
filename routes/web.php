@@ -18,6 +18,10 @@ Route::get('/', function () {
     return redirect('/dashboard');;
 });
 
+Route::get('/credits', function () {
+    return view('credits');;
+});
+
 Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
 Route::group(['middleware' => ['auth', 'role:Admin'], 'prefix' => 'admin'], function () {

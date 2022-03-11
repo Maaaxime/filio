@@ -1,57 +1,69 @@
 <x-app-layout>
-    <x-slot name="header">
-        <hgroup>
-            <h2 class="">
-                {{ __('message.usersManagement') }}
-            </h2>
-            <h3>
-                <a href="{{ route('users.create') }}">
-                    <span class="icon"><i class="gg-add"></i></span>{{ __('message.add') }}
-                </a>
-            </h3>
-        </hgroup>
-    </x-slot>
+    <x-content-page>
+        <x-slot name="header">{{ __('message.usersManagement') }}</x-slot>
+        <x-slot name="headerSubtitle">
+            <a href="{{ route('users.create') }}">
+                <i class="fa-solid fa-circle-plus"></i> {{ __('message.add') }}
+            </a>
+        </x-slot>
 
-    <x-banner />
-    <figure>
-        <table role="grid">
-            <thead>
-                <tr>
-                    <th scope="col">{{ __('message.name') }}</th>
-                    <th scope="col">{{ __('message.roles') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($data as $key => $user)
+        <div class="table-container pr-2 pl-2">
+            <table class="table is-striped is-hoverable is-fullwidth">
+                <thead>
                     <tr>
-                        <td>
-                            <div class="grid flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10">
-                                    @if ($user->image)
-                                        <div class="w-10 h-10 img-circle"
-                                            style="background-image: url('{{ asset('/storage/images/' . $user->image) }}')">
-                                        </div>
-                                    @endif
-                                </div>
-                                <div>
-                                    <a
-                                        href="{{ route('users.edit', $user->id) }}">{{ $user->name }}</a><br /><small>{{ $user->email }}</small>
-                                </div>
-                            </div>
-
-                        </td>
-                        <td>
-                            @if (!empty($user->getRoleNames()))
-                                @foreach ($user->getRoleNames() as $v)
-                                    <label class="badge rounded-pill btn-info">{{ $v }}</label>
-                                @endforeach
-                            @endif
-                        </td>
+                        <th scope="col" colspan="2">{{ __('message.name') }}</th>
+                        <th scope="col">{{ __('message.roles') }}</th>
+                        <th scope="col" class="is-hidden-touch">{{ __('message.childs') }}</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </figure>
-    {{ $data->links('vendor.pagination.custom') }}
+                </thead>
+                <tbody>
+                    @foreach ($data as $key => $user)
+                        <tr>
+                            <td class="is-narrow">
+                                @if ($user->image)
+                                    <div class="img-circle image"
+                                        style="background-image: url('{{ asset('/storage/images/' . $user->image) }}');">
+                                    </div>
+                                @endif
+                            </td>
+                            <td class="is-narrow">
+                                <a href="{{ route('users.edit', $user->id) }}">
+                                    <p class="title is-5">
+                                        {{ $user->name }}
+                                    </p>
+                                    <p class="subtitle is-6">
+                                        {{ $user->email }}
+                                    </p>
+                                </a>
 
+                            </td>
+                            <td>
+                                @if (!empty($user->getRoleNames()))
+                                    @foreach ($user->getRoleNames() as $v)
+                                        <span class="tag is-primary is-light">{{ $v }}</span>
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td class="is-hidden-touch">
+                                @foreach ($user->childs as $child)
+                                    @if ($child->image)
+                                        <a href="{{ route('childs.show', $child->id) }}">
+                                            <div class="image img-circle" style="
+                                            background-image: url('{{ asset('/storage/images/' . $child->image) }}');
+                                            display: inline-block;
+                                            margin-left: calc(-7px); margin-right: calc(-7px);
+                                            box-shadow: 0 0 0 2px #fff, inset 0 0 0 1px rgb(34 41 47 / 7%);
+    cursor: pointer;" data-tooltip="{{ $child->full_name }}">
+                                            </div>
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        {{ $data->links('vendor.pagination.custom') }}
+    </x-content-page>
 </x-app-layout>

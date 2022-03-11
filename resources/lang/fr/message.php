@@ -3,6 +3,7 @@
 return [
     'dashboard' => 'Tableau de bord',
     'welcome' => 'Bonjour ',
+    'teamManagement' => 'Gestion des accès',
     'usersManagement' => 'Utilisateurs',
     'rolesManagement' => 'Rôles',
     'roles' => 'Rôles',
@@ -63,6 +64,11 @@ return [
     'alertConfirmDeleteTitle' => 'Êtes-vous certain de vouloir supprimer cet enregistrement ?',
     'alertConfirmDeleteDesc' => 'Si vous le supprimez, il disparaîtra à jamais.',
     'alertOk' => 'Ok !',
-    'alertCancel' => 'Annuler'
+    'alertCancel' => 'Annuler',
+    'credits' => 'Crédits',
+    'administration' => 'Administration',
+    'myChilds' => 'Mon enfant',
+    'uploadProfilePicture' => 'Mettre à jour la photo de profil',
+    'profilePicture' => 'Photo de profil',
 
 ];

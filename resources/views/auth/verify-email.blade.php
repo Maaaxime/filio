@@ -3,9 +3,7 @@
     </x-slot>
 
     <x-auth-card>
-        <p>
-            {{ __('auth.check-email') }}
-        </p>
+        <p class="title">{{ __('auth.check-email') }}</p>
 
         @if (session('status') == 'verification-link-sent')
             <p>
@@ -13,14 +11,27 @@
             </p>
         @endif
 
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
-            <button type="submit">{{ __('check-emailSend') }}</button>
-        </form>
-
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit"> {{ __('auth.logOut') }}</button>
-        </form>
+        <div class="columns">
+            <div class="column">
+                <form method="POST" action="{{ route('login') }}" class="box">
+                    @csrf
+                    <div class="field">
+                        <button class="button is-success is-fullwidth" type="submit">
+                            {{ __('auth.logIn') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="column">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <div class="field">
+                        <button class="button is-warning is-fullwidth" type="submit">
+                            {{ __('auth.logOut') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </x-auth-card>
-    </x-guest-layout>
+</x-app-layout>
