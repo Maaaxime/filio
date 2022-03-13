@@ -8,7 +8,7 @@
         </x-slot>
 
         {!! Form::open(['route' => 'entries.store', 'method' => 'POST', 'class' => 'box-no-shadow']) !!}
-        {{  Form::hidden('url',URL::previous())  }}
+        {{ Form::hidden('url', URL::previous()) }}
         <div class="columns">
             <div class="column">
                 <div class="field">
@@ -21,6 +21,12 @@
                     <label class="label">{{ __('message.timeEntryType') }}</label>
                     <div class="control select is-fullwidth">
                         {{ Form::select('entry_type', $timeEntryTypes, null, ['class' => '']) }}
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">{{ __('message.comment') }}</label>
+                    <div class="control">
+                        {!! Form::textarea('comment', null, ['class' => 'textarea', 'rows' => 6]) !!}
                     </div>
                 </div>
             </div>
@@ -48,9 +54,9 @@
                         <label class="label">{{ __('message.time_end_time') }}</label>
                         <div class="control">
                             <!-- value="$timeEntry->time_end" -->
-                            <input type="time" name="time_end_time" 
-                            value="{{ App\Models\TimeEntry::defaultEndTime()->format('H:i') }}"
-                            class="input is-fullwidth bulma-calendar-time bulma-calendar">
+                            <input type="time" name="time_end_time"
+                                value="{{ App\Models\TimeEntry::defaultEndTime()->format('H:i') }}"
+                                class="input is-fullwidth bulma-calendar-time bulma-calendar">
                         </div>
                     </div>
                 </div>
@@ -62,9 +68,7 @@
             </div>
         </div>
         <div class="is-clearfix"></div>
-
         {!! Form::close() !!}
     </x-content-page>
-
     <x-calendar></x-calendar>
 </x-app-layout>

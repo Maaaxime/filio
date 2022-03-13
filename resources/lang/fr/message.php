@@ -89,8 +89,9 @@ return [
     'timeEntriesManagement' => 'Entrées',
     'timeEntryType' => 'Type',
     'time_start_date' => 'Date',
-    'time_start_time' => 'Check-In',
+    'time_start_time' => 'Arrivée',
     'time_end_date' => 'Date',
-    'time_end_time' => 'Check-Out',
+    'time_end_time' => 'Départ',
     'time_duration' => 'Durée',
+    'comment' => 'Observations'
 ];

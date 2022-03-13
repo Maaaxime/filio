@@ -8,7 +8,7 @@
         </x-slot>
 
         {!! Form::model($timeEntry, ['method' => 'PATCH', 'route' => ['entries.update', $timeEntry->id], 'class' => 'box-no-shadow']) !!}
-        {{  Form::hidden('url',URL::previous())  }}
+        {{ Form::hidden('url', URL::previous()) }}
         <div class="columns">
             <div class="column">
                 <div class="field">
@@ -20,7 +20,13 @@
                 <div class="field ">
                     <label class="label">{{ __('message.timeEntryType') }}</label>
                     <div class="control select is-fullwidth">
-                        {{ Form::select('entry_type', $timeEntryTypes, $timeEntry->entry_type_id, ['class' => '', 'disabled' => $readonly]) }}
+                        {{ Form::select('entry_type', $timeEntryTypes, $timeEntry->entry_type_id, ['class' => '','disabled' => $readonly]) }}
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">{{ __('message.comment') }}</label>
+                    <div class="control">
+                        {!! Form::textarea('comment', null, ['class' => 'textarea', 'rows' => 6, 'disabled' => $readonly]) !!}
                     </div>
                 </div>
             </div>
@@ -56,7 +62,6 @@
                 </div>
             </div>
         </div>
-
         @if (!$readonly)
             <div class="columns is-flex-direction-row-reverse pt-4">
                 <div class="column field is-pulled-right">
@@ -72,9 +77,7 @@
                 <div class="is-clearfix"></div>
             </div>
         @endif
-
         {!! Form::close() !!}
     </x-content-page>
-
     <x-calendar></x-calendar>
 </x-app-layout>

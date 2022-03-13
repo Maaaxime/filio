@@ -30,7 +30,6 @@ class TimeEntry extends Model
         'time_start' => 'datetime',
         'system_time_end' => 'datetime',
         'system_time_start' => 'datetime',
-        'system_time_end' => 'datetime',
     ];
 
     protected $fillable = [
@@ -40,6 +39,7 @@ class TimeEntry extends Model
         'time_start',
         'system_time_end',
         'system_time_start',
+        'comment',
         'created_at',
         'created_by_id',
         'updated_at',

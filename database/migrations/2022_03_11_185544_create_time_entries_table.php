@@ -36,6 +36,7 @@ class CreateTimeEntriesTable extends Migration
             $table->datetime('time_end')->nullable();
             $table->datetime('system_time_start');
             $table->datetime('system_time_end')->nullable();
+            $table->text('comment')->nullable();
 
             $table->foreignIdFor(User::class,'created_by_id');
             $table->foreignIdFor(User::class,'updated_by_id');
