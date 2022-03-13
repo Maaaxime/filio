@@ -15,8 +15,7 @@
                         <th scope="col" class="has-text-centered is-narrow">#</th>
                         <th scope="col">{{ __('message.name') }}</th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.description') }}</th>
-                        <th scope="col" class="is-hidden-touch is-narrow">{{ __('message.timeEntryTypesNeedProof') }}
-                        </th>
+                        <th scope="col" class="is-hidden-touch is-narrow">{{ __('message.timeEntryTypesNeedProof') }}</th>
                         <th scope="col" class="is-hidden-touch is-narrow">
                             {{ __('message.timeEntryTypesNeedPermission') }}</th>
                     </tr>
@@ -29,7 +28,7 @@
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </th>
-                            <td class="is-narrow">
+                            <td>
                                 {{ $timeEntryType->name }}
                                 @if ($timeEntryType->default)
                                     <span
@@ -39,10 +38,10 @@
                             <td class="is-hidden-touch">
                                 {{ $timeEntryType->description }}
                             </td>
-                            <td class="is-hidden-touch has-text-centered">
+                            <td class="is-hidden-touch is-narrow has-text-centered">
                                 {{ Form::checkbox('need_proof', null, $timeEntryType->need_proof, ['class' => 'checkbox icon','disabled' => true]) }}
                             </td>
-                            <td class="is-hidden-touch has-text-centered">
+                            <td class="is-hidden-touch is-narrow has-text-centered">
                                 {{ Form::checkbox('need_permission', null, $timeEntryType->need_permission, ['class' => 'checkbox icon','disabled' => true]) }}
                             </td>
                         </tr>
