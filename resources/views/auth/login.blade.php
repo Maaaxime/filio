@@ -39,7 +39,7 @@
                 </label>
             </div>
             <div class="field">
-                <button class="button is-success is-fullwidth" type="submit">
+                <button class="button is-primary is-fullwidth" type="submit">
                     {{ __('auth.logIn') }}
                 </button>
             </div>

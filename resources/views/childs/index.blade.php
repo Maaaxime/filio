@@ -1,9 +1,10 @@
 <x-app-layout>
     <x-content-page>
         <x-slot name="header">{{ __('message.childsManagement') }}</x-slot>
-        <x-slot name="headerSubtitle">
-            <a href="{{ route('childs.create') }}">
-                <i class="fa-solid fa-circle-plus"></i> {{ __('message.add') }}
+        <x-slot name="headerSubtitle"></x-slot>
+        <x-slot name="headerAction">
+            <a href="{{ route('childs.create') }}" class="button is-primary is-light">
+                <span class="icon"><i class="fa-solid fa-circle-plus"></i></span> {{ __('message.add') }}
             </a>
         </x-slot>
 
@@ -11,6 +12,7 @@
             <table class="table is-striped is-hoverable is-fullwidth">
                 <thead>
                     <tr>
+                        <th scope="col" class="has-text-centered is-narrow">#</th>
                         <th scope="col" colspan="2">{{ __('message.name') }}</th>
                         <th scope="col" colspan="2">{{ __('message.birthdate') }}</th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.address') }}</th>
@@ -18,50 +20,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($childs as $key => $child)
-                        <tr {{ !$child->isActive() ? 'class="stripes"' : '' }}>
+                    @foreach ($childs as $key => $children)
+                        <tr {{ !$children->isActive() ? 'class="stripes"' : '' }}>
+                            <th class="is-narrow">
+                                <a href="{{ route('childs.edit', $children->id) }}" class="button is-primary">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </th>
                             <td class="is-narrow">
-                                @if ($child->image)
+                                @if ($children->image)
                                     <div class="image img-circle is-48x48"
-                                        style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');">
+                                        style="background-image: url('{{ asset('/storage/images/' . $children->image) }}');">
                                     </div>
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('childs.edit', $child->id) }}">
-                                    <p class="title is-5">
-                                        {{ $child->first_name }} {{ $child->last_name }}
-                                    </p>
-                                    <p class="subtitle is-6">
-                                        {{ $child->parents() }}
-                                    </p>
-                                </a>
+                                <p>
+                                    {{ $children->first_name }} {{ $children->last_name }}
+                                </p>
+                                <p class="is-size-7">
+                                    {{ $children->parents() }}
+                                </p>
                             </td>
                             <td class="is-hidden-touch">
-                                {{ $child->formatAsDate($child->birthdate) }}
+                                {{ $children->formatAsDate($children->birthdate) }}
                             </td>
                             <td>
                                 <div class="field is-grouped is-grouped-multiline">
-                                    @if ($child->remainingDaysBeforeBirthday())
+                                    @if ($children->remainingDaysBeforeBirthday())
                                         <div class="control">
                                             <div class="tags has-addons">
                                                 <span class="tag is-primary is-light">
                                                     <i class="fa-solid fa-cake-candles"></i>
                                                 </span>
                                                 <span class="tag is-primary is-light" style="min-width: 47px;">
-                                                    {{ __('message.days') . $child->remainingDaysBeforeBirthday() }}
+                                                    {{ __('message.days') . $children->remainingDaysBeforeBirthday() }}
                                                 </span>
                                             </div>
                                         </div>
                                     @endif
-                                    @if ($child->age())
+                                    @if ($children->age())
                                         <div class="control">
                                             <div class="tags has-addons">
                                                 <span class="tag is-warning is-light">
                                                     <i class="fa-solid fa-baby"></i>
                                                 </span>
                                                 <span class="tag is-warning is-light" style="min-width: 47px;">
-                                                    {{ $child->age() }}
+                                                    {{ $children->age() }}
                                                 </span>
                                             </div>
                                         </div>
@@ -69,15 +74,15 @@
                                 </div>
                             </td>
                             <td class="is-hidden-touch">
-                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(implode(',', $child->address())) }}"
-                                    target="_blank"  class="has-text-dark">
-                                        @foreach ($child->address() as $key => $addrPart)
-                                            {{ $addrPart }} <br />
-                                        @endforeach
+                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(implode(',', $children->address())) }}"
+                                    target="_blank" class="has-text-dark">
+                                    @foreach ($children->address() as $key => $addrPart)
+                                        {{ $addrPart }} <br />
+                                    @endforeach
                                 </a>
                             </td>
                             <td class="is-hidden-touch">
-                                {{ $child->formatAsDate($child->contract_starting_date) .(!empty((int) $child->contract_ending_date) ? '-' . $child->formatAsDate($child->contract_ending_date) : '') }}
+                                {{ $children->formatAsDate($children->contract_starting_date) .(!empty((int) $children->contract_ending_date) ? '-' . $children->formatAsDate($children->contract_ending_date) : '') }}
                             </td>
                         </tr>
                     @endforeach

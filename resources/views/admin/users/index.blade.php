@@ -1,9 +1,10 @@
 <x-app-layout>
     <x-content-page>
         <x-slot name="header">{{ __('message.usersManagement') }}</x-slot>
-        <x-slot name="headerSubtitle">
-            <a href="{{ route('users.create') }}">
-                <i class="fa-solid fa-circle-plus"></i> {{ __('message.add') }}
+        <x-slot name="headerSubtitle"></x-slot>
+        <x-slot name="headerAction">
+            <a href="{{ route('users.create') }}" class="button is-primary is-light">
+                <span class="icon"><i class="fa-solid fa-circle-plus"></i></span> {{ __('message.add') }}
             </a>
         </x-slot>
 
@@ -11,6 +12,7 @@
             <table class="table is-striped is-hoverable is-fullwidth">
                 <thead>
                     <tr>
+                        <th scope="col" class="has-text-centered is-narrow">#</th>
                         <th scope="col" colspan="2">{{ __('message.name') }}</th>
                         <th scope="col">{{ __('message.roles') }}</th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.childs') }}</th>
@@ -19,6 +21,11 @@
                 <tbody>
                     @foreach ($data as $key => $user)
                         <tr>
+                            <th class="is-narrow">
+                                <a href="{{ route('users.edit', $user->id) }}" class="button is-primary">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </th>
                             <td class="is-narrow">
                                 @if ($user->image)
                                     <div class="image img-circle is-48x48 image"
@@ -27,15 +34,12 @@
                                 @endif
                             </td>
                             <td class="is-narrow">
-                                <a href="{{ route('users.edit', $user->id) }}">
-                                    <p class="title is-5">
-                                        {{ $user->name }}
-                                    </p>
-                                    <p class="subtitle is-6">
-                                        {{ $user->email }}
-                                    </p>
-                                </a>
-
+                                <p>
+                                    {{ $user->name }}
+                                </p>
+                                <p class="is-size-7">
+                                    {{ $user->email }}
+                                </p>
                             </td>
                             <td>
                                 @if (!empty($user->getRoleNames()))

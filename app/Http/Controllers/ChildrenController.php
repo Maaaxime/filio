@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ChildrenController extends Controller
 {
@@ -73,7 +74,7 @@ class ChildrenController extends Controller
             $request->image->storeAs('images',  $filename, 'public');
         }
 
-        return redirect()->route('childs.index')
+        return redirect($request->url)
             ->with('success', __('message.successCreated', ['name' => $children->full_name]));
     }
 
@@ -140,11 +141,11 @@ class ChildrenController extends Controller
                     }
                 }
 
-                return redirect()->route('childs.index')
+                return redirect($request->url)
                     ->with('success', __('message.successUpdated', ['name' => $children->full_name]));
                 break;
             case 'delete':
-                return  $this->destroy($id);
+                return  $this->destroy($request, $id);
                 break;
         }
     }
@@ -155,12 +156,12 @@ class ChildrenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $children = Children::find($id);
         $children->delete();
 
-        return redirect()->route('childs.index')
+        return redirect($request->url)
             ->with('success', __('message.successDeleted', ['name' => $children->full_name]));
     }
 }

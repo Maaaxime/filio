@@ -9,14 +9,14 @@ $(document).ready(function () {
 
     });
 
-    $('.steps-segment a').click(function(e) {
+    $('.steps-segment a').click(function (e) {
         e.preventDefault();
 
-        $('.steps-segment a').each(function() {
+        $('.steps-segment a').each(function () {
             $(this).parent().removeClass('is-active');
         });
 
-        $(".tab-panel").each(function() {
+        $(".tab-panel").each(function () {
             $(this).addClass('is-hidden');
         });
 
@@ -28,4 +28,14 @@ $(document).ready(function () {
             $(panelId).removeClass('is-hidden');
         }
     });
+
+    const fileInput = document.querySelector('#file input[type=file]');
+    if (fileInput !== null) {
+        fileInput.onchange = () => {
+            if (fileInput.files.length > 0) {
+                const fileName = document.querySelector('#file .file-name');
+                fileName.textContent = fileInput.files[0].name;
+            }
+        }
+    }
 });

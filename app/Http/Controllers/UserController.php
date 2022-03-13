@@ -75,7 +75,7 @@ class UserController extends Controller
 
         $user->assignChildren($request->input('childs'));
 
-        return redirect()->route('users.index')
+        return redirect($request->url)
             ->with('success', __('message.successCreated', ['name' => $user->name]));
     }
 
@@ -163,11 +163,11 @@ class UserController extends Controller
                     }
                 }
 
-                return redirect()->route('users.index')
+                return redirect($request->url)
                     ->with('success', __('message.successUpdated', ['name' => $user->name]));
                 break;
             case 'delete':
-                return $this->destroy($id);
+                return $this->destroy($request, $id);
                 break;
         }
     }
@@ -178,12 +178,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $user = User::find($id);
         $user->delete();
 
-        return redirect()->route('users.index')
+        return redirect($request->url)
             ->with('success', __('message.successDeleted', ['name' => $user->name]));
     }
 }

@@ -1,38 +1,45 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ $role->name }}</x-slot>
+        <x-slot name="header">{{ $timeEntryType->name }}</x-slot>
         <x-slot name="headerSubtitle">
-            <a href="{{ url()->previous(); }}">
+            <a href="{{ url()->previous() }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
 
-        {!! Form::model($role, ['method' => 'PATCH', 'route' => ['roles.update', $role->id], 'class' => 'box-no-shadow']) !!}
+        {!! Form::model($timeEntryType, ['method' => 'PATCH', 'route' => ['types.update', $timeEntryType->id], 'class' => 'box-no-shadow']) !!}
         {{  Form::hidden('url',URL::previous())  }}
         <div class="field">
             <label class="label">{{ __('message.name') }}</label>
             <div class="control">
-                {!! Form::text('name', null, ['placeholder' => __('message.name'), 'class' => 'input', 'disabled' => $readonly]) !!}
+                {!! Form::text('name', null, ['class' => 'input', 'disabled' => $readonly]) !!}
             </div>
         </div>
 
         <div class="field">
-            <p class="title">{{ __('message.roles') }}</p>
-            @foreach ($permission as $value)
-                <div class="card mb-4">
-                    <header class="card-header">
-                        <div class="card-header-title">
-                            <p class="title is-5">{{ $value->name }}</p>
-                            @if ($value->description != '')
-                                <p class="subtitle is-6">{{ $value->description }}</p>
-                            @endif
-                        </div>
-                        <span class="card-header-icon" aria-label="more options">
-                            {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, ['class' => 'checkbox icon','disabled' => $readonly]) }}
-                        </span>
-                    </header>
-                </div>
-            @endforeach
+            <label class="label">{{ __('message.description') }}</label>
+            <div class="control">
+                {!! Form::textarea('description', null, ['class' => 'textarea', 'rows' => 3, 'disabled' => $readonly]) !!}
+            </div>
+        </div>
+        <div class="field">
+            <label class="checkbox">
+                {{ Form::checkbox('default', null, $timeEntryType->default, ['class' => 'checkbox icon','disabled' => $readonly]) }}
+                {{ __('message.timeEntryTypesDefault') }}
+            </label>
+        </div>
+        <div class="field">
+            <label class="checkbox">
+                {{ Form::checkbox('need_proof', null, $timeEntryType->need_proof, ['class' => 'checkbox icon','disabled' => $readonly]) }}
+                {{ __('message.timeEntryTypesNeedProof') }}
+            </label>
+        </div>
+
+        <div class="field">
+            <label class="checkbox">
+                {{ Form::checkbox('need_permission', null, $timeEntryType->need_permission, ['class' => 'checkbox icon','disabled' => $readonly]) }}
+                {{ __('message.timeEntryTypesNeedPermission') }}
+            </label>
         </div>
 
         @if (!$readonly)

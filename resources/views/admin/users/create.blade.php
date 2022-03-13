@@ -8,7 +8,8 @@
         </x-slot>
 
         {!! Form::open(['route' => 'users.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
-        <div class="pb-6">
+        {{  Form::hidden('url',URL::previous())  }}
+        <div class="pb-6 sticky">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
                 <li class="steps-segment is-active">
                     <a hef="#" class="has-text-dark" aria-controls="tab1-section">
@@ -53,16 +54,19 @@
                 <div class="columns pt-6">
                     <div class="column">
                         <label class="label">{{ __('message.profilePicture') }}</label>
-                        <div class="file is-boxed">
-                            <label class="file-label" style="width: 100%; height: 100%;">
-                                <input class="file-input" type="file" name="image" style="width: 100%;">
+                        <div class="file is-normal is-boxed has-name is-fullwidth" id="file">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="image">
                                 <span class="file-cta">
                                     <span class="file-icon">
                                         <i class="fas fa-upload"></i>
                                     </span>
-                                    <span class="file-label">
+                                    <span class="file-label has-text-centered">
                                         {{ __('message.uploadProfilePicture') }}
                                     </span>
+                                </span>
+                                <span class="file-name" style="min-width: 100%;">
+                                    {{ $user->image }}
                                 </span>
                             </label>
                         </div>
@@ -145,7 +149,7 @@
         @can('user-mngt')
             <div class="field is-pulled-right pt-4">
                 <div class="control is-pulled-right">
-                    {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-plus"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
+                    {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-plus"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
                 </div>
             </div>
             <div class="is-clearfix"></div>

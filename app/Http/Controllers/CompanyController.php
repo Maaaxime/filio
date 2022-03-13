@@ -24,27 +24,27 @@ class CompanyController extends Controller
     ];
 
     /**
-    * Returns the id of a given type
-    *
-    * @param string $type  Company's type
-    * @return int typeId
-    */
+     * Returns the id of a given type
+     *
+     * @param string $type  Company's type
+     * @return int typeId
+     */
     public static function getTypeID($type)
     {
         return array_search($type, self::TYPES);
     }
 
     /**
-    * Get Company Type
-    */
+     * Get Company Type
+     */
     public function getTypeAttribute()
     {
-        return self::TYPES[ $this->attributes['typeId'] ];
+        return self::TYPES[$this->attributes['typeId']];
     }
 
     /**
-    * Set Company Type
-    */
+     * Set Company Type
+     */
     public function setTypeAttribute($value)
     {
         $typeId = self::getTypeID($value);
@@ -57,8 +57,8 @@ class CompanyController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:company-list|company-mngt', ['only' => ['index','store']]);
-         $this->middleware('permission:company-mngt', ['only' => ['create','store','edit','update','destroy']]);
+        $this->middleware('permission:company-list|company-mngt', ['only' => ['index', 'store']]);
+        $this->middleware('permission:company-mngt', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 
     /**
@@ -68,8 +68,8 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $companies = Company::orderBy('id','DESC')->paginate(5);
-        return view('companies.index',compact('companies'))
+        $companies = Company::orderBy('id', 'DESC')->paginate(5);
+        return view('companies.index', compact('companies'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -81,7 +81,7 @@ class CompanyController extends Controller
     public function create()
     {
         $permission = Permission::get();
-        return view('companies.create',compact('permission'));
+        return view('companies.create', compact('permission'));
     }
 
     /**
@@ -100,8 +100,8 @@ class CompanyController extends Controller
         $company = Company::create(['name' => $request->input('name')]);
         $company->syncPermissions($request->input('permission'));
 
-        return redirect()->route('companies.index')
-                        ->with('success','company created successfully');
+        return redirect($request->url)
+            ->with('success', 'company created successfully');
     }
 
     /**
@@ -113,11 +113,11 @@ class CompanyController extends Controller
     public function show($id)
     {
         $company = Company::find($id);
-        $companyPermissions = Permission::join("company_has_permissions","company_has_permissions.permission_id","=","permissions.id")
-            ->where("company_has_permissions.company_id",$id)
+        $companyPermissions = Permission::join("company_has_permissions", "company_has_permissions.permission_id", "=", "permissions.id")
+            ->where("company_has_permissions.company_id", $id)
             ->get();
 
-        return view('companies.show',compact('company','companyPermissions'));
+        return view('companies.show', compact('company', 'companyPermissions'));
     }
 
     /**
@@ -130,11 +130,11 @@ class CompanyController extends Controller
     {
         $company = Company::find($id);
         $permission = Permission::get();
-        $companyPermissions = DB::table("company_has_permissions")->where("company_has_permissions.company_id",$id)
-            ->pluck('company_has_permissions.permission_id','company_has_permissions.permission_id')
+        $companyPermissions = DB::table("company_has_permissions")->where("company_has_permissions.company_id", $id)
+            ->pluck('company_has_permissions.permission_id', 'company_has_permissions.permission_id')
             ->all();
 
-        return view('companies.edit',compact('company','permission','companyPermissions'));
+        return view('companies.edit', compact('company', 'permission', 'companyPermissions'));
     }
 
     /**
@@ -157,8 +157,8 @@ class CompanyController extends Controller
 
         $company->syncPermissions($request->input('permission'));
 
-        return redirect()->route('companies.index')
-                        ->with('success','company updated successfully');
+        return redirect($request->url)
+            ->with('success', 'company updated successfully');
     }
 
     /**
@@ -167,11 +167,10 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        DB::table("companies")->where('id',$id)->delete();
-        return redirect()->route('companies.index')
-                        ->with('success','company deleted successfully');
+        DB::table("companies")->where('id', $id)->delete();
+        return redirect($request->url)
+            ->with('success', 'company deleted successfully');
     }
 }
-

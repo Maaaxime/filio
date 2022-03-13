@@ -22,6 +22,9 @@
 
     <link rel="stylesheet" href="{{ asset('css/bulma-tooltip.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/bulma-calendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bulma-calendar.custom.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/bulma-sweetalert2.css') }}">
     
     <script src="https://kit.fontawesome.com/19514b6620.js" crossorigin="anonymous"></script>

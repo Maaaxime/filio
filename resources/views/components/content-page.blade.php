@@ -2,7 +2,7 @@
     <div class="column is-narrow navigation">
         @include('layouts.navigation')
     </div>
-    <div class="column">
+    <div class="column" style="overflow-y:auto;max-height:99vh;">
         @include('layouts.navbar')
 
         <div class="page-content">
@@ -12,8 +12,13 @@
                     <div class="hero-body">
                         @if (isset($headerPicture) && $headerPicture->isNotEmpty())
                             <div class="image img-circle is-96x96 is-pulled-right "
-                            style="background-image: url('{{ asset('/storage/images/' . $headerPicture) }}');">
-                        </div>
+                                style="background-image: url('{{ asset('/storage/images/' . $headerPicture) }}');">
+                            </div>
+                        @endif
+                        @if (isset($headerAction) && $headerAction->isNotEmpty())
+                            <div class="is-pulled-right">
+                                {{ $headerAction }}
+                            </div>
                         @endif
                         <p class="title">{{ $header }}</p>
                         @if ($headerSubtitle->isNotEmpty())
@@ -22,14 +27,8 @@
                     </div>
                 </section>
             @endif
-            <div class="">
-                <div class="">
-                    {{ $slot }}
-                </div>
-            </div>
-            <div>
-                @include('layouts.footer')
-            </div>
+            {{ $slot }}
+            @include('layouts.footer')
         </div>
     </div>
 </div>

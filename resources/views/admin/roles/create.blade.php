@@ -8,6 +8,7 @@
         </x-slot>
 
         {!! Form::open(['route' => 'roles.store', 'method' => 'POST', 'class' => 'box-no-shadow']) !!}
+        {{  Form::hidden('url',URL::previous())  }}
         <div class="field">
             <label class="label">{{ __('message.name') }}</label>
             <div class="control">
@@ -36,7 +37,7 @@
         @can('role-mngt')
             <div class="field is-pulled-right pt-4">
                 <div class="control is-pulled-right">
-                    {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-plus"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
+                    {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-plus"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
                 </div>
             </div>
             <div class="is-clearfix"></div>

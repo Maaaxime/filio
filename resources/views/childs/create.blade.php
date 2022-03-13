@@ -2,13 +2,14 @@
     <x-content-page>
         <x-slot name="header">{{ __('message.childsManagement') }}</x-slot>
         <x-slot name="headerSubtitle">
-            <a href="{{ url()->previous(); }}">
+            <a href="{{ url()->previous() }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
 
         {!! Form::open(['route' => 'childs.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
-        <div class="pb-6">
+        {{ Form::hidden('url', URL::previous()) }}
+        <div class="pb-6 sticky">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
                 <li class="steps-segment is-active">
                     <a hef="#" class="has-text-dark" aria-controls="tab1-section">
@@ -65,16 +66,19 @@
                 <div class="columns pt-6">
                     <div class="column">
                         <label class="label">{{ __('message.profilePicture') }}</label>
-                        <div class="file is-boxed">
-                            <label class="file-label" style="width: 100%; height: 100%;">
-                                <input class="file-input" type="file" name="image" style="width: 100%;">
+                        <div class="file is-normal is-boxed has-name is-fullwidth" id="file">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="image" id="file">
                                 <span class="file-cta">
                                     <span class="file-icon">
                                         <i class="fas fa-upload"></i>
                                     </span>
-                                    <span class="file-label">
+                                    <span class="file-label has-text-centered">
                                         {{ __('message.uploadProfilePicture') }}
                                     </span>
+                                </span>
+                                <span class="file-name" style="min-width: 100%;">
+
                                 </span>
                             </label>
                         </div>
@@ -328,7 +332,7 @@
 
         <div class="field is-pulled-right pt-4">
             <div class="control is-pulled-right">
-                {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-success', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
+                {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
             </div>
         </div>
         <div class="is-clearfix"></div>

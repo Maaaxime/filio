@@ -54,7 +54,7 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('roles.index')
+        return redirect($request->url)
             ->with('success', __('message.successCreated', ['name' => $role->name]));
     }
 
@@ -117,11 +117,13 @@ class RoleController extends Controller
 
                 $role->syncPermissions($request->input('permission'));
 
-                return redirect()->route('roles.index')
+                return redirect($request->url)
                     ->with('success', __('message.successUpdated', ['name' => $role->name]));
                 break;
             case 'delete':
-                return $this->destroy($id);
+                $role = $this->destroy($request,$id);
+                return redirect($request->url)
+                    ->with('success', __('message.successDeleted', ['name' => $role->name]));
                 break;
         }
     }
@@ -132,12 +134,12 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    protected function destroy(Request $request, $id)
     {
         $role = Role::find($id);
         $role->delete();
 
-        return redirect()->route('roles.index')
-            ->with('success', __('message.successDeleted', ['name' => $role->name]));
+        return redirect($request->url)
+                    ->with('success', __('message.successDeleted', ['name' => $role->name]));
     }
 }

@@ -5,7 +5,7 @@
 
         <div class="box-no-shadow">
             @foreach ($childs as $key => $child)
-                <a href="{{ route('childs.show', $child->id) }}">
+                <a href="{{ route('childs.edit', $child->id) }}">
                     <div class="card mb-4">
                         <header class="card-header mt-4">
                             <table class="table card-header-title">
