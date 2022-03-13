@@ -66,6 +66,7 @@ class TimeEntryController extends Controller
             'system_time_end' => $time_end,
             'created_by_id' => Auth::User()->id,
             'updated_by_id' => Auth::User()->id,
+            'comment' => $request->comment,
         ]);
 
         return redirect($request->url)
@@ -131,6 +132,7 @@ class TimeEntryController extends Controller
                     'time_start' => $time_start,
                     'time_end' => $time_end,
                     'updated_by_id' => Auth::User()->id,
+                    'comment' => $request->comment,
                 ]);
 
                 return redirect($request->url)

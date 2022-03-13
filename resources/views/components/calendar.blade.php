@@ -9,6 +9,7 @@
         var options = {
             displayMode: 'inline',
             minuteSteps: 1,
+            weekStart: 1,
         }
 
         // Initialize all input of type date
