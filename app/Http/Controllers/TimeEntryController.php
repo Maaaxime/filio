@@ -70,7 +70,7 @@ class TimeEntryController extends Controller
         ]);
 
         return redirect($request->url)
-            ->with('success', __('message.successCreated', ['name' => $timeEntry->time_start]));
+            ->with('success', __('message.successCreated', ['name' => $timeEntry->name]));
     }
 
     /**
@@ -136,7 +136,7 @@ class TimeEntryController extends Controller
                 ]);
 
                 return redirect($request->url)
-                    ->with('success', __('message.successUpdated', ['name' => $timeEntry->time_start]));
+                    ->with('success', __('message.successUpdated', ['name' => $timeEntry->name]));
                 break;
             case 'delete':
                 return  $this->destroy($request, $id);
@@ -159,6 +159,6 @@ class TimeEntryController extends Controller
         $timeEntry->delete();
 
         return redirect($request->url)
-            ->with('success', __('message.successDeleted', ['name' => $timeEntry->time_start]));
+            ->with('success', __('message.successDeleted', ['name' => $timeEntry->name]));
     }
 }

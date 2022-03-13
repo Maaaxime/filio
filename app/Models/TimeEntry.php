@@ -82,6 +82,15 @@ class TimeEntry extends Model
     {
         return Carbon::createFromTime(18, 0, 0, Config('app.timezone'));
     }
+    public function getNameAttribute()
+    {
+        $date = $this->time_start ? $this->time_start->format('d/m/Y') : '';
+        $name = "{$this->children->full_name} · {$date} · {$this->time_start_time}";
+        if ($this->time_end_time != '') {
+            $name = $name . " · {$this->time_end_time}";
+        }
+        return $name;
+    }
 
     public function getTimeStartDateAttribute()
     {
