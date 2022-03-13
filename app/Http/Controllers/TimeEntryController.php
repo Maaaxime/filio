@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Children;
 use App\Models\TimeEntry;
 use App\Models\TimeEntryType;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Log;
 
 class TimeEntryController extends Controller
 {
@@ -22,7 +18,6 @@ class TimeEntryController extends Controller
     public function index(Request $request)
     {
         $timeEntries = TimeEntry::orderBy('id', 'desc')->paginate(20);
-        Log::debug($timeEntries);
         return view('admin.attendances.entries.index', compact('timeEntries'))
             ->with('i', ($request->input('page', 1) - 1) * 20);
     }
@@ -113,7 +108,6 @@ class TimeEntryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Log::debug($request);
         switch ($request->input('action')) {
             case 'save':
                 $this->validate($request, [
