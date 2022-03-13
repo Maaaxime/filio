@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="{{ asset('css/bulma-calendar.custom.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/bulma-sweetalert2.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/sortable-theme-minimal.css') }}">
     
     <script src="https://kit.fontawesome.com/19514b6620.js" crossorigin="anonymous"></script>
     <link href='https://css.gg/css' rel='stylesheet'>
@@ -33,6 +35,7 @@
     <link rel="icon" type="img/png" href="{{ asset('img/favicon.png') }}">
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/sortable.min.js') }}"></script>
     <script src="{{ asset('js/bulma.custom.js') }}"></script>
 </head>
 

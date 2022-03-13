@@ -9,7 +9,7 @@
         </x-slot>
 
         <div class="table-container pr-2 pl-2">
-            <table class="table is-striped is-hoverable is-fullwidth">
+            <table class="table is-striped is-hoverable is-fullwidth" data-sortable>
                 <thead>
                     <tr>
                         <th scope="col" class="has-text-centered is-narrow">#</th>

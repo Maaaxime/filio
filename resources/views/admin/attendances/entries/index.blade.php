@@ -9,17 +9,17 @@
         </x-slot>
 
         <div class="table-container pr-2 pl-2">
-            <table class="table is-striped is-hoverable is-fullwidth">
+            <table class="table is-striped is-hoverable is-fullwidth sortable-theme-minimal" data-sortable>
                 <thead>
                     <tr>
-                        <th scope="col" class="has-text-centered is-narrow">#</th>
-                        <th scope="col">{{ __('message.child') }}</th>
+                        <th scope="col" class="has-text-centered" data-sortable="false">#</th>
+                        <th scope="col" data-sortable="false">{{ __('message.child') }}</th>
                         <th scope="col" class="is-hidden-touch"></th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.user') }}</th>
-                        <th scope="col" class="is-narrow">{{ __('message.timeEntryType') }}</th>
-                        <th scope="col" class="is-narrow">{{ __('message.time_start_date') }}</th>
-                        <th scope="col" class="is-narrow is-hidden-touch">{{ __('message.time_start_time') }}</th>
-                        <th scope="col" class="is-narrow is-hidden-touch">{{ __('message.time_end_time') }}</th>
+                        <th scope="col" class="">{{ __('message.timeEntryType') }}</th>
+                        <th scope="col" class="">{{ __('message.time_start_date') }}</th>
+                        <th scope="col" class="is-hidden-touch">{{ __('message.time_start_time') }}</th>
+                        <th scope="col" class="is-hidden-touch">{{ __('message.time_end_time') }}</th>
                         <th scope="col" class="has-text-right">{{ __('message.time_duration') }}</th>
                     </tr>
                 </thead>
@@ -44,16 +44,16 @@
                             <td class="is-hidden-touch">
                                 {{ $timeEntry->createdby->name }}
                             </td>
-                            <td class="is-narrow">
+                            <td class="">
                                 {{ $timeEntry->entry_type->name }}
                             </td>
-                            <td class="is-narrow">
+                            <td class="">
                                 {{ $timeEntry->time_start ? $timeEntry->time_start->translatedFormat('d/m/y') : '' }}
                             </td>
-                            <td class="is-narrow is-hidden-touch">
+                            <td class=" is-hidden-touch">
                                 {{ $timeEntry->time_start ? $timeEntry->time_start->translatedFormat('H:i') : '' }}
                             </td>
-                            <td class="is-narrow is-hidden-touch">
+                            <td class=" is-hidden-touch">
                                 {{ $timeEntry->time_end ? $timeEntry->time_end->translatedFormat('H:i') : '' }}
                             </td>
                             <td class="has-text-right">

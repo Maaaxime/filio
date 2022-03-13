@@ -9,14 +9,14 @@
         </x-slot>
 
         <div class="table-container pr-2 pl-2">
-            <table class="table is-striped is-hoverable is-fullwidth">
+            <table class="table is-striped is-hoverable is-fullwidth" data-sortable>
                 <thead>
                     <tr>
-                        <th scope="col" class="has-text-centered is-narrow">#</th>
+                        <th scope="col" class="has-text-centered is-narrow" data-sortable="false">#</th>
                         <th scope="col">{{ __('message.name') }}</th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.description') }}</th>
-                        <th scope="col" class="is-hidden-touch is-narrow">{{ __('message.timeEntryTypesNeedProof') }}</th>
-                        <th scope="col" class="is-hidden-touch is-narrow">
+                        <th scope="col" class="is-hidden-touch">{{ __('message.timeEntryTypesNeedProof') }}</th>
+                        <th scope="col" class="is-hidden-touch">
                             {{ __('message.timeEntryTypesNeedPermission') }}</th>
                     </tr>
                 </thead>
@@ -38,10 +38,10 @@
                             <td class="is-hidden-touch">
                                 {{ $timeEntryType->description }}
                             </td>
-                            <td class="is-hidden-touch is-narrow has-text-centered">
+                            <td class="is-hidden-touch has-text-centered">
                                 {{ Form::checkbox('need_proof', null, $timeEntryType->need_proof, ['class' => 'checkbox icon','disabled' => true]) }}
                             </td>
-                            <td class="is-hidden-touch is-narrow has-text-centered">
+                            <td class="is-hidden-touch has-text-centered">
                                 {{ Form::checkbox('need_permission', null, $timeEntryType->need_permission, ['class' => 'checkbox icon','disabled' => true]) }}
                             </td>
                         </tr>

@@ -9,11 +9,12 @@
         </x-slot>
 
         <div class="table-container pr-2 pl-2">
-            <table class="table is-striped is-hoverable is-fullwidth">
+            <table class="table is-striped is-hoverable is-fullwidth" data-sortable>
                 <thead>
                     <tr>
-                        <th scope="col" class="has-text-centered is-narrow">#</th>
-                        <th scope="col" colspan="2">{{ __('message.name') }}</th>
+                        <th scope="col" class="has-text-centered is-narrow" data-sortable="false">#</th>
+                        <th scope="col">{{ __('message.name') }}</th>
+                        <th scope="col"></th>
                         <th scope="col">{{ __('message.roles') }}</th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.childs') }}</th>
                     </tr>
@@ -33,7 +34,7 @@
                                     </div>
                                 @endif
                             </td>
-                            <td class="is-narrow">
+                            <td>
                                 <p>
                                     {{ $user->name }}
                                 </p>
