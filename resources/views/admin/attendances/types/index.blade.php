@@ -23,7 +23,7 @@
                 <tbody>
                     @foreach ($timeEntryTypes as $key => $timeEntryType)
                         <tr>
-                            <th class="is-narrow">
+                            <th class="is-narrow" data-sortable="false">
                                 <a href="{{ route('types.edit', $timeEntryType->id) }}" class="button is-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>

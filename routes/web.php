@@ -27,7 +27,7 @@ Route::get('/credits', function () {
 
 Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
-Route::group(['middleware' => ['auth', 'role:Admin'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
     Route::resource('childs', 'ChildrenController');
@@ -38,17 +38,25 @@ Route::group(['middleware' => ['auth', 'role:Admin'], 'prefix' => 'admin'], func
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'my'], function () {
-    Route::get('/childs',[ChildrenController::class, 'my'])->name('my.childs');
-    Route::get('/profile',[UserController::class,'my'])->name('my.profile');
+    Route::get('/childs', [ChildrenController::class, 'my'])->name('my.childs');
+    Route::get('/profile', [UserController::class, 'my'])->name('my.profile');
 });
 
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
     Artisan::call('config:clear');
     Artisan::call('view:clear');
 
     return "App. is cleared";
+});
+
+Route::get('/list-route', function () {
+    $routes = array_map(function (\Illuminate\Routing\Route $route) {
+        return $route;
+    }, (array) Route::getRoutes()->getIterator());
+
+    return $routes;
 });
 
 require __DIR__ . '/auth.php';

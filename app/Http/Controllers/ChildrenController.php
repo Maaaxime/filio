@@ -13,6 +13,11 @@ use Carbon\Carbon;
 
 class ChildrenController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +25,8 @@ class ChildrenController extends Controller
      */
     public function index(Request $request)
     {
+        Auth::user()->hasAnyPermission(['children-read-general', 'children-read-medical', 'children-read-family', 'children-read-contract']);
+
         $childs = Children::orderBy('contract_ending_date', 'asc')->orderBy('first_name', 'asc')->paginate(20);
         return view('childs.index', compact('childs'))
             ->with('i', ($request->input('page', 1) - 1) * 20);
@@ -46,6 +53,8 @@ class ChildrenController extends Controller
      */
     public function create()
     {
+        Auth::user()->hasAnyPermission(['children-create']);
+        
         return view('childs.create');
     }
 
@@ -57,6 +66,8 @@ class ChildrenController extends Controller
      */
     public function store(Request $request)
     {
+        Auth::user()->hasAnyPermission(['children-create']);
+
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -85,9 +96,9 @@ class ChildrenController extends Controller
      */
     public function show($id)
     {
-        if ($id == "my") {
-            return $this->my();
-        }
+        Auth::user()->hasAnyPermission([
+            'children-read-general', 'children-read-medical', 'children-read-family', 'children-read-contract',
+        ]);
 
         $children = Children::find($id);
         return view('childs.edit', compact('children'))->with('readonly', true);
@@ -101,6 +112,18 @@ class ChildrenController extends Controller
      */
     public function edit($id)
     {
+        Auth::user()->hasAnyPermission([
+            'children-read-general', 'children-read-medical', 'children-read-family', 'children-read-contract',
+            'children-update-general', 'children-update-medical', 'children-update-family', 'children-update-contract'
+        ]);
+
+        if (!(Auth::user()->hasAnyPermission([
+            'children-update-general', 'children-update-medical', 'children-update-family', 'children-update-contract'
+        ]))) {
+            return $this->show($id);
+        }
+
+
         $children = Children::find($id);
         return view('childs.edit', compact('children'))->with('readonly', false);
     }
@@ -116,6 +139,11 @@ class ChildrenController extends Controller
     {
         switch ($request->input('action')) {
             case 'save':
+
+                Auth::user()->hasAnyPermission([
+                    'children-update-general', 'children-update-medical', 'children-update-family', 'children-update-contract'
+                ]);
+
                 $this->validate($request, [
                     'first_name' => 'required',
                     'last_name' => 'required',
@@ -144,6 +172,8 @@ class ChildrenController extends Controller
                     ->with('success', __('message.successUpdated', ['name' => $children->full_name]));
                 break;
             case 'delete':
+
+                Auth::user()->hasAnyPermission(['children-delete']);
                 return  $this->destroy($request, $id);
                 break;
         }
@@ -157,6 +187,8 @@ class ChildrenController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        Auth::user()->hasAnyPermission(['children-delete']);
+
         $children = Children::find($id);
         $children->delete();
 

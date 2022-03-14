@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-
+use Spatie\Permission\PermissionRegistrar;
 class AdminUserSeeder extends Seeder
 {
     /**
@@ -17,6 +17,9 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
+        // Reset cached roles and permissions
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        
         $adminRole = Role::create(['name' => 'Admin']);
         $permissions = Permission::pluck('id','id')->all();
         $adminRole->syncPermissions($permissions);

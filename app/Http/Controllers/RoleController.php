@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -11,8 +13,11 @@ class RoleController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:role-list|role-mngt', ['only' => ['index', 'store']]);
-        $this->middleware('permission:role-mngt', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('auth');
+        $this->middleware('permission:role-create')->only('create', 'store');
+        $this->middleware('permission:role-read')->only('index', 'show','edit');
+        $this->middleware('permission:role-update')->only('edit', 'update');
+        $this->middleware('permission:role-delete')->only('destroy');
     }
 
     /**
@@ -66,6 +71,8 @@ class RoleController extends Controller
      */
     public function show($id)
     {
+        Log::debug('Show');
+
         $role = Role::find($id);
         $permission = Permission::get();
         $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
@@ -86,6 +93,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        Log::debug(Auth::user()->can('role-update'));
+        if (!Auth::user()->can('role-update'))
+            return $this->show($id);
+
         $role = Role::find($id);
         $permission = Permission::get();
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
@@ -121,7 +132,7 @@ class RoleController extends Controller
                     ->with('success', __('message.successUpdated', ['name' => $role->name]));
                 break;
             case 'delete':
-                $role = $this->destroy($request,$id);
+                $role = $this->destroy($request, $id);
                 return redirect($request->url)
                     ->with('success', __('message.successDeleted', ['name' => $role->name]));
                 break;
@@ -140,6 +151,6 @@ class RoleController extends Controller
         $role->delete();
 
         return redirect($request->url)
-                    ->with('success', __('message.successDeleted', ['name' => $role->name]));
+            ->with('success', __('message.successDeleted', ['name' => $role->name]));
     }
 }

@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach ($data as $key => $user)
                         <tr>
-                            <th class="is-narrow">
+                            <th class="is-narrow" data-sortable="false">
                                 <a href="{{ route('users.edit', $user->id) }}" class="button is-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>

@@ -12,7 +12,7 @@
             <table class="table is-striped is-hoverable is-fullwidth" data-sortable>
                 <thead>
                     <tr>
-                        <th scope="col" class="has-text-centered is-narrow">#</th>
+                        <th scope="col" class="has-text-centered is-narrow" data-sortable="false">#</th>
                         <th scope="col" colspan="2">{{ __('message.name') }}</th>
                         <th scope="col" colspan="2">{{ __('message.birthdate') }}</th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.address') }}</th>
@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach ($childs as $key => $children)
                         <tr {{ !$children->isActive() ? 'class="stripes"' : '' }}>
-                            <th class="is-narrow">
+                            <th class="is-narrow" data-sortable="false">
                                 <a href="{{ route('childs.edit', $children->id) }}" class="button is-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>

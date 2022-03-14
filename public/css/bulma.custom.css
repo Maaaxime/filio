@@ -42,6 +42,10 @@ body {
     vertical-align: middle;
 }
 
+.table tbody th {
+    vertical-align: middle;;
+}
+
 table.table.card-header-title {
     padding-top: 1rem;
     margin-bottom: 0;
