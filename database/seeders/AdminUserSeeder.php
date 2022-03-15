@@ -35,7 +35,7 @@ class AdminUserSeeder extends Seeder
         // Admin User
         $adminUser = User::create([
             'name' => 'Admin',
-            'email' => 'admin@fripouilles.local',
+            'email' => 'admin@filio.local',
             'password' => bcrypt('123456'),
         ]);
         $adminUser->assignRole([$adminRole->id]);
@@ -43,7 +43,7 @@ class AdminUserSeeder extends Seeder
         // Employee User
         $employeeUser = User::create([
             'name' => 'Employee',
-            'email' => 'employee@fripouilles.local',
+            'email' => 'employee@filio.local',
             'password' => bcrypt('123456'),
         ]);
         $employeeUser->assignRole([$employeeRole->id]);
@@ -51,7 +51,7 @@ class AdminUserSeeder extends Seeder
         // Parent User
         $parentUser = User::create([
             'name' => 'Parent',
-            'email' => 'parent@fripouilles.local',
+            'email' => 'parent@filio.local',
             'password' => bcrypt('123456'),
         ]);
         $parentUser->assignRole([$parentRole->id]);
