@@ -9,3 +9,8 @@
 .steps-segment:after {
     background-color: #00d1b2;
 }
+
+.tab-panels {
+    margin-right: 2px;
+    margin-left: 2px;
+}
