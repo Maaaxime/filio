@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Children;
+use App\Models\Child;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
 
-class ChildrenController extends Controller
+class ChildController extends Controller
 {
     function __construct()
     {
@@ -25,10 +25,10 @@ class ChildrenController extends Controller
      */
     public function index(Request $request)
     {
-        Auth::user()->hasAnyPermission(['children-read-general', 'children-read-medical', 'children-read-family', 'children-read-contract']);
+        Auth::user()->hasAnyPermission(['child-read-general', 'child-read-medical', 'child-read-family', 'child-read-contract']);
 
-        $childs = Children::orderBy('contract_ending_date', 'asc')->orderBy('first_name', 'asc')->paginate(20);
-        return view('admin.childs.index', compact('childs'))
+        $children = Child::orderBy('contract_ending_date', 'asc')->orderBy('first_name', 'asc')->paginate(20);
+        return view('admin.children.index', compact('children'))
             ->with('i', ($request->input('page', 1) - 1) * 20);
     }
 
@@ -39,11 +39,11 @@ class ChildrenController extends Controller
      */
     public function my()
     {
-        $childs = Auth::User()->childs;
-        if ($childs->count() == 1)
-            return $this->edit($childs->first()->id);
+        $children = Auth::User()->children;
+        if ($children->count() == 1)
+            return $this->edit($children->first()->id);
 
-        return view('admin.childs.my', compact('childs'));
+        return view('admin.children.my', compact('children'));
     }
 
     /**
@@ -53,9 +53,9 @@ class ChildrenController extends Controller
      */
     public function create()
     {
-        Auth::user()->hasAnyPermission(['children-create']);
+        Auth::user()->hasAnyPermission(['child-create']);
         
-        return view('admin.childs.create');
+        return view('admin.children.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class ChildrenController extends Controller
      */
     public function store(Request $request)
     {
-        Auth::user()->hasAnyPermission(['children-create']);
+        Auth::user()->hasAnyPermission(['child-create']);
 
         $this->validate($request, [
             'first_name' => 'required',
@@ -74,18 +74,18 @@ class ChildrenController extends Controller
         ]);
 
         $input = $request->all();
-        $children = Children::create($input);
+        $child = Child::create($input);
 
         if ($request->hasFile('image')) {
             $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
-            $filename = 'Children_' . $children->id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
-            $children->update(['image' => $filename]);
+            $filename = 'Child_' . $child->id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
+            $child->update(['image' => $filename]);
 
             $request->image->storeAs('images',  $filename, 'public');
         }
 
         return redirect($request->url)
-            ->with('success', __('message.successCreated', ['name' => $children->full_name]));
+            ->with('success', __('message.successCreated', ['name' => $child->full_name]));
     }
 
     /**
@@ -97,11 +97,11 @@ class ChildrenController extends Controller
     public function show($id)
     {
         Auth::user()->hasAnyPermission([
-            'children-read-general', 'children-read-medical', 'children-read-family', 'children-read-contract',
+            'child-read-general', 'child-read-medical', 'child-read-family', 'child-read-contract',
         ]);
 
-        $children = Children::find($id);
-        return view('admin.childs.edit', compact('children'))->with('readonly', true);
+        $child = Child::find($id);
+        return view('admin.children.edit', compact('child'))->with('readonly', true);
     }
 
     /**
@@ -113,19 +113,19 @@ class ChildrenController extends Controller
     public function edit($id)
     {
         Auth::user()->hasAnyPermission([
-            'children-read-general', 'children-read-medical', 'children-read-family', 'children-read-contract',
-            'children-update-general', 'children-update-medical', 'children-update-family', 'children-update-contract'
+            'child-read-general', 'child-read-medical', 'child-read-family', 'child-read-contract',
+            'child-update-general', 'child-update-medical', 'child-update-family', 'child-update-contract'
         ]);
 
         if (!(Auth::user()->hasAnyPermission([
-            'children-update-general', 'children-update-medical', 'children-update-family', 'children-update-contract'
+            'child-update-general', 'child-update-medical', 'child-update-family', 'child-update-contract'
         ]))) {
             return $this->show($id);
         }
 
 
-        $children = Children::find($id);
-        return view('admin.childs.edit', compact('children'))->with('readonly', false);
+        $child = Child::find($id);
+        return view('admin.children.edit', compact('child'))->with('readonly', false);
     }
 
     /**
@@ -141,7 +141,7 @@ class ChildrenController extends Controller
             case 'save':
 
                 Auth::user()->hasAnyPermission([
-                    'children-update-general', 'children-update-medical', 'children-update-family', 'children-update-contract'
+                    'child-update-general', 'child-update-medical', 'child-update-family', 'child-update-contract'
                 ]);
 
                 $this->validate($request, [
@@ -151,15 +151,15 @@ class ChildrenController extends Controller
 
                 $input = $request->all();
 
-                $children = Children::find($id);
-                $oldImage = 'public/images/' . $children->image;
+                $child = Child::find($id);
+                $oldImage = 'public/images/' . $child->image;
 
-                $children->update($input);
+                $child->update($input);
 
                 if ($request->hasFile('image')) {
                     $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
-                    $filename = 'Children_' . $id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
-                    $children->update(['image' => $filename]);
+                    $filename = 'Child_' . $id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
+                    $child->update(['image' => $filename]);
 
                     $request->image->storeAs('images',  $filename, 'public');
 
@@ -169,11 +169,11 @@ class ChildrenController extends Controller
                 }
 
                 return redirect($request->url)
-                    ->with('success', __('message.successUpdated', ['name' => $children->full_name]));
+                    ->with('success', __('message.successUpdated', ['name' => $child->full_name]));
                 break;
             case 'delete':
 
-                Auth::user()->hasAnyPermission(['children-delete']);
+                Auth::user()->hasAnyPermission(['child-delete']);
                 return  $this->destroy($request, $id);
                 break;
         }
@@ -187,12 +187,12 @@ class ChildrenController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        Auth::user()->hasAnyPermission(['children-delete']);
+        Auth::user()->hasAnyPermission(['child-delete']);
 
-        $children = Children::find($id);
-        $children->delete();
+        $child = Child::find($id);
+        $child->delete();
 
         return redirect($request->url)
-            ->with('success', __('message.successDeleted', ['name' => $children->full_name]));
+            ->with('success', __('message.successDeleted', ['name' => $child->full_name]));
     }
 }

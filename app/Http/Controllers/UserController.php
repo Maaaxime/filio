@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Children;
+use App\Models\Child;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -48,8 +48,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::get();
-        $childs = Children::active()->get();
-        return view('admin.users.create', compact('roles', 'childs'));
+        $children = Child::active()->get();
+        return view('admin.users.create', compact('roles', 'children'));
     }
 
     /**
@@ -73,7 +73,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        $user->assignChildren($request->input('childs'));
+        $user->assignChildren($request->input('children'));
 
         return redirect($request->url)
             ->with('success', __('message.successCreated', ['name' => $user->name]));
@@ -89,12 +89,12 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::get();
-        $childs = Children::get();
+        $children = Child::get();
 
         $userRole = $user->roles->pluck('name', 'name')->all();
-        $userChildren = $user->childs->pluck('id')->all();
+        $userChildren = $user->children->pluck('id')->all();
 
-        return view('admin.users.edit', compact('user', 'roles', 'userRole', 'childs', 'userChildren'))->with('readonly', true);
+        return view('admin.users.edit', compact('user', 'roles', 'userRole', 'children', 'userChildren'))->with('readonly', true);
     }
 
     /**
@@ -107,12 +107,12 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::get();
-        $childs = Children::get();
+        $children = Child::get();
 
         $userRole = $user->roles->pluck('name', 'name')->all();
-        $userChildren = $user->childs->pluck('id')->all();
+        $userChildren = $user->children->pluck('id')->all();
 
-        return view('admin.users.edit', compact('user', 'roles', 'userRole', 'childs', 'userChildren'))->with('readonly', false);
+        return view('admin.users.edit', compact('user', 'roles', 'userRole', 'children', 'userChildren'))->with('readonly', false);
     }
 
     /**
@@ -148,8 +148,8 @@ class UserController extends Controller
                 DB::table('model_has_roles')->where('model_id', $id)->delete();
                 $user->assignRole($request->input('roles'));
 
-                DB::table('children_user')->where('user_id', $id)->delete();
-                $user->assignChildren($request->input('childs'));
+                DB::table('child_user')->where('user_id', $id)->delete();
+                $user->assignChildren($request->input('children'));
 
                 if ($request->hasFile('image')) {
                     $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');

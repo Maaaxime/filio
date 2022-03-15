@@ -44,12 +44,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function childs()
+    public function children()
     {
-        return $this->belongsToMany(Children::class);
+        return $this->belongsToMany(Child::class);
     }
-    public function assignChildren($childs)
+    public function assignChildren($children)
     {
-        $this->childs()->attach($childs);
+        $this->children()->attach($children);
     }
 }

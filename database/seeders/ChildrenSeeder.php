@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Children;
+use App\Models\Child;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +16,7 @@ class ChildrenSeeder extends Seeder
      */
     public function run()
     {
-        Children::create([
+        Child::create([
             'first_name' => 'Astrid',
             'last_name' => 'Grenier',
             'birthdate' => Carbon::parse('2019-06-13'),
@@ -28,7 +28,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Sarreguemines',
             'postCode' => '57200',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Olivie',
             'last_name' => 'Bonnet',
             'birthdate' => Carbon::parse('2019-08-23'),
@@ -40,7 +40,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Cergy',
             'postCode' => '95800',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Margaret',
             'last_name' => 'Perrin',
             'birthdate' => Carbon::parse('2019-08-13'),
@@ -52,7 +52,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Manosque',
             'postCode' => '04100',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Susan',
             'last_name' => 'Laroche Berger-Bonneau',
             'birthdate' => Carbon::parse('2020-11-14'),
@@ -64,7 +64,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Saint-louis',
             'postCode' => '68300',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Rémy',
             'last_name' => 'Boulanger de la Morin',
             'birthdate' => Carbon::parse('2021-01-26'),
@@ -76,7 +76,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Les Ulis',
             'postCode' => '91940',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Margot',
             'last_name' => 'Jean',
             'birthdate' => Carbon::parse('2021-06-20'),
@@ -88,7 +88,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Champs-sur-marne',
             'postCode' => '77420',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Arthur',
             'last_name' => 'Gaillard',
             'birthdate' => Carbon::parse('2020-06-08'),
@@ -100,7 +100,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Palaiseau',
             'postCode' => '91120',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Julie',
             'last_name' => 'Briand',
             'birthdate' => Carbon::parse('2020-11-09'),
@@ -112,7 +112,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Agde',
             'postCode' => '34300',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Henri',
             'last_name' => 'Chauveau',
             'birthdate' => Carbon::parse('2021-06-18'),
@@ -124,7 +124,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Sainte-marie',
             'postCode' => '97438',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Martine',
             'last_name' => 'Dufour-Alves',
             'birthdate' => Carbon::parse('2021-10-06'),
@@ -136,7 +136,7 @@ class ChildrenSeeder extends Seeder
             'city' => 'Marseille',
             'postCode' => '13014',
         ]);
-        Children::create([
+        Child::create([
             'first_name' => 'Alix',
             'last_name' => 'Lebrun de la Barbe',
             'birthdate' => Carbon::parse('2021-10-06'),

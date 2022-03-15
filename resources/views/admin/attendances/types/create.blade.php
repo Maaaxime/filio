@@ -7,7 +7,7 @@
             </a>
         </x-slot>
 
-        {!! Form::open(['route' => 'types.store', 'method' => 'POST', 'class' => 'box-no-shadow']) !!}
+        {!! Form::open(['route' => 'admin.attendances.types.store', 'method' => 'POST', 'class' => 'box-no-shadow']) !!}
         {{  Form::hidden('url',URL::previous())  }}
         <div class="field">
             <label class="label">{{ __('message.name') }}</label>

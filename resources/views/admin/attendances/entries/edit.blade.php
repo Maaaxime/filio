@@ -7,14 +7,14 @@
             </a>
         </x-slot>
 
-        {!! Form::model($timeEntry, ['method' => 'PATCH', 'route' => ['entries.update', $timeEntry->id], 'class' => 'box-no-shadow']) !!}
+        {!! Form::model($timeEntry, ['method' => 'PATCH', 'route' => ['admin.attendances.entries.update', $timeEntry->id], 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="columns">
             <div class="column">
                 <div class="field">
                     <label class="label">{{ __('message.child') }}</label>
                     <div class="control select is-fullwidth">
-                        {{ Form::select('child', $childs, $timeEntry->children_id, ['class' => '', 'disabled' => $readonly]) }}
+                        {{ Form::select('child', $children, $timeEntry->child_id, ['class' => '', 'disabled' => $readonly]) }}
                     </div>
                 </div>
                 <div class="field ">

@@ -1,17 +1,18 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ __('message.childsManagement') }}</x-slot>
+        <x-slot name="header">{{ $child->full_name }}</x-slot>
         <x-slot name="headerSubtitle">
             <a href="{{ url()->previous() }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
+        <x-slot name="headerPicture">{{ $child->image }}</x-slot>
 
-        {!! Form::open(['route' => 'childs.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
+        {!! Form::model($child, ['method' => 'PATCH', 'route' => ['admin.children.update', $child->id], 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
-                @canany(['children-read-general', 'children-update-general'])
+                @canany(['child-read-general', 'child-update-general'])
                     <li class="steps-segment is-active">
                         <a hef="#" class="has-text-dark" aria-controls="tab1-section">
                             <span class="steps-marker">
@@ -25,7 +26,7 @@
                         </a>
                     </li>
                 @endcanany
-                @canany(['children-read-medical', 'children-update-medical'])
+                @canany(['child-read-medical', 'child-update-medical'])
                     <li class="steps-segment">
                         <a hef="#" class="has-text-dark" aria-controls="tab2-section">
                             <span class="steps-marker">
@@ -39,7 +40,7 @@
                         </a>
                     </li>
                 @endcanany
-                @canany(['children-read-family', 'children-update-family'])
+                @canany(['child-read-family', 'child-update-family'])
                     <li class="steps-segment">
                         <a hef="#" class="has-text-dark" aria-controls="tab3-section">
                             <span class="steps-marker">
@@ -53,7 +54,7 @@
                         </a>
                     </li>
                 @endcanany
-                @canany(['children-read-contract', 'children-update-contract'])
+                @canany(['child-read-contract', 'child-update-contract'])
                     <li class="steps-segment">
                         <a hef="#" class="has-text-dark" aria-controls="tab4-section">
                             <span class="steps-marker">
@@ -70,14 +71,15 @@
             </ul>
         </div>
         <div class="tab-panels">
-            @canany(['children-read-general', 'children-update-general'])
+            @canany(['child-read-general', 'child-update-general'])
                 <section id="tab1-section" class="tab-panel">
                     <div class="columns pt-6">
                         <div class="column">
                             <label class="label">{{ __('message.profilePicture') }}</label>
                             <div class="file is-normal is-boxed has-name is-fullwidth" id="file">
                                 <label class="file-label">
-                                    <input class="file-input" type="file" name="image" id="file">
+                                    <input class="file-input" type="file" name="image"
+                                        @if ($readonly) disabled @endif>
                                     <span class="file-cta">
                                         <span class="file-icon">
                                             <i class="fas fa-upload"></i>
@@ -87,7 +89,7 @@
                                         </span>
                                     </span>
                                     <span class="file-name" style="min-width: 100%;">
-
+                                        {{ $child->image }}
                                     </span>
                                 </label>
                             </div>
@@ -96,24 +98,28 @@
                             <div class="field">
                                 <label class="label">{{ __('message.first_name') }}</label>
                                 <div class="control">
-                                    {!! Form::text('first_name', null, ['class' => 'input']) !!}
+                                    {!! Form::text('first_name', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.last_name') }}</label>
                                 <div class="control">
-                                    {!! Form::text('last_name', null, ['class' => 'input']) !!}
+                                    {!! Form::text('last_name', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.gender') }}</label>
                                 <div class="control">
                                     <label class="radio">
-                                        <input type="radio" name="gender" value="{{ __('message.girl') }}" selected>
+                                        <input type="radio" name="gender" value="0"
+                                            {{ $child->gender == 0 ? 'checked' : '' }}
+                                            {{ $readonly ? 'disabled' : '' }}>
                                         {{ __('message.girl') }}
                                     </label>
                                     <label class="radio">
-                                        <input type="radio" name="gender" value="{{ __('message.boy') }}">
+                                        <input type="radio" name="gender" value="1"
+                                            {{ $child->gender == 1 ? 'checked' : '' }}
+                                            {{ $readonly ? 'disabled' : '' }}>
                                         {{ __('message.boy') }}
                                     </label>
                                 </div>
@@ -124,13 +130,13 @@
                         <div class="column field">
                             <label class="label">{{ __('message.birthdate') }}</label>
                             <div class="control">
-                                {!! Form::date('birthdate', null, ['class' => 'input']) !!}
+                                {!! Form::date('birthdate', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                         <div class="column field">
                             <label class="label">{{ __('message.city_of_birth') }}</label>
                             <div class="control">
-                                {!! Form::text('city_of_birth', null, ['class' => 'input']) !!}
+                                {!! Form::text('city_of_birth', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                     </div>
@@ -138,69 +144,69 @@
                         <div class="column field">
                             <label class="label">{{ __('message.phone_no') }}</label>
                             <div class="control">
-                                {!! Form::text('phone_no', null, ['class' => 'input']) !!}
+                                {!! Form::text('phone_no', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                         <div class="column field">
                             <label class="label">{{ __('message.email') }}</label>
                             <div class="control">
-                                {!! Form::email('email', null, ['class' => 'input']) !!}
+                                {!! Form::email('email', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">{{ __('message.address') }}</label>
                         <div class="control">
-                            {!! Form::text('address', null, ['class' => 'input']) !!}
+                            {!! Form::text('address', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">{{ __('message.address2') }}</label>
                         <div class="control">
-                            {!! Form::text('address2', null, ['class' => 'input']) !!}
+                            {!! Form::text('address2', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                         </div>
                     </div>
                     <div class="columns">
                         <div class="column field">
                             <label class="label">{{ __('message.postCode') }}</label>
                             <div class="control">
-                                {!! Form::text('postCode', null, ['class' => 'input']) !!}
+                                {!! Form::text('postCode', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                         <div class="column field">
                             <label class="label">{{ __('message.city') }}</label>
                             <div class="control">
-                                {!! Form::text('city', null, ['class' => 'input']) !!}
+                                {!! Form::text('city', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                     </div>
                 </section>
             @endcanany
-            @canany(['children-read-medical', 'children-update-medical'])
+            @canany(['child-read-medical', 'child-update-medical'])
                 <section id="tab2-section" class="tab-panel is-hidden">
                     <div class="field">
                         <label class="label">{{ __('message.blood_type') }}</label>
                         <div class="control">
-                            {!! Form::text('blood_type', null, ['class' => 'input']) !!}
+                            {!! Form::text('blood_type', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                         </div>
                     </div>
                     <div class="columns">
                         <div class="column field">
                             <label class="label">{{ __('message.medical_conditions') }}</label>
                             <div class="control">
-                                {!! Form::textarea('medical_conditions', null, ['rows' => 2, 'class' => 'textarea']) !!}
+                                {!! Form::textarea('medical_conditions', null, ['rows' => 2, 'class' => 'textarea', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                         <div class="column field">
                             <label class="label">{{ __('message.medical_medications') }}</label>
                             <div class="control">
-                                {!! Form::textarea('medical_medications', null, ['rows' => 2, 'class' => 'textarea']) !!}
+                                {!! Form::textarea('medical_medications', null, ['rows' => 2, 'class' => 'textarea', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                         <div class="column field">
                             <label class="label">{{ __('message.medical_allergies') }}</label>
                             <div class="control">
-                                {!! Form::textarea('medical_allergies', null, ['rows' => 2, 'class' => 'textarea']) !!}
+                                {!! Form::textarea('medical_allergies', null, ['rows' => 2, 'class' => 'textarea', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                     </div>
@@ -210,26 +216,26 @@
                             <div class="field">
                                 <label class="label">{{ __('message.doctor_name') }}</label>
                                 <div class="control">
-                                    {!! Form::text('doctor_name', null, ['class' => 'input']) !!}
+                                    {!! Form::text('doctor_name', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.doctor_phone_no') }}</label>
                                 <div class="control">
-                                    {!! Form::text('doctor_phone_no', null, ['class' => 'input']) !!}
+                                    {!! Form::text('doctor_phone_no', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="column field">
                             <label class="label">{{ __('message.doctor_address') }}</label>
                             <div class="control">
-                                {!! Form::textarea('doctor_address', null, ['rows' => 4, 'class' => 'textarea']) !!}
+                                {!! Form::textarea('doctor_address', null, ['rows' => 4, 'class' => 'textarea', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                     </div>
                 </section>
             @endcanany
-            @canany(['children-read-family', 'children-update-family'])
+            @canany(['child-read-family', 'child-update-family'])
                 <section id="tab3-section" class="tab-panel is-hidden">
                     <div class="columns">
                         <div class="column">
@@ -237,37 +243,37 @@
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_name') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor1_name', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor1_name', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_socialsecurity') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor1_socialsecurity', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor1_socialsecurity', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_caf') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor1_caf', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor1_caf', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_job_title') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor1_job_title', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor1_job_title', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_address') }}</label>
                                 <div class="control">
-                                    {!! Form::textarea('legal_tutor1_address', null, ['rows' => 4, 'class' => 'textarea']) !!}
+                                    {!! Form::textarea('legal_tutor1_address', null, ['rows' => 4, 'class' => 'textarea', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_phone_no') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor1_phone_no', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor1_phone_no', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                         </div>
@@ -276,37 +282,37 @@
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_name') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor2_name', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor2_name', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_socialsecurity') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor2_socialsecurity', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor2_socialsecurity', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_caf') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor2_caf', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor2_caf', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_job_title') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor2_job_title', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor2_job_title', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_address') }}</label>
                                 <div class="control">
-                                    {!! Form::textarea('legal_tutor2_address', null, ['rows' => 4, 'class' => 'textarea']) !!}
+                                    {!! Form::textarea('legal_tutor2_address', null, ['rows' => 4, 'class' => 'textarea', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                             <div class="field">
                                 <label class="label">{{ __('message.legal_tutor_phone_no') }}</label>
                                 <div class="control">
-                                    {!! Form::text('legal_tutor2_phone_no', null, ['class' => 'input']) !!}
+                                    {!! Form::text('legal_tutor2_phone_no', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
                         </div>
@@ -314,24 +320,24 @@
                     <div class="field">
                         <label class="label">{{ __('message.authorized_persons') }}</label>
                         <div class="control">
-                            {!! Form::textarea('authorized_persons', null, ['rows' => 5, 'class' => 'textarea']) !!}
+                            {!! Form::textarea('authorized_persons', null, ['rows' => 5, 'class' => 'textarea', 'disabled' => $readonly]) !!}
                         </div>
                     </div>
                 </section>
             @endcanany
-            @canany(['children-read-contract', 'children-update-contract'])
+            @canany(['child-read-contract', 'child-update-contract'])
                 <section id="tab4-section" class="tab-panel is-hidden">
                     <div class="columns">
                         <div class="column field">
                             <label class="label">{{ __('message.contract_starting_date') }}</label>
                             <div class="control">
-                                {!! Form::date('contract_starting_date', null, ['class' => 'input']) !!}
+                                {!! Form::date('contract_starting_date', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                         <div class="column field">
                             <label class="label">{{ __('message.contract_ending_date') }}</label>
                             <div class="control">
-                                {!! Form::date('contract_ending_date', null, ['class' => 'input']) !!}
+                                {!! Form::date('contract_ending_date', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                     </div>
@@ -339,19 +345,19 @@
                         <div class="column field">
                             <label class="label">{{ __('message.annual_resources') }}</label>
                             <div class="control">
-                                {!! Form::number('annual_resources', null, ['class' => 'input']) !!}
+                                {!! Form::number('annual_resources', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                         <div class="column field">
                             <label class="label">{{ __('message.child_care_expenses') }}</label>
                             <div class="control">
-                                {!! Form::number('child_care_expenses', null, ['class' => 'input']) !!}
+                                {!! Form::number('child_care_expenses', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                         <div class="column field">
                             <label class="label">{{ __('message.alimony_paid') }}</label>
                             <div class="control">
-                                {!! Form::number('alimony_paid', null, ['class' => 'input']) !!}
+                                {!! Form::number('alimony_paid', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
                     </div>
@@ -359,14 +365,24 @@
             @endcanany
         </div>
 
-        @canany(['children-create', 'children-update-general', 'children-update-medical', 'children-update-family',
-            'children-update-contract'])
-            <div class="field is-pulled-right pt-4">
-                <div class="control is-pulled-right">
-                    {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
+        @if (!$readonly)
+            @canany(['child-create', 'child-update-general', 'child-update-medical', 'child-update-family',
+                'child-update-contract'])
+                <div class="columns is-flex-direction-row-reverse pt-4">
+                    <div class="column field is-pulled-right">
+                        <div class="control is-pulled-right">
+                            {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
+                        </div>
+                    </div>
+                    <div class="column field is-pulled-left">
+                        <div class="control">
+                            {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-minus"></i></span><span>' . __('message.remove') . '</span>', ['class' => 'button is-danger is-outlined confirmDelete', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
+                        </div>
+                    </div>
+                    <div class="is-clearfix"></div>
                 </div>
-            </div>
-            <div class="is-clearfix"></div>
-        @endcanany
+            @endcanany
+        @endif
+
     </x-content-page>
 </x-app-layout>

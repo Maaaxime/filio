@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
-class Children extends Model
+class Child extends Model
 {
     use HasFactory;
 
-    protected $table = 'childs';
+    protected $table = 'children';
 
     /**
      * The attributes that are mass assignable.
@@ -39,8 +39,8 @@ class Children extends Model
         'address2',
         'city',
         'postCode',
-        'no_dependant_childs',
-        'no_childs_less_7yo',
+        'no_dependant_children',
+        'no_children_less_7yo',
         'legal_regime',
         'legal_regime_other',
         'legal_tutor1_name',
@@ -59,7 +59,7 @@ class Children extends Model
         'contract_starting_date',
         'contract_ending_date',
         'annual_resources',
-        'child_care_expenses',
+        'children_care_expenses',
         'alimony_paid',
         'applicable_rate'
     ];

@@ -3,7 +3,7 @@
         <x-slot name="header">{{ __('message.timeEntryTypesManagement') }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
         <x-slot name="headerAction">
-            <a href="{{ route('types.create') }}" class="button is-primary is-light">
+            <a href="{{ route('admin.attendances.types.create') }}" class="button is-primary is-light">
                 <span class="icon"><i class="fa-solid fa-circle-plus"></i></span> {{ __('message.add') }}
             </a>
         </x-slot>
@@ -24,7 +24,7 @@
                     @foreach ($timeEntryTypes as $key => $timeEntryType)
                         <tr>
                             <th class="is-narrow" data-sortable="false">
-                                <a href="{{ route('types.edit', $timeEntryType->id) }}" class="button is-primary">
+                                <a href="{{ route('admin.attendances.types.edit', $timeEntryType->id) }}" class="button is-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </th>

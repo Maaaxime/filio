@@ -7,7 +7,7 @@
             </a>
         </x-slot>
 
-        {!! Form::model($timeEntryType, ['method' => 'PATCH', 'route' => ['types.update', $timeEntryType->id], 'class' => 'box-no-shadow']) !!}
+        {!! Form::model($timeEntryType, ['method' => 'PATCH', 'route' => ['admin.attendances.types.update', $timeEntryType->id], 'class' => 'box-no-shadow']) !!}
         {{  Form::hidden('url',URL::previous())  }}
         <div class="field">
             <label class="label">{{ __('message.name') }}</label>

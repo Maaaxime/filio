@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ __('message.childsManagement') }}</x-slot>
+        <x-slot name="header">{{ __('message.childrenManagement') }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
         <x-slot name="headerAction">
-            <a href="{{ route('childs.create') }}" class="button is-primary is-light">
+            <a href="{{ route('admin.children.create') }}" class="button is-primary is-light">
                 <span class="icon"><i class="fa-solid fa-circle-plus"></i></span> {{ __('message.add') }}
             </a>
         </x-slot>
@@ -20,53 +20,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($childs as $key => $children)
-                        <tr {{ !$children->isActive() ? 'class="stripes"' : '' }}>
+                    @foreach ($children as $key => $child)
+                        <tr {{ !$child->isActive() ? 'class="stripes"' : '' }}>
                             <th class="is-narrow" data-sortable="false">
-                                <a href="{{ route('childs.edit', $children->id) }}" class="button is-primary">
+                                <a href="{{ route('admin.children.edit', $child->id) }}" class="button is-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </th>
                             <td class="is-narrow">
-                                @if ($children->image)
+                                @if ($child->image)
                                     <div class="image is-rounded is-48x48"
-                                        style="background-image: url('{{ asset('/storage/images/' . $children->image) }}');">
+                                        style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');">
                                     </div>
                                 @endif
                             </td>
-                            <td style="color: {{ $children->gender_color }};">
+                            <td style="color: {{ $child->gender_color }};">
                                 <p>
-                                    {{ $children->first_name }} {{ $children->last_name }}
+                                    {{ $child->first_name }} {{ $child->last_name }}
                                 </p>
                                 <p class="is-size-7">
-                                    {{ $children->parents() }}
+                                    {{ $child->parents() }}
                                 </p>
                             </td>
                             <td class="is-hidden-touch">
-                                {{ $children->formatAsDate($children->birthdate) }}
+                                {{ $child->formatAsDate($child->birthdate) }}
                             </td>
                             <td>
                                 <div class="field is-grouped is-grouped-multiline">
-                                    @if ($children->remainingDaysBeforeBirthday())
+                                    @if ($child->remainingDaysBeforeBirthday())
                                         <div class="control">
                                             <div class="tags has-addons">
                                                 <span class="tag is-primary is-light">
                                                     <i class="fa-solid fa-cake-candles"></i>
                                                 </span>
                                                 <span class="tag is-primary is-light" style="min-width: 47px;">
-                                                    {{ __('message.days') . $children->remainingDaysBeforeBirthday() }}
+                                                    {{ __('message.days') . $child->remainingDaysBeforeBirthday() }}
                                                 </span>
                                             </div>
                                         </div>
                                     @endif
-                                    @if ($children->age())
+                                    @if ($child->age())
                                         <div class="control">
                                             <div class="tags has-addons">
                                                 <span class="tag is-warning is-light">
                                                     <i class="fa-solid fa-baby"></i>
                                                 </span>
                                                 <span class="tag is-warning is-light" style="min-width: 47px;">
-                                                    {{ $children->age() }}
+                                                    {{ $child->age() }}
                                                 </span>
                                             </div>
                                         </div>
@@ -74,21 +74,21 @@
                                 </div>
                             </td>
                             <td class="is-hidden-touch">
-                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(implode(',', $children->address())) }}"
+                                <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(implode(',', $child->address())) }}"
                                     target="_blank" class="has-text-dark">
-                                    @foreach ($children->address() as $key => $addrPart)
+                                    @foreach ($child->address() as $key => $addrPart)
                                         {{ $addrPart }} <br />
                                     @endforeach
                                 </a>
                             </td>
                             <td class="is-hidden-touch">
-                                {{ $children->formatAsDate($children->contract_starting_date) .(!empty((int) $children->contract_ending_date) ? '-' . $children->formatAsDate($children->contract_ending_date) : '') }}
+                                {{ $child->formatAsDate($child->contract_starting_date) .(!empty((int) $child->contract_ending_date) ? '-' . $child->formatAsDate($child->contract_ending_date) : '') }}
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-        {{ $childs->links('vendor.pagination.custom') }}
+        {{ $children->links('vendor.pagination.custom') }}
     </x-content-page>
 </x-app-layout>

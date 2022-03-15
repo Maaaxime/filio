@@ -33,7 +33,7 @@ class TimeEntry extends Model
     ];
 
     protected $fillable = [
-        'children_id',
+        'child_id',
         'entry_type_id',
         'time_end',
         'time_start',
@@ -63,9 +63,9 @@ class TimeEntry extends Model
         return $this->belongsTo(User::class, 'deleted_by_id');
     }
 
-    public function children()
+    public function child()
     {
-        return $this->belongsTo(Children::class, 'children_id');
+        return $this->belongsTo(Child::class, 'child_id');
     }
 
     public function entry_type()
@@ -85,7 +85,7 @@ class TimeEntry extends Model
     public function getNameAttribute()
     {
         $date = $this->time_start ? $this->time_start->format('d/m/Y') : '';
-        $name = "{$this->children->full_name} · {$date} · {$this->time_start_time}";
+        $name = "{$this->child->full_name} · {$date} · {$this->time_start_time}";
         if ($this->time_end_time != '') {
             $name = $name . " · {$this->time_end_time}";
         }

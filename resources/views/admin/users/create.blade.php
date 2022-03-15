@@ -2,13 +2,13 @@
     <x-content-page>
         <x-slot name="header">{{ __('message.usersManagement') }}</x-slot>
         <x-slot name="headerSubtitle">
-            <a href="{{ url()->previous(); }}">
+            <a href="{{ url()->previous() }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
 
         {!! Form::open(['route' => 'users.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
-        {{  Form::hidden('url',URL::previous())  }}
+        {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
                 <li class="steps-segment is-active">
@@ -43,7 +43,7 @@
                             </span>
                         </span>
                         <div class="steps-content">
-                            <p class="heading">{{ __('message.childs') }}</p>
+                            <p class="heading">{{ __('message.children') }}</p>
                         </div>
                     </a>
                 </li>
@@ -119,8 +119,8 @@
                 </div>
             </section>
             <section id="tab3-section" class="tab-panel is-hidden">
-                <p class="title">{{ __('message.childs') }}</p>
-                @foreach ($childs as $value)
+                <p class="title">{{ __('message.children') }}</p>
+                @foreach ($children as $value)
                     <div class="card mb-4">
                         <header class="card-header mt-4">
                             <table class="table card-header-title">
@@ -139,21 +139,19 @@
                             </table>
 
                             <span class="card-header-icon" aria-label="more options">
-                                {!! Form::checkbox('childs[]', $value->id, null, ['class' => 'checkbox icon']) !!}
+                                {!! Form::checkbox('children[]', $value->id, null, ['class' => 'checkbox icon']) !!}
                             </span>
                         </header>
                     </div>
                 @endforeach
             </section>
         </div>
-        @can('user-mngt')
-            <div class="field is-pulled-right pt-4">
-                <div class="control is-pulled-right">
-                    {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-plus"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
-                </div>
+        <div class="field is-pulled-right pt-4">
+            <div class="control is-pulled-right">
+                {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-plus"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
             </div>
-            <div class="is-clearfix"></div>
-        @endcan
+        </div>
+        <div class="is-clearfix"></div>
         {!! Form::close() !!}
     </x-content-page>
 </x-app-layout>

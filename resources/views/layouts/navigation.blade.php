@@ -13,10 +13,10 @@
             <a href="{{ url('/dashboard') }}"
                 class={{ request()->routeIs('dashboard') ? 'is-active' : '' }}>{{ __('message.dashboard') }}</a>
         </li>
-        @if (Auth()->user()->childs()->count() > 0)
+        @if (Auth()->user()->children()->count() > 0)
             <li>
-                <a href="{{ url('/my/childs') }}"
-                    class={{ request()->routeIs('my.childs') ? 'is-active' : '' }}>{{ trans_choice('message.myChilds',Auth()->user()->childs()->count()) }}</a>
+                <a href="{{ url('/my/children') }}"
+                    class={{ request()->routeIs('my.children') ? 'is-active' : '' }}>{{ trans_choice('message.myChildren',Auth()->user()->children()->count()) }}</a>
             </li>
         @endif
     </ul>
@@ -25,12 +25,12 @@
     </p>
     <ul class="menu-list">
         <li>
-            <a href="{{ url('/admin/childs') }}" class={{ request()->routeIs('childs.*') ? 'is-active' : '' }}>
+            <a href="{{ url('/admin/children') }}" class={{ request()->routeIs('admin.children.*') ? 'is-active' : '' }}>
                 <span class="icon-text">
                     <span class="icon">
                         <i class="fa-solid fa-baby"></i>
                     </span>
-                </span> {{ __('message.childsManagement') }}
+                </span> {{ __('message.childrenManagement') }}
             </a>
         </li>
         <li>
@@ -60,7 +60,7 @@
             <ul>
                 <li>
                     <a href="{{ url('/admin/attendances/entries') }}"
-                        class={{ request()->routeIs('entries.*') ? 'is-active' : '' }}>
+                        class={{ request()->routeIs('admin.attendances.entries.*') ? 'is-active' : '' }}>
                         <span class="icon-text">
                             <span class="icon">
                                 <i class="fa-solid fa-calendar"></i>
@@ -70,7 +70,7 @@
                 </li>
                 <li>
                     <a href="{{ url('/admin/attendances/types') }}"
-                        class={{ request()->routeIs('types.*') ? 'is-active' : '' }}>
+                        class={{ request()->routeIs('attendances.types.*') ? 'is-active' : '' }}>
                         <span class="icon-text">
                             <span class="icon">
                                 <i class="fa-solid fa-layer-group"></i>

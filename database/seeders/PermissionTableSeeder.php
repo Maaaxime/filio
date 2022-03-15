@@ -47,39 +47,39 @@ class PermissionTableSeeder extends Seeder
 
             /*
             |--------------------------------------------------------------------------
-            | Childs
+            | Children
             |--------------------------------------------------------------------------
             */
 
-            'children-create',
-            'children-read-general',
-            'children-read-medical',
-            'children-read-family',
-            'children-read-contract',
-            'children-update',
-            'children-update-general',
-            'children-update-medical',
-            'children-update-family',
-            'children-update-contract',
-            'children-delete',
+            'child-create',
+            'child-read-general',
+            'child-read-medical',
+            'child-read-family',
+            'child-read-contract',
+            'child-update',
+            'child-update-general',
+            'child-update-medical',
+            'child-update-family',
+            'child-update-contract',
+            'child-delete',
 
             // Only "My" Children
-            'children-create-my',
-            'children-create-general-my',
-            'children-create-medical-my',
-            'children-create-family-my',
-            'children-create-contract-my',
-            'children-read-my',
-            'children-read-general-my',
-            'children-read-medical-my',
-            'children-read-family-my',
-            'children-read-contract-my',
-            'children-update-my',
-            'children-update-general-my',
-            'children-update-medical-my',
-            'children-update-family-my',
-            'children-update-contract-my',
-            'children-delete-my',
+            'child-create-my',
+            'child-create-general-my',
+            'child-create-medical-my',
+            'child-create-family-my',
+            'child-create-contract-my',
+            'child-read-my',
+            'child-read-general-my',
+            'child-read-medical-my',
+            'child-read-family-my',
+            'child-read-contract-my',
+            'child-update-my',
+            'child-update-general-my',
+            'child-update-medical-my',
+            'child-update-family-my',
+            'child-update-contract-my',
+            'child-delete-my',
 
             /*
             |--------------------------------------------------------------------------

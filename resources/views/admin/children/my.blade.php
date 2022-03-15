@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ trans_choice('message.myChilds',Auth()->user()->childs()->count()) }}</x-slot>
+        <x-slot name="header">{{ trans_choice('message.myChildren',Auth()->user()->children()->count()) }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
 
         <div class="box-no-shadow">
-            @foreach ($childs as $key => $child)
-                <a href="{{ route('childs.edit', $child->id) }}">
+            @foreach ($children as $key => $child)
+                <a href="{{ route('admin.children.edit', $child->id) }}">
                     <div class="card mb-4">
                         <header class="card-header mt-4">
                             <table class="table card-header-title">

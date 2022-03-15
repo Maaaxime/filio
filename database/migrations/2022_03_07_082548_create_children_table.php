@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChildsTable extends Migration
+class CreateChildrenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateChildsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('childs');
-        Schema::create('childs', function (Blueprint $table) {
+        Schema::dropIfExists('children');
+        Schema::create('children', function (Blueprint $table) {
             $table->increments('id');
 
             /* General Informations */
@@ -41,8 +41,8 @@ class CreateChildsTable extends Migration
             $table->string('city', 30)->nullable();
             $table->string('postCode', 30)->nullable();
 
-            $table->integer('no_dependant_childs')->nullable();
-            $table->integer('no_childs_less_7yo')->nullable();
+            $table->integer('no_dependant_children')->nullable();
+            $table->integer('no_children_less_7yo')->nullable();
             $table->enum('legal_regime', array('general', 'officier','msa','other'))->nullable();
             $table->string('legal_regime_other', 100)->nullable();
 
@@ -66,7 +66,7 @@ class CreateChildsTable extends Migration
             $table->date('contract_starting_date')->nullable();
             $table->date('contract_ending_date')->nullable();
             $table->float('annual_resources')->nullable();
-            $table->float('child_care_expenses')->nullable();
+            $table->float('children_care_expenses')->nullable();
             $table->float('alimony_paid')->nullable();
             $table->float('applicable_rate')->nullable();
             $table->timestamp('contract_edited_at')->nullable();
@@ -74,11 +74,11 @@ class CreateChildsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::dropIfExists('children_user');
-        Schema::create('children_user', function (Blueprint $table) {
+        Schema::dropIfExists('child_user');
+        Schema::create('child_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('children_id')->unsigned();
+            $table->integer('child_id')->unsigned();
             $table->timestamps();
         });
 
@@ -92,8 +92,8 @@ class CreateChildsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('model_has_childs');
-        Schema::dropIfExists('children_user');
-        Schema::dropIfExists('childs');
+        Schema::dropIfExists('model_has_children');
+        Schema::dropIfExists('child_user');
+        Schema::dropIfExists('children');
     }
 }

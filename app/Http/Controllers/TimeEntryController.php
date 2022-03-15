@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Children;
+use App\Models\Child;
 use App\Models\TimeEntry;
 use App\Models\TimeEntryType;
 use Illuminate\Http\Request;
@@ -29,10 +29,10 @@ class TimeEntryController extends Controller
      */
     public function create()
     {
-        $childs = Children::active()->get()->pluck('full_name', 'id');;
+        $children = Child::active()->get()->pluck('full_name', 'id');;
         $timeEntryTypes = TimeEntryType::orderBy('default', 'desc')->get()->pluck('name', 'id');
 
-        return view('admin.attendances.entries.create', compact('childs', 'timeEntryTypes'));
+        return view('admin.attendances.entries.create', compact('children', 'timeEntryTypes'));
     }
 
     /**
@@ -58,7 +58,7 @@ class TimeEntryController extends Controller
         }
 
         $timeEntry = TimeEntry::create([
-            'children_id' => Children::findOrFail($request->child)->id,
+            'child_id' => Child::findOrFail($request->child)->id,
             'entry_type_id' => TimeEntryType::findOrFail($request->entry_type)->id,
             'time_start' => $time_start,
             'system_time_start' => $time_start,
@@ -94,10 +94,10 @@ class TimeEntryController extends Controller
     public function edit($id)
     {
         $timeEntry = TimeEntry::find($id);
-        $childs = Children::active()->get()->pluck('full_name', 'id');;
+        $children = Child::active()->get()->pluck('full_name', 'id');;
         $timeEntryTypes = TimeEntryType::all()->pluck('name', 'id');
 
-        return view('admin.attendances.entries.edit', compact('timeEntry', 'childs', 'timeEntryTypes'))->with('readonly', false);
+        return view('admin.attendances.entries.edit', compact('timeEntry', 'children', 'timeEntryTypes'))->with('readonly', false);
     }
 
     /**
@@ -127,7 +127,7 @@ class TimeEntryController extends Controller
 
                 $timeEntry = TimeEntry::findOrFail($id);
                 $timeEntry->update([
-                    'children_id' => Children::findOrFail($request->child)->id,
+                    'child_id' => Child::findOrFail($request->child)->id,
                     'entry_type_id' => TimeEntryType::findOrFail($request->entry_type)->id,
                     'time_start' => $time_start,
                     'time_end' => $time_end,

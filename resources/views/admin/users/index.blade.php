@@ -16,7 +16,7 @@
                         <th scope="col">{{ __('message.name') }}</th>
                         <th scope="col"></th>
                         <th scope="col">{{ __('message.roles') }}</th>
-                        <th scope="col" class="is-hidden-touch">{{ __('message.childs') }}</th>
+                        <th scope="col" class="is-hidden-touch">{{ __('message.children') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,9 +52,9 @@
                                 @endif
                             </td>
                             <td class="is-hidden-touch">
-                                @foreach ($user->childs as $child)
+                                @foreach ($user->children as $child)
                                     @if ($child->image)
-                                        <a href="{{ route('childs.show', $child->id) }}">
+                                        <a href="{{ route('admin.children.show', $child->id) }}">
                                             <div class="image is-rounded img-multi is-48x48"
                                                 style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');"
                                                 data-tooltip="{{ $child->full_name }}">

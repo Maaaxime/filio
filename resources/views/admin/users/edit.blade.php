@@ -2,14 +2,14 @@
     <x-content-page>
         <x-slot name="header">{{ $user->name }}</x-slot>
         <x-slot name="headerSubtitle">
-            <a href="{{ url()->previous(); }}">
+            <a href="{{ url()->previous() }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
         <x-slot name="headerPicture">{{ $user->image }}</x-slot>
 
         {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id], 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
-        {{  Form::hidden('url',URL::previous())  }}
+        {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
                 <li class="steps-segment is-active">
@@ -44,7 +44,7 @@
                             </span>
                         </span>
                         <div class="steps-content">
-                            <p class="heading">{{ __('message.childs') }}</p>
+                            <p class="heading">{{ __('message.children') }}</p>
                         </div>
                     </a>
                 </li>
@@ -57,7 +57,8 @@
                         <label class="label">{{ __('message.profilePicture') }}</label>
                         <div class="file is-normal is-boxed has-name is-fullwidth" id="file">
                             <label class="file-label">
-                                <input class="file-input" type="file" name="image" @if ($readonly) disabled @endif>
+                                <input class="file-input" type="file" name="image"
+                                    @if ($readonly) disabled @endif>
                                 <span class="file-cta">
                                     <span class="file-icon">
                                         <i class="fas fa-upload"></i>
@@ -120,8 +121,8 @@
                 </div>
             </section>
             <section id="tab3-section" class="tab-panel is-hidden">
-                <p class="title">{{ __('message.childs') }}</p>
-                @foreach ($childs as $value)
+                <p class="title">{{ __('message.children') }}</p>
+                @foreach ($children as $value)
                     <div class="card mb-4">
                         <header class="card-header mt-4">
                             <table class="table card-header-title">
@@ -140,7 +141,7 @@
                             </table>
 
                             <span class="card-header-icon" aria-label="more options">
-                                {!! Form::checkbox('childs[]', $value->id, in_array($value->id, $userChildren), ['class' => 'checkbox icon', 'disabled' => $readonly]) !!}
+                                {!! Form::checkbox('children[]', $value->id, in_array($value->id, $userChildren), ['class' => 'checkbox icon', 'disabled' => $readonly]) !!}
                             </span>
                         </header>
                     </div>
@@ -149,21 +150,19 @@
         </div>
 
         @if (!$readonly)
-            @can('user-mngt')
-                <div class="columns is-flex-direction-row-reverse pt-4">
-                    <div class="column field is-pulled-right">
-                        <div class="control is-pulled-right">
-                            {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
-                        </div>
+            <div class="columns is-flex-direction-row-reverse pt-4">
+                <div class="column field is-pulled-right">
+                    <div class="control is-pulled-right">
+                        {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
                     </div>
-                    <div class="column field is-pulled-left">
-                        <div class="control">
-                            {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-minus"></i></span><span>' . __('message.remove') . '</span>', ['class' => 'button is-danger is-outlined confirmDelete', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
-                        </div>
-                    </div>
-                    <div class="is-clearfix"></div>
                 </div>
-            @endcan
+                <div class="column field is-pulled-left">
+                    <div class="control">
+                        {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-minus"></i></span><span>' . __('message.remove') . '</span>', ['class' => 'button is-danger is-outlined confirmDelete', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
+                    </div>
+                </div>
+                <div class="is-clearfix"></div>
+            </div>
         @endif
         {!! Form::close() !!}
     </x-content-page>

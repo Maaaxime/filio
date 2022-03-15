@@ -7,14 +7,14 @@
             </a>
         </x-slot>
 
-        {!! Form::open(['route' => 'entries.store', 'method' => 'POST', 'class' => 'box-no-shadow']) !!}
+        {!! Form::open(['route' => 'admin.attendances.entries.store', 'method' => 'POST', 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="columns">
             <div class="column">
                 <div class="field">
                     <label class="label">{{ __('message.child') }}</label>
                     <div class="control select is-fullwidth">
-                        {{ Form::select('child', $childs, null, ['class' => '']) }}
+                        {{ Form::select('child', $children, null, ['class' => '']) }}
                     </div>
                 </div>
                 <div class="field ">

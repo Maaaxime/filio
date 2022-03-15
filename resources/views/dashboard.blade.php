@@ -19,7 +19,7 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">Enfants</p>
-                    <p class="title">{{ $childs }}</p>
+                    <p class="title">{{ $children }}</p>
                 </div>
             </div>
         </nav>

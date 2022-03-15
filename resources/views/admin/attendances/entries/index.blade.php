@@ -3,7 +3,7 @@
         <x-slot name="header">{{ __('message.timeEntriesManagement') }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
         <x-slot name="headerAction">
-            <a href="{{ route('entries.create') }}" class="button is-primary is-light">
+            <a href="{{ route('admin.attendances.entries.create') }}" class="button is-primary is-light">
                 <span class="icon"><i class="fa-solid fa-circle-plus"></i></span> {{ __('message.add') }}
             </a>
         </x-slot>
@@ -27,19 +27,19 @@
                     @foreach ($timeEntries as $key => $timeEntry)
                         <tr>
                             <th class="is-narrow" data-sortable="false">
-                                <a href="{{ route('entries.edit', $timeEntry->id) }}" class="button is-primary">
+                                <a href="{{ route('admin.attendances.entries.edit', $timeEntry->id) }}" class="button is-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </th>
                             <td class="is-narrow">
-                                @if ($timeEntry->children->image)
+                                @if ($timeEntry->child->image)
                                     <div class="image is-rounded is-48x48"
-                                        style="background-image: url('{{ asset('/storage/images/' . $timeEntry->children->image) }}');">
+                                        style="background-image: url('{{ asset('/storage/images/' . $timeEntry->child->image) }}');">
                                     </div>
                                 @endif
                             </td>
                             <td class="is-hidden-touch">
-                                {{ $timeEntry->children->full_name }}
+                                {{ $timeEntry->child->full_name }}
                             </td>
                             <td class="is-hidden-touch">
                                 {{ $timeEntry->createdby->name }}
