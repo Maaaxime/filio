@@ -11,7 +11,7 @@
         {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
-                @canany(['children-read-general','children-update-general'])
+                @canany(['children-read-general', 'children-update-general'])
                     <li class="steps-segment is-active">
                         <a hef="#" class="has-text-dark" aria-controls="tab1-section">
                             <span class="steps-marker">
@@ -25,7 +25,7 @@
                         </a>
                     </li>
                 @endcanany
-                @canany(['children-read-medical','children-update-medical'])
+                @canany(['children-read-medical', 'children-update-medical'])
                     <li class="steps-segment">
                         <a hef="#" class="has-text-dark" aria-controls="tab2-section">
                             <span class="steps-marker">
@@ -39,7 +39,7 @@
                         </a>
                     </li>
                 @endcanany
-                @canany(['children-read-family','children-update-family'])
+                @canany(['children-read-family', 'children-update-family'])
                     <li class="steps-segment">
                         <a hef="#" class="has-text-dark" aria-controls="tab3-section">
                             <span class="steps-marker">
@@ -53,7 +53,7 @@
                         </a>
                     </li>
                 @endcanany
-                @canany(['children-read-contract','children-update-contract'])
+                @canany(['children-read-contract', 'children-update-contract'])
                     <li class="steps-segment">
                         <a hef="#" class="has-text-dark" aria-controls="tab4-section">
                             <span class="steps-marker">
@@ -70,7 +70,7 @@
             </ul>
         </div>
         <div class="tab-panels">
-            @canany(['children-read-general','children-update-general'])
+            @canany(['children-read-general', 'children-update-general'])
                 <section id="tab1-section" class="tab-panel">
                     <div class="columns pt-6">
                         <div class="column">
@@ -103,6 +103,19 @@
                                 <label class="label">{{ __('message.last_name') }}</label>
                                 <div class="control">
                                     {!! Form::text('last_name', null, ['class' => 'input']) !!}
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">{{ __('message.gender') }}</label>
+                                <div class="control">
+                                    <label class="radio">
+                                        <input type="radio" name="gender" value="{{ __('message.girl') }}" selected>
+                                        {{ __('message.girl') }}
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="gender" value="{{ __('message.boy') }}">
+                                        {{ __('message.boy') }}
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +176,7 @@
                     </div>
                 </section>
             @endcanany
-            @canany(['children-read-medical','children-update-medical'])
+            @canany(['children-read-medical', 'children-update-medical'])
                 <section id="tab2-section" class="tab-panel is-hidden">
                     <div class="field">
                         <label class="label">{{ __('message.blood_type') }}</label>
@@ -216,7 +229,7 @@
                     </div>
                 </section>
             @endcanany
-            @canany(['children-read-family','children-update-family'])
+            @canany(['children-read-family', 'children-update-family'])
                 <section id="tab3-section" class="tab-panel is-hidden">
                     <div class="columns">
                         <div class="column">
@@ -306,7 +319,7 @@
                     </div>
                 </section>
             @endcanany
-            @canany(['children-read-contract','children-update-contract'])
+            @canany(['children-read-contract', 'children-update-contract'])
                 <section id="tab4-section" class="tab-panel is-hidden">
                     <div class="columns">
                         <div class="column field">
@@ -346,7 +359,8 @@
             @endcanany
         </div>
 
-        @canany(['children-create','children-update-general','children-update-medical','children-update-family','children-update-contract'])
+        @canany(['children-create', 'children-update-general', 'children-update-medical', 'children-update-family',
+            'children-update-contract'])
             <div class="field is-pulled-right pt-4">
                 <div class="control is-pulled-right">
                     {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}

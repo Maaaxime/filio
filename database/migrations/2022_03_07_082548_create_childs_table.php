@@ -21,6 +21,7 @@ class CreateChildsTable extends Migration
             $table->string('image')->default('child.png');
             $table->string('first_name', 100);
             $table->string('last_name', 100);
+            $table->integer('gender');
             $table->date('birthdate')->nullable();
             $table->string('city_of_birth', 30)->nullable();
             $table->string('phone_no', 30)->nullable();

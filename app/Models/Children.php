@@ -24,6 +24,7 @@ class Children extends Model
         'first_name',
         'last_name',
         'birthdate',
+        'gender',
         'city_of_birth',
         'phone_no',
         'email',
@@ -98,6 +99,35 @@ class Children extends Model
                 break;
             case (($this->legal_tutor1_name != '') && ($this->legal_tutor2_name != '')):
                 return $this->legal_tutor1_name . ' | ' . $this->legal_tutor2_name;
+                break;
+        }
+    }
+
+    public function getGenderNameAttribute()
+    {
+        switch ($this->gender) {
+            case 0:
+                return __('girl');
+                break;
+            case 1:
+                return __('boy');
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
+    public function getGenderColorAttribute()
+    {
+        switch ($this->gender) {
+            case 0:
+                return '#EC63BD';
+                break;
+            case 1:
+                return '#63BDEC';
+                break;
+            default:
+                return '';
                 break;
         }
     }

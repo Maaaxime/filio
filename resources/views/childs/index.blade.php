@@ -34,7 +34,7 @@
                                     </div>
                                 @endif
                             </td>
-                            <td>
+                            <td style="color: {{ $children->gender_color }};">
                                 <p>
                                     {{ $children->first_name }} {{ $children->last_name }}
                                 </p>

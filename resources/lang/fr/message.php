@@ -93,5 +93,8 @@ return [
     'time_end_date' => 'Date',
     'time_end_time' => 'Départ',
     'time_duration' => 'Durée',
-    'comment' => 'Observations'
+    'comment' => 'Observations',
+    'gender' => 'Genre',
+    'boy' => 'Garçon',
+    'girl' => 'Fille',
 ];

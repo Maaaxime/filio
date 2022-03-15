@@ -107,6 +107,23 @@
                                     {!! Form::text('last_name', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                                 </div>
                             </div>
+                            <div class="field">
+                                <label class="label">{{ __('message.gender') }}</label>
+                                <div class="control">
+                                    <label class="radio">
+                                        <input type="radio" name="gender" value="0"
+                                            {{ $children->gender == 0 ? 'checked' : '' }}
+                                            {{ $readonly ? 'disabled' : '' }}>
+                                        {{ __('message.girl') }}
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="gender" value="1"
+                                            {{ $children->gender == 1 ? 'checked' : '' }}
+                                            {{ $readonly ? 'disabled' : '' }}>
+                                        {{ __('message.boy') }}
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="columns">
