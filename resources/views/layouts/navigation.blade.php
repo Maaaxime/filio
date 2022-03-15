@@ -34,7 +34,7 @@
             </a>
         </li>
         <li>
-            <p>{{ __('message.teamManagement') }}</p>
+            <p class="menu-label">{{ __('message.teamManagement') }}</p>
             <ul>
                 <li>
                     <a href="{{ url('/admin/users') }}"
@@ -56,7 +56,7 @@
                     </a>
                 </li>
             </ul>
-            <p>{{ __('message.attendanceManagement') }}</p>
+            <p class="menu-label">{{ __('message.attendanceManagement') }}</p>
             <ul>
                 <li>
                     <a href="{{ url('/admin/attendances/entries') }}"

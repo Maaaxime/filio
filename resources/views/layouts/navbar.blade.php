@@ -34,9 +34,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="button is-danger is-light">
-                        <span class="icon is-small">
-                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        </span>
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     </button>
                 </form>
             </div>
