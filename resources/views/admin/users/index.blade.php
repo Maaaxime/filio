@@ -29,7 +29,7 @@
                             </th>
                             <td class="is-narrow">
                                 @if ($user->image)
-                                    <div class="image img-circle is-48x48 image"
+                                    <div class="image is-rounded is-48x48 image"
                                         style="background-image: url('{{ asset('/storage/images/' . $user->image) }}');">
                                     </div>
                                 @endif
@@ -55,7 +55,7 @@
                                 @foreach ($user->childs as $child)
                                     @if ($child->image)
                                         <a href="{{ route('childs.show', $child->id) }}">
-                                            <div class="image img-circle img-multi is-48x48"
+                                            <div class="image is-rounded img-multi is-48x48"
                                                 style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');"
                                                 data-tooltip="{{ $child->full_name }}">
                                             </div>

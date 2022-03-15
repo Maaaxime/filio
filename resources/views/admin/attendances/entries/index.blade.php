@@ -33,7 +33,7 @@
                             </th>
                             <td class="is-narrow">
                                 @if ($timeEntry->children->image)
-                                    <div class="image img-circle is-48x48"
+                                    <div class="image is-rounded is-48x48"
                                         style="background-image: url('{{ asset('/storage/images/' . $timeEntry->children->image) }}');">
                                     </div>
                                 @endif

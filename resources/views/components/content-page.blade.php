@@ -11,7 +11,7 @@
 
                     <div class="hero-body">
                         @if (isset($headerPicture) && $headerPicture->isNotEmpty())
-                            <div class="image img-circle is-96x96 is-pulled-right "
+                            <div class="image is-rounded is-96x96 is-pulled-right "
                                 style="background-image: url('{{ asset('/storage/images/' . $headerPicture) }}');">
                             </div>
                         @endif

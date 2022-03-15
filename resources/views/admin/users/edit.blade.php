@@ -128,7 +128,7 @@
                                 <tr>
                                     <td class="is-narrow">
                                         @if ($value->image)
-                                            <div class="image img-circle is-48x48"
+                                            <div class="image is-rounded is-48x48"
                                                 style="background-image: url('{{ asset('/storage/images/' . $value->image) }}');">
                                             </div>
                                         @endif

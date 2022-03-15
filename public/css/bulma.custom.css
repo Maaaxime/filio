@@ -38,6 +38,16 @@ body {
     background-size: cover;
 }
 
+div.image {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+div.image.is-rounded {
+    border-radius: 9999px;
+}
+
 .table td {
     vertical-align: middle;
 }
@@ -54,7 +64,6 @@ table.table.card-header-title {
 .subtitle.is-7 {
     font-size: 0.75rem;
 }
-
 
 .page-content {
     margin: 0.5rem 0.5rem 0.5rem;
