@@ -28,7 +28,7 @@ class ChildrenController extends Controller
         Auth::user()->hasAnyPermission(['children-read-general', 'children-read-medical', 'children-read-family', 'children-read-contract']);
 
         $childs = Children::orderBy('contract_ending_date', 'asc')->orderBy('first_name', 'asc')->paginate(20);
-        return view('childs.index', compact('childs'))
+        return view('admin.childs.index', compact('childs'))
             ->with('i', ($request->input('page', 1) - 1) * 20);
     }
 
@@ -43,7 +43,7 @@ class ChildrenController extends Controller
         if ($childs->count() == 1)
             return $this->edit($childs->first()->id);
 
-        return view('childs.my', compact('childs'));
+        return view('admin.childs.my', compact('childs'));
     }
 
     /**
@@ -55,7 +55,7 @@ class ChildrenController extends Controller
     {
         Auth::user()->hasAnyPermission(['children-create']);
         
-        return view('childs.create');
+        return view('admin.childs.create');
     }
 
     /**
@@ -101,7 +101,7 @@ class ChildrenController extends Controller
         ]);
 
         $children = Children::find($id);
-        return view('childs.edit', compact('children'))->with('readonly', true);
+        return view('admin.childs.edit', compact('children'))->with('readonly', true);
     }
 
     /**
@@ -125,7 +125,7 @@ class ChildrenController extends Controller
 
 
         $children = Children::find($id);
-        return view('childs.edit', compact('children'))->with('readonly', false);
+        return view('admin.childs.edit', compact('children'))->with('readonly', false);
     }
 
     /**
