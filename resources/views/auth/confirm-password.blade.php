@@ -5,7 +5,7 @@
     <x-auth-card>
         <p class="title">{{ __('auth.password-confirmDetails') }}</p>
 
-        <form method="POST" action="{{ route('password.confirm') }}">
+        <form method="POST" action="{{ route('password.confirm') }}" class="box">
             @csrf
 
             <!-- Password -->

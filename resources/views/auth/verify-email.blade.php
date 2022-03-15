@@ -11,26 +11,28 @@
             </p>
         @endif
 
-        <div class="columns">
-            <div class="column">
-                <form method="POST" action="{{ route('login') }}" class="box">
-                    @csrf
-                    <div class="field">
-                        <button class="button is-primary is-fullwidth" type="submit">
-                            {{ __('auth.logIn') }}
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div class="column">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <div class="field">
-                        <button class="button is-warning is-fullwidth" type="submit">
-                            {{ __('auth.logOut') }}
-                        </button>
-                    </div>
-                </form>
+        <div class="box">
+            <div class="columns">
+                <div class="column">
+                    <form method="POST" action="{{ route('login') }}" class="box">
+                        @csrf
+                        <div class="field">
+                            <button class="button is-primary is-fullwidth" type="submit">
+                                {{ __('auth.logIn') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="column">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <div class="field">
+                            <button class="button is-warning is-fullwidth" type="submit">
+                                {{ __('auth.logOut') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </x-auth-card>

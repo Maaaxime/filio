@@ -3,10 +3,12 @@
     </x-slot>
 
     <x-auth-card>
+        <p class="title has-text-centered">{{ __('auth.logIn') }}</p>
+
         <!-- Session Status -->
         <x-auth-session-status :status="session('status')" />
 
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('password.update') }}" class="box">
             @csrf
             <!-- Password Reset Token -->
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
@@ -34,10 +36,10 @@
                     </div>
                 </div>
                 <div class="column field">
-                    <label for="" class="label">{{ __('auth.auth.password-confirm') }}</label>
+                    <label for="" class="label">{{ __('auth.password-confirm') }}</label>
                     <div class="control has-icons-left">
                         <input type="password" name="password_confirmation" placeholder="*******" class="input"
-                            aria-label="{{ __('auth.auth.password-confirm') }}" required>
+                            aria-label="{{ __('auth.password-confirm') }}" required>
 
                         <span class="icon is-small is-left">
                             <i class="fa fa-lock"></i>
