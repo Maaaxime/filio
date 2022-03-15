@@ -3,7 +3,7 @@
         <x-slot name="header">{{ __('message.usersManagement') }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
         <x-slot name="headerAction">
-            <a href="{{ route('users.create') }}" class="button is-primary is-light">
+            <a href="{{ route('admin.users.create') }}" class="button is-primary is-light">
                 <span class="icon"><i class="fa-solid fa-circle-plus"></i></span> {{ __('message.add') }}
             </a>
         </x-slot>
@@ -23,7 +23,7 @@
                     @foreach ($data as $key => $user)
                         <tr>
                             <th class="is-narrow" data-sortable="false">
-                                <a href="{{ route('users.edit', $user->id) }}" class="button is-primary">
+                                <a href="{{ route('admin.users.edit', $user->id) }}" class="button is-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </th>

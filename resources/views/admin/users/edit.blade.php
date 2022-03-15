@@ -8,7 +8,7 @@
         </x-slot>
         <x-slot name="headerPicture">{{ $user->image }}</x-slot>
 
-        {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id], 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
+        {!! Form::model($user, ['method' => 'PATCH', 'route' => ['admin.users.update', $user->id], 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">

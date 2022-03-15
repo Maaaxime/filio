@@ -17,6 +17,82 @@ Route::prefix('admin')
     ->middleware('auth')
     ->group(function () {
 
+        Route::prefix('roles')
+            ->group(function () {
+                // show attendances time entries list
+                Route::get('/')
+                    ->name('admin.roles.index')
+                    ->uses('RoleController@index');
+
+                // show attendances time entry card
+                Route::get('/view/{id}')
+                    ->name('admin.roles.show')
+                    ->uses('RoleController@show');
+
+                // show create attendances time entry form
+                Route::get('/create')
+                    ->name('admin.roles.create')
+                    ->uses('RoleController@create');
+
+                // store attendances time entry
+                Route::post('/store')
+                    ->name('admin.roles.store')
+                    ->uses('RoleController@store');
+
+                // show edit attendances time entry form
+                Route::get('/edit/{id}')
+                    ->name('admin.roles.edit')
+                    ->uses('RoleController@edit');
+
+                // update an attendances time entry
+                Route::patch('/edit/{id}')
+                    ->name('admin.roles.update')
+                    ->uses('RoleController@update');
+
+                // remove an attendances time entry
+                Route::delete('/edit/{id}')
+                    ->name('admin.roles.destroy')
+                    ->uses('RoleController@destroy');
+            });
+
+        Route::prefix('users')
+            ->group(function () {
+                // show attendances time entries list
+                Route::get('/')
+                    ->name('admin.users.index')
+                    ->uses('UserController@index');
+
+                // show attendances time entry card
+                Route::get('/view/{id}')
+                    ->name('admin.users.show')
+                    ->uses('UserController@show');
+
+                // show create attendances time entry form
+                Route::get('/create')
+                    ->name('admin.users.create')
+                    ->uses('UserController@create');
+
+                // store attendances time entry
+                Route::post('/store')
+                    ->name('admin.users.store')
+                    ->uses('UserController@store');
+
+                // show edit attendances time entry form
+                Route::get('/edit/{id}')
+                    ->name('admin.users.edit')
+                    ->uses('UserController@edit');
+
+                // update an attendances time entry
+                Route::patch('/edit/{id}')
+                    ->name('admin.users.update')
+                    ->uses('UserController@update');
+
+                // remove an attendances time entry
+                Route::delete('/edit/{id}')
+                    ->name('admin.users.destroy')
+                    ->uses('UserController@destroy');
+            });
+
         Route::prefix('attendances')
             ->group(function () {
                 Route::prefix('types')

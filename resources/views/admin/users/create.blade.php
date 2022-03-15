@@ -7,7 +7,7 @@
             </a>
         </x-slot>
 
-        {!! Form::open(['route' => 'users.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
+        {!! Form::open(['route' => 'admin.users.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
@@ -66,7 +66,7 @@
                                     </span>
                                 </span>
                                 <span class="file-name" style="min-width: 100%;">
-                                    {{ $user->image }}
+                                    
                                 </span>
                             </label>
                         </div>

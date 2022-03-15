@@ -7,7 +7,7 @@
             </a>
         </x-slot>
 
-        {!! Form::model($role, ['method' => 'PATCH', 'route' => ['roles.update', $role->id], 'class' => 'box-no-shadow']) !!}
+        {!! Form::model($role, ['method' => 'PATCH', 'route' => ['admin.roles.update', $role->id], 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="field">
             <label class="label">{{ __('message.name') }}</label>

@@ -38,7 +38,7 @@
             <ul>
                 <li>
                     <a href="{{ url('/admin/users') }}"
-                        class={{ request()->routeIs('users.*') ? 'is-active' : '' }}>
+                        class={{ request()->routeIs('admin.users.*') ? 'is-active' : '' }}>
                         <span class="icon-text">
                             <span class="icon">
                                 <i class="fa-solid fa-user"></i>
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li><a href="{{ url('/admin/roles') }}"
-                        class={{ request()->routeIs('roles.*') ? 'is-active' : '' }}>
+                        class={{ request()->routeIs('admin.roles.*') ? 'is-active' : '' }}>
                         <span class="icon-text">
                             <span class="icon">
                                 <i class="fa-solid fa-key"></i>

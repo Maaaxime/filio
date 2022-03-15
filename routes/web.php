@@ -27,37 +27,8 @@ Route::get('/credits', function () {
 
 Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
-Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
-    Route::resource('roles', 'RoleController');
-    Route::resource('users', 'UserController');
-    Route::resource('children', 'ChildController');
-    //Route::resource('attendances/types', 'TimeEntryTypeController');
-    Route::resource('attendances/entries', 'TimeEntryController');
-
-    Route::resource('companies', 'CompanyController');
-});
-
-Route::group(['middleware' => ['auth'], 'prefix' => 'my'], function () {
-    Route::get('/children', [ChildController::class, 'my'])->name('my.children');
-    Route::get('/profile', [UserController::class, 'my'])->name('my.profile');
-});
-
-Route::get('/clear-cache', function () {
-    Artisan::call('cache:clear');
-    Artisan::call('route:clear');
-    Artisan::call('config:clear');
-    Artisan::call('view:clear');
-
-    return "App. is cleared";
-});
-
-Route::get('/list-route', function () {
-    $routes = array_map(function (\Illuminate\Routing\Route $route) {
-        return $route;
-    }, (array) Route::getRoutes()->getIterator());
-
-    return $routes;
-});
-
 require __DIR__ . '/admin.php';
+require __DIR__ . '/sysadmin.php';
+require __DIR__ . '/user.php';
+
 require __DIR__ . '/auth.php';
