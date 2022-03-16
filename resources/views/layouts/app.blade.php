@@ -25,12 +25,18 @@
     <link rel="stylesheet" href="{{ asset('css/bulma-calendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bulma-calendar.custom.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/bulma-list.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/bulma-sweetalert2.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/sortable-theme-minimal.css') }}">
-    
+
     <script src="https://kit.fontawesome.com/19514b6620.js" crossorigin="anonymous"></script>
     <link href='https://css.gg/css' rel='stylesheet'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
     <link rel="icon" type="img/png" href="{{ asset('img/favicon.png') }}">
 

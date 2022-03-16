@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChildController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,6 @@ Route::prefix('my')
     ->group(function () {
 
         Route::get('/children', [ChildController::class, 'my'])->name('my.children');
-        
+
         Route::get('/profile', [UserController::class, 'my'])->name('my.profile');
     });

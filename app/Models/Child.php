@@ -121,10 +121,10 @@ class Child extends Model
     {
         switch ($this->gender) {
             case 0:
-                return '#EC63BD';
+                return '#faa3b7';
                 break;
             case 1:
-                return '#63BDEC';
+                return '#a3b7fa';
                 break;
             default:
                 return '';
