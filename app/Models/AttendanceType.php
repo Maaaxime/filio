@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TimeEntryType extends Model
+class AttendanceType extends Model
 {
     use HasFactory;
 
-    public $table = 'time_entry_types';
+    public $table = 'attendance_types';
 
     protected $dates = [
         'created_at',

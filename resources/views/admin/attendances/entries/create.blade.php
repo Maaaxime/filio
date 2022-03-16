@@ -18,9 +18,9 @@
                     </div>
                 </div>
                 <div class="field ">
-                    <label class="label">{{ __('message.timeEntryType') }}</label>
+                    <label class="label">{{ __('message.attendanceType') }}</label>
                     <div class="control select is-fullwidth">
-                        {{ Form::select('entry_type', $timeEntryTypes, null, ['class' => '']) }}
+                        {{ Form::select('entry_type', $attendanceTypes, null, ['class' => '']) }}
                     </div>
                 </div>
                 <div class="field">

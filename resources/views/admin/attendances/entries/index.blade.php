@@ -16,7 +16,7 @@
                         <th scope="col" data-sortable="false">{{ __('message.child') }}</th>
                         <th scope="col" class="is-hidden-touch"></th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.user') }}</th>
-                        <th scope="col" class="">{{ __('message.timeEntryType') }}</th>
+                        <th scope="col" class="">{{ __('message.attendanceType') }}</th>
                         <th scope="col" class="">{{ __('message.time_start_date') }}</th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.time_start_time') }}</th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.time_end_time') }}</th>
@@ -45,7 +45,7 @@
                                 {{ $timeEntry->createdby->name }}
                             </td>
                             <td class="">
-                                {{ $timeEntry->entry_type->name }}
+                                {{ $timeEntry->type->name }}
                             </td>
                             <td class="">
                                 {{ $timeEntry->time_start ? $timeEntry->time_start->translatedFormat('d/m/y') : '' }}

@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Child;
-use App\Models\TimeEntryType;
+use App\Models\AttendanceType;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,7 +17,8 @@ class CreateTimeEntriesTable extends Migration
     public function up()
     {
         Schema::dropIfExists('time_entry_types');
-        Schema::create('time_entry_types', function (Blueprint $table) {
+        Schema::dropIfExists('attendance_types');
+        Schema::create('attendance_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
@@ -31,7 +32,7 @@ class CreateTimeEntriesTable extends Migration
         Schema::create('time_entries', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignIdFor(Child::class,'child_id');
-            $table->foreignIdFor(TimeEntryType::class,'entry_type_id');
+            $table->foreignIdFor(AttendanceType::class,'type_id');
             $table->datetime('time_start');
             $table->datetime('time_end')->nullable();
             $table->datetime('system_time_start');

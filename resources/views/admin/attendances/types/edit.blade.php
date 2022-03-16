@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ $timeEntryType->name }}</x-slot>
+        <x-slot name="header">{{ $attendanceType->name }}</x-slot>
         <x-slot name="headerSubtitle">
             <a href="{{ url()->previous() }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
 
-        {!! Form::model($timeEntryType, ['method' => 'PATCH', 'route' => ['admin.attendances.types.update', $timeEntryType->id], 'class' => 'box-no-shadow']) !!}
+        {!! Form::model($attendanceType, ['method' => 'PATCH', 'route' => ['admin.attendances.types.update', $attendanceType->id], 'class' => 'box-no-shadow']) !!}
         {{  Form::hidden('url',URL::previous())  }}
         <div class="field">
             <label class="label">{{ __('message.name') }}</label>
@@ -24,21 +24,21 @@
         </div>
         <div class="field">
             <label class="checkbox">
-                {{ Form::checkbox('default', null, $timeEntryType->default, ['class' => 'checkbox icon','disabled' => $readonly]) }}
-                {{ __('message.timeEntryTypesDefault') }}
+                {{ Form::checkbox('default', null, $attendanceType->default, ['class' => 'checkbox icon','disabled' => $readonly]) }}
+                {{ __('message.attendanceTypeDefault') }}
             </label>
         </div>
         <div class="field">
             <label class="checkbox">
-                {{ Form::checkbox('need_proof', null, $timeEntryType->need_proof, ['class' => 'checkbox icon','disabled' => $readonly]) }}
-                {{ __('message.timeEntryTypesNeedProof') }}
+                {{ Form::checkbox('need_proof', null, $attendanceType->need_proof, ['class' => 'checkbox icon','disabled' => $readonly]) }}
+                {{ __('message.attendanceTypeNeedProof') }}
             </label>
         </div>
 
         <div class="field">
             <label class="checkbox">
-                {{ Form::checkbox('need_permission', null, $timeEntryType->need_permission, ['class' => 'checkbox icon','disabled' => $readonly]) }}
-                {{ __('message.timeEntryTypesNeedPermission') }}
+                {{ Form::checkbox('need_permission', null, $attendanceType->need_permission, ['class' => 'checkbox icon','disabled' => $readonly]) }}
+                {{ __('message.attendanceTypeNeedPermission') }}
             </label>
         </div>
 

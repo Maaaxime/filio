@@ -100,37 +100,37 @@ Route::prefix('admin')
                         // show attendances time entry types list
                         Route::get('/')
                             ->name('admin.attendances.types.index')
-                            ->uses('TimeEntryTypeController@index');
+                            ->uses('AttendanceTypeController@index');
 
                         // show attendances time entry type card
                         Route::get('/view/{id}')
                             ->name('admin.attendances.types.show')
-                            ->uses('TimeEntryTypeController@show');
+                            ->uses('AttendanceTypeController@show');
 
                         // show create attendances time entry type form
                         Route::get('/create')
                             ->name('admin.attendances.types.create')
-                            ->uses('TimeEntryTypeController@create');
+                            ->uses('AttendanceTypeController@create');
 
                         // store attendances time entry type
                         Route::post('/store')
                             ->name('admin.attendances.types.store')
-                            ->uses('TimeEntryTypeController@store');
+                            ->uses('AttendanceTypeController@store');
 
                         // show edit attendances time entry type form
                         Route::get('/edit/{id}')
                             ->name('admin.attendances.types.edit')
-                            ->uses('TimeEntryTypeController@edit');
+                            ->uses('AttendanceTypeController@edit');
 
                         // update an attendances time entry type
                         Route::patch('/edit/{id}')
                             ->name('admin.attendances.types.update')
-                            ->uses('TimeEntryTypeController@update');
+                            ->uses('AttendanceTypeController@update');
 
                         // remove an attendances time entry type
                         Route::delete('/edit/{id}')
                             ->name('admin.attendances.types.destroy')
-                            ->uses('TimeEntryTypeController@destroy');
+                            ->uses('AttendanceTypeController@destroy');
                     });
 
                 Route::prefix('entries')

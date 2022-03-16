@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ __('message.timeEntryTypesManagement') }}</x-slot>
+        <x-slot name="header">{{ __('message.attendanceTypesManagement') }}</x-slot>
         <x-slot name="headerSubtitle">
             <a href="{{ url()->previous() }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
@@ -25,19 +25,19 @@
         <div class="field">
             <label class="checkbox">
                 {{ Form::checkbox('default', null, false, ['class' => 'checkbox icon']) }}
-                {{ __('message.timeEntryTypesDefault') }}
+                {{ __('message.attendanceTypeDefault') }}
             </label>
         </div>
         <div class="field">
             <label class="checkbox">
                 {{ Form::checkbox('need_proof', null, false, ['class' => 'checkbox icon']) }}
-                {{ __('message.timeEntryTypesNeedProof') }}
+                {{ __('message.attendanceTypeNeedProof') }}
             </label>
         </div>
         <div class="field">
             <label class="checkbox">
                 {{ Form::checkbox('need_permission', null, false, ['class' => 'checkbox icon']) }}
-                {{ __('message.timeEntryTypesNeedPermission') }}
+                {{ __('message.attendanceTypeNeedPermission') }}
             </label>
         </div>
 

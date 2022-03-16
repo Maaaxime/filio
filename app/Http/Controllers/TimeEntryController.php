@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Child;
 use App\Models\TimeEntry;
-use App\Models\TimeEntryType;
+use App\Models\AttendanceType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,9 +30,9 @@ class TimeEntryController extends Controller
     public function create()
     {
         $children = Child::active()->get()->pluck('full_name', 'id');;
-        $timeEntryTypes = TimeEntryType::orderBy('default', 'desc')->get()->pluck('name', 'id');
+        $attendanceTypes = AttendanceType::orderBy('default', 'desc')->get()->pluck('name', 'id');
 
-        return view('admin.attendances.entries.create', compact('children', 'timeEntryTypes'));
+        return view('admin.attendances.entries.create', compact('children', 'attendanceTypes'));
     }
 
     /**
@@ -59,7 +59,7 @@ class TimeEntryController extends Controller
 
         $timeEntry = TimeEntry::create([
             'child_id' => Child::findOrFail($request->child)->id,
-            'entry_type_id' => TimeEntryType::findOrFail($request->entry_type)->id,
+            'type_id' => AttendanceType::findOrFail($request->entry_type)->id,
             'time_start' => $time_start,
             'system_time_start' => $time_start,
             'time_end' => $time_end,
@@ -95,9 +95,9 @@ class TimeEntryController extends Controller
     {
         $timeEntry = TimeEntry::find($id);
         $children = Child::active()->get()->pluck('full_name', 'id');;
-        $timeEntryTypes = TimeEntryType::all()->pluck('name', 'id');
+        $attendanceTypes = AttendanceType::all()->pluck('name', 'id');
 
-        return view('admin.attendances.entries.edit', compact('timeEntry', 'children', 'timeEntryTypes'))->with('readonly', false);
+        return view('admin.attendances.entries.edit', compact('timeEntry', 'children', 'attendanceTypes'))->with('readonly', false);
     }
 
     /**
@@ -128,7 +128,7 @@ class TimeEntryController extends Controller
                 $timeEntry = TimeEntry::findOrFail($id);
                 $timeEntry->update([
                     'child_id' => Child::findOrFail($request->child)->id,
-                    'entry_type_id' => TimeEntryType::findOrFail($request->entry_type)->id,
+                    'type_id' => AttendanceType::findOrFail($request->entry_type)->id,
                     'time_start' => $time_start,
                     'time_end' => $time_end,
                     'updated_by_id' => Auth::User()->id,

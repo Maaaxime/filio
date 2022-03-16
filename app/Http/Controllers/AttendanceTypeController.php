@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TimeEntryType;
+use App\Models\AttendanceType;
 use Illuminate\Http\Request;
 
-class TimeEntryTypeController extends Controller
+class AttendanceTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class TimeEntryTypeController extends Controller
      */
     public function index(Request $request)
     {
-        $timeEntryTypes = TimeEntryType::orderBy('name', 'asc')->paginate(20);
-        return view('admin.attendances.types.index', compact('timeEntryTypes'))
+        $attendanceTypes = AttendanceType::orderBy('name', 'asc')->paginate(20);
+        return view('admin.attendances.types.index', compact('attendanceTypes'))
             ->with('i', ($request->input('page', 1) - 1) * 20);
     }
 
@@ -42,14 +42,14 @@ class TimeEntryTypeController extends Controller
         ]);
 
         if ($request->input('default')) {
-            $defaultTimeEntryType = TimeEntryType::where('default', 1)->first();
-            if ($defaultTimeEntryType != null) {
-                $defaultTimeEntryType->default = false;
-                $defaultTimeEntryType->save();
+            $defaultAttendanceType = AttendanceType::where('default', 1)->first();
+            if ($defaultAttendanceType != null) {
+                $defaultAttendanceType->default = false;
+                $defaultAttendanceType->save();
             }
         }
 
-        $timeEntryType = TimeEntryType::create([
+        $attendanceType = AttendanceType::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'default' => $request->input('default') ? true : false,
@@ -58,7 +58,7 @@ class TimeEntryTypeController extends Controller
         ]);
 
         return redirect($request->url)
-            ->with('success', __('message.successCreated', ['name' => $timeEntryType->name]));
+            ->with('success', __('message.successCreated', ['name' => $attendanceType->name]));
     }
 
     /**
@@ -69,8 +69,8 @@ class TimeEntryTypeController extends Controller
      */
     public function show($id)
     {
-        $timeEntryType = TimeEntryType::find($id);
-        return view('admin.attendances.types.edit', compact('timeEntryType'))->with('readonly', true);
+        $attendanceType = AttendanceType::find($id);
+        return view('admin.attendances.types.edit', compact('attendanceType'))->with('readonly', true);
     }
 
     /**
@@ -81,8 +81,8 @@ class TimeEntryTypeController extends Controller
      */
     public function edit($id)
     {
-        $timeEntryType = TimeEntryType::find($id);
-        return view('admin.attendances.types.edit', compact('timeEntryType'))->with('readonly', false);
+        $attendanceType = AttendanceType::find($id);
+        return view('admin.attendances.types.edit', compact('attendanceType'))->with('readonly', false);
     }
 
     /**
@@ -101,23 +101,23 @@ class TimeEntryTypeController extends Controller
                 ]);
 
                 if ($request->input('default')) {
-                    $defaultTimeEntryType = TimeEntryType::where('id', '<>', $id)->where('default', 1)->first();
-                    if ($defaultTimeEntryType != null) {
-                        $defaultTimeEntryType->default = false;
-                        $defaultTimeEntryType->save();
+                    $defaultAttendanceType = AttendanceType::where('id', '<>', $id)->where('default', 1)->first();
+                    if ($defaultAttendanceType != null) {
+                        $defaultAttendanceType->default = false;
+                        $defaultAttendanceType->save();
                     }
                 }
 
-                $timeEntryType = TimeEntryType::find($id);
-                $timeEntryType->name = $request->input('name');
-                $timeEntryType->description = $request->input('description');
-                $timeEntryType->default = $request->input('default') ? true : false;
-                $timeEntryType->need_proof = $request->input('need_proof') ? true : false;
-                $timeEntryType->need_permission = $request->input('need_permission') ? true : false;
-                $timeEntryType->save();
+                $attendanceType = AttendanceType::find($id);
+                $attendanceType->name = $request->input('name');
+                $attendanceType->description = $request->input('description');
+                $attendanceType->default = $request->input('default') ? true : false;
+                $attendanceType->need_proof = $request->input('need_proof') ? true : false;
+                $attendanceType->need_permission = $request->input('need_permission') ? true : false;
+                $attendanceType->save();
 
                 return redirect($request->url)
-                    ->with('success', __('message.successUpdated', ['name' => $timeEntryType->name]));
+                    ->with('success', __('message.successUpdated', ['name' => $attendanceType->name]));
                 break;
             case 'delete':
                 return  $this->destroy($request, $id);
@@ -133,10 +133,10 @@ class TimeEntryTypeController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $timeEntryType = TimeEntryType::find($id);
-        $timeEntryType->delete();
+        $attendanceType = AttendanceType::find($id);
+        $attendanceType->delete();
 
         return redirect($request->url)
-            ->with('success', __('message.successDeleted', ['name' => $timeEntryType->name]));
+            ->with('success', __('message.successDeleted', ['name' => $attendanceType->name]));
     }
 }

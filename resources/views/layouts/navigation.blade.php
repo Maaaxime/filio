@@ -70,12 +70,12 @@
                 </li>
                 <li>
                     <a href="{{ url('/admin/attendances/types') }}"
-                        class={{ request()->routeIs('attendances.types.*') ? 'is-active' : '' }}>
+                        class={{ request()->routeIs('admin.attendances.types.*') ? 'is-active' : '' }}>
                         <span class="icon-text">
                             <span class="icon">
                                 <i class="fa-solid fa-layer-group"></i>
                             </span>
-                        </span> {{ __('message.timeEntryTypesManagement') }}
+                        </span> {{ __('message.attendanceTypesManagement') }}
                     </a>
                 </li>
             </ul>

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\TimeEntryType;
+use App\Models\AttendanceType;
 use Illuminate\Database\Seeder;
 
 class TimeEntriesSeeder extends Seeder
@@ -14,7 +14,7 @@ class TimeEntriesSeeder extends Seeder
      */
     public function run()
     {
-        TimeEntryType::create([
+        AttendanceType::create([
             'name' => 'Présent',
             'description' => 'L\'enfant est présent.',
             'need_proof' => false,
@@ -22,7 +22,7 @@ class TimeEntriesSeeder extends Seeder
             'default' => true
         ]);
 
-        TimeEntryType::create([
+        AttendanceType::create([
             'name' => 'Maladie',
             'description' => 'L\'enfant est absent pour maladie.',
             'need_proof' => true,
@@ -30,15 +30,15 @@ class TimeEntriesSeeder extends Seeder
             'default' => false
         ]);
 
-        TimeEntryType::create([
+        AttendanceType::create([
             'name' => 'Vacance',
-            'description' => 'L\'enfant est absent pour vacances.',
+            'description' => 'L\'enfant est absent pour vacance.',
             'need_proof' => false,
             'need_permission' => false,
             'default' => false
         ]);
 
-        TimeEntryType::create([
+        AttendanceType::create([
             'name' => 'Fermeture',
             'description' => 'L\'établissement est fermé.',
             'need_proof' => false,

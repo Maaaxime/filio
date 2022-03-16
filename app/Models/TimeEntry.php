@@ -34,7 +34,7 @@ class TimeEntry extends Model
 
     protected $fillable = [
         'child_id',
-        'entry_type_id',
+        'type_id',
         'time_end',
         'time_start',
         'system_time_end',
@@ -68,9 +68,9 @@ class TimeEntry extends Model
         return $this->belongsTo(Child::class, 'child_id');
     }
 
-    public function entry_type()
+    public function type()
     {
-        return $this->belongsTo(TimeEntryType::class, 'entry_type_id');
+        return $this->belongsTo(AttendanceType::class, 'type_id');
     }
 
     public static function defaultStartTime()
