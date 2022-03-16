@@ -364,7 +364,6 @@
                 </section>
             @endcanany
         </div>
-
         @if (!$readonly)
             @canany(['child-create', 'child-update-general', 'child-update-medical', 'child-update-family',
                 'child-update-contract'])
@@ -383,6 +382,6 @@
                 </div>
             @endcanany
         @endif
-
+        {!! Form::close() !!}
     </x-content-page>
 </x-app-layout>

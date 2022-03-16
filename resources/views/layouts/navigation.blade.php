@@ -1,6 +1,6 @@
 <aside class="menu main-menu container">
     <a href="{{ route('dashboard') }}">
-        <figure>
+        <figure style="text-align: center;">
             <img src="{{ url(asset('img/logo.png')) }}" style="height: 60px">
         </figure>
     </a>
@@ -25,12 +25,9 @@
     </p>
     <ul class="menu-list">
         <li>
-            <a href="{{ url('/admin/children') }}" class={{ request()->routeIs('admin.children.*') ? 'is-active' : '' }}>
-                <span class="icon-text">
-                    <span class="icon">
-                        <i class="fa-solid fa-baby"></i>
-                    </span>
-                </span> {{ __('message.childrenManagement') }}
+            <a href="{{ url('/admin/children') }}"
+                class={{ request()->routeIs('admin.children.*') ? 'is-active' : '' }}>
+                {{ __('message.childrenManagement') }}
             </a>
         </li>
         <li>
@@ -39,20 +36,12 @@
                 <li>
                     <a href="{{ url('/admin/users') }}"
                         class={{ request()->routeIs('admin.users.*') ? 'is-active' : '' }}>
-                        <span class="icon-text">
-                            <span class="icon">
-                                <i class="fa-solid fa-user"></i>
-                            </span>
-                        </span> {{ __('message.usersManagement') }}
+                        {{ __('message.usersManagement') }}
                     </a>
                 </li>
                 <li><a href="{{ url('/admin/roles') }}"
                         class={{ request()->routeIs('admin.roles.*') ? 'is-active' : '' }}>
-                        <span class="icon-text">
-                            <span class="icon">
-                                <i class="fa-solid fa-key"></i>
-                            </span>
-                        </span> {{ __('message.rolesManagement') }}
+                        {{ __('message.rolesManagement') }}
                     </a>
                 </li>
             </ul>
@@ -61,21 +50,13 @@
                 <li>
                     <a href="{{ url('/admin/attendances/entries') }}"
                         class={{ request()->routeIs('admin.attendances.entries.*') ? 'is-active' : '' }}>
-                        <span class="icon-text">
-                            <span class="icon">
-                                <i class="fa-solid fa-calendar"></i>
-                            </span>
-                        </span> {{ __('message.attendanceEntriesManagement') }}
+                        {{ __('message.attendanceEntriesManagement') }}
                     </a>
                 </li>
                 <li>
                     <a href="{{ url('/admin/attendances/types') }}"
                         class={{ request()->routeIs('admin.attendances.types.*') ? 'is-active' : '' }}>
-                        <span class="icon-text">
-                            <span class="icon">
-                                <i class="fa-solid fa-layer-group"></i>
-                            </span>
-                        </span> {{ __('message.attendanceTypesManagement') }}
+                        {{ __('message.attendanceTypesManagement') }}
                     </a>
                 </li>
             </ul>

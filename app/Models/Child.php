@@ -121,10 +121,10 @@ class Child extends Model
     {
         switch ($this->gender) {
             case 0:
-                return '#faa3b7';
+                return '#ecacc5';
                 break;
             case 1:
-                return '#a3b7fa';
+                return '#439cfb';
                 break;
             default:
                 return '';
@@ -197,7 +197,12 @@ class Child extends Model
             $nextbirthday = $nextbirthday->copy()->addYear();
         }
 
-        return $today->diffInDays($nextbirthday);
+        $noOfDays = $today->diffInDays($nextbirthday);
+
+        if ($noOfDays <= 30)
+            return $today->diffInDays($nextbirthday);
+
+        return 0;
     }
 
     public function age()
@@ -233,6 +238,19 @@ class Child extends Model
         $query->where(function ($query) {
             $query->where('contract_ending_date', '>', new \DateTime());
         })->orWhereNull('contract_ending_date');
+    }
+
+    public function scopeInactive($query)
+    {
+        $query->where(function ($query) {
+            $query->where('contract_ending_date', '<', new \DateTime());
+        });
+    }
+
+    public function scopeOrderedByName($query) {
+        $query->where(function ($query) {
+            $query->orderBy('first_name', 'asc');
+        });
     }
 
     public function isActive()

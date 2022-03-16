@@ -62,6 +62,10 @@ Route::prefix('admin')
                     ->name('admin.users.index')
                     ->uses('UserController@index');
 
+                Route::post('/')
+                    ->name('admin.users.index.filtered')
+                    ->uses('UserController@index');
+
                 // show attendances time entry card
                 Route::get('/view/{id}')
                     ->name('admin.users.show')
@@ -177,6 +181,10 @@ Route::prefix('admin')
                 // show attendances time entries list
                 Route::get('/')
                     ->name('admin.children.index')
+                    ->uses('ChildController@index');
+
+                Route::post('/')
+                    ->name('admin.children.index.filtered')
                     ->uses('ChildController@index');
 
                 // show attendances time entry card

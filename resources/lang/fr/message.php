@@ -3,7 +3,7 @@
 return [
     'dashboard' => 'Tableau de bord',
     'welcome' => 'Bonjour ',
-    'teamManagement' => 'Gestion des accès',
+    'teamManagement' => 'La gestion des accès',
     'usersManagement' => 'Utilisateurs',
     'rolesManagement' => 'Rôles',
     'roles' => 'Rôles',
@@ -81,7 +81,7 @@ return [
     'successCreated' => ':name a été ajouté.',
     'successUpdated' => ':name a été mis à jour.',
     'successDeleted' => ':name a été supprimé.',
-    'attendanceManagement' => 'Pointage',
+    'attendanceManagement' => 'Les pointages',
     'attendanceTypesManagement' => 'Types',
     'attendanceTypeNeedProof' => 'Nécessite un justificatif',
     'attendanceTypeNeedPermission' => 'Utilis. habilité uniquement',
@@ -97,4 +97,9 @@ return [
     'gender' => 'Genre',
     'boy' => 'Garçon',
     'girl' => 'Fille',
+    'onlyActiveChilds' => 'Actifs',
+    'onlyInactiveChilds' => 'Inactifs',
+    'allChilds' => 'Tous',
+    'allUsers' => 'Tous',
+
 ];

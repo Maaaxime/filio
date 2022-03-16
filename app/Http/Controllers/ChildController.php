@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ChildController extends Controller
 {
@@ -25,11 +26,31 @@ class ChildController extends Controller
      */
     public function index(Request $request)
     {
-        Auth::user()->hasAnyPermission(['child-read-general', 'child-read-medical', 'child-read-family', 'child-read-contract']);
+        $children = Child::active()->OrderedByName()->get();
+        $filter = 'active';
 
-        $children = Child::orderBy('contract_ending_date', 'asc')->orderBy('first_name', 'asc')->paginate(20);
-        return view('admin.children.index', compact('children'))
-            ->with('i', ($request->input('page', 1) - 1) * 20);
+        $activeChildrenCount = Child::active()->count();
+        $inactiveChildrenCount = Child::inactive()->count();
+        $totalChildrenCount =  $activeChildrenCount + $inactiveChildrenCount;
+
+        if ($request->isMethod('post')) {
+            $filter = $request->action;
+            switch ($request->action) {
+                case 'all':
+                    $children = Child::OrderedByName()->get();
+                    break;
+                case 'active':
+                     // Nothing to do - set by default
+                    break;
+                case 'inactive':
+                    $children = Child::inactive()->OrderedByName()->get();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return view('admin.children.index', compact('children','filter','totalChildrenCount','activeChildrenCount','inactiveChildrenCount'));
     }
 
     /**
@@ -54,7 +75,7 @@ class ChildController extends Controller
     public function create()
     {
         Auth::user()->hasAnyPermission(['child-create']);
-        
+
         return view('admin.children.create');
     }
 

@@ -358,7 +358,6 @@
                 </section>
             @endcanany
         </div>
-
         @canany(['child-create', 'child-update-general', 'child-update-medical', 'child-update-family',
             'child-update-contract'])
             <div class="field is-pulled-right pt-4">
@@ -368,5 +367,6 @@
             </div>
             <div class="is-clearfix"></div>
         @endcanany
+        {!! Form::close() !!}
     </x-content-page>
 </x-app-layout>

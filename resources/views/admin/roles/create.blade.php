@@ -30,23 +30,21 @@
                 </div>
                 <div class="is-clearfix"></div>
             </div>
-            @foreach ($permission as $value)
-                <div class="card mb-4">
-                    <header class="card-header">
-                        <div class="card-header-title">
-                            <p class="title is-6 has-text-weight-normal">{{ $value->name }}</p>
-                            @if ($value->description != '')
-                                <p class="subtitle is-7">{{ $value->description }}</p>
-                            @endif
+            <div class="list has-visible-pointer-controls has-hoverable-list-items">
+                @foreach ($permissions as $permission)
+                    <div class="list-item">
+                        <div class="list-item-content">
+                            <div class="list-item-title">
+                                {{ $permission->name }}
+                            </div>
                         </div>
-                        <span class="card-header-icon" aria-label="more options">
-                            {{ Form::checkbox('permission[]', $value->id, false, ['class' => 'checkbox-permission checkbox icon']) }}
-                        </span>
-                    </header>
-                </div>
-            @endforeach
+                        <div class="list-item-controls">
+                            {{ Form::checkbox('permission[]', $permission->id, false, ['class' => 'checkbox-permission checkbox icon']) }}
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
-
         @canany(['role-create', 'role-update'])
             <div class="field is-pulled-right pt-4">
                 <div class="control is-pulled-right">
@@ -55,7 +53,6 @@
             </div>
             <div class="is-clearfix"></div>
         @endcanany
-
         {!! Form::close() !!}
     </x-content-page>
 </x-app-layout>

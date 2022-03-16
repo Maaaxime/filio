@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -25,9 +25,24 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id', 'DESC')->paginate(5);
-        return view('admin.users.index', compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $users = User::get();
+        $roles = Role::get();
+        $filter = '';
+
+        if ($request->isMethod('post')) {
+            $filter = $request->action;
+            switch ($request->action) {
+                case 'all':
+                    break; // Nothing to do - set by default
+                default:
+                Log::debug($request->action);
+                    $selectedRole = Role::where('name',$request->action)->first();
+                    $users = $selectedRole->users()->get();
+                    break;
+            }
+        }
+
+        return view('admin.users.index', compact('users', 'roles', 'filter'));
     }
 
     /**

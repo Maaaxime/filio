@@ -8,46 +8,28 @@
             </a>
         </x-slot>
 
-        <div class="table-container pr-2 pl-2">
-            <table class="table is-striped is-hoverable is-fullwidth" data-sortable>
-                <thead>
-                    <tr>
-                        <th scope="col" class="has-text-centered is-narrow" data-sortable="false">#</th>
-                        <th scope="col">{{ __('message.name') }}</th>
-                        <th scope="col" class="is-hidden-touch">{{ __('message.description') }}</th>
-                        <th scope="col" class="is-hidden-touch">{{ __('message.attendanceTypeNeedProof') }}</th>
-                        <th scope="col" class="is-hidden-touch">
-                            {{ __('message.attendanceTypeNeedPermission') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($attendanceTypes as $key => $attendanceType)
-                        <tr>
-                            <th class="is-narrow" data-sortable="false">
-                                <a href="{{ route('admin.attendances.types.edit', $attendanceType->id) }}" class="button is-primary">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                            </th>
-                            <td>
-                                {{ $attendanceType->name }}
-                                @if ($attendanceType->default)
-                                    <span
-                                        class="tag is-primary is-light">{{ __('message.attendanceTypeDefault') }}</span>
-                                @endif
-                            </td>
-                            <td class="is-hidden-touch">
-                                {{ $attendanceType->description }}
-                            </td>
-                            <td class="is-hidden-touch has-text-centered">
-                                {{ Form::checkbox('need_proof', null, $attendanceType->need_proof, ['class' => 'checkbox icon','disabled' => true]) }}
-                            </td>
-                            <td class="is-hidden-touch has-text-centered">
-                                {{ Form::checkbox('need_permission', null, $attendanceType->need_permission, ['class' => 'checkbox icon','disabled' => true]) }}
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="list has-hoverable-list-items">
+            @foreach ($attendanceTypes as $key => $attendanceType)
+                <div class="list-item">
+                    <div class="list-item-content">
+                        <div class="list-item-title">
+                            {{ $attendanceType->name }}
+                            @if ($attendanceType->default)
+                                <span class="tag is-primary is-light">{{ __('message.attendanceTypeDefault') }}</span>
+                            @endif
+                        </div>
+                        <div class="list-item-description">{{ $attendanceType->description }}</div>
+                    </div>
+                    <div class="list-item-controls">
+                        <div class="buttons is-right">
+                            <a href="{{ route('admin.attendances.types.edit', $attendanceType->id) }}"
+                                class="button is-primary">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
         {{ $attendanceTypes->links('vendor.pagination.custom') }}
     </x-content-page>

@@ -1,6 +1,7 @@
 body {
     background-color: #fafafa;
     overflow: hidden;
+    height: 100vh;
 }
 
 .inline-icon {

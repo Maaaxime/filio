@@ -106,49 +106,62 @@
             <section id="tab2-section" class="tab-panel is-hidden">
                 <div class="field">
                     <p class="title">{{ __('message.roles') }}</p>
-                    @foreach ($roles as $value)
-                        <div class="card mb-4">
-                            <header class="card-header">
-                                <p class="card-header-title">
-                                    {{ $value->name }}
-                                </p>
-                                <span class="card-header-icon" aria-label="more options">
-                                    {!! Form::checkbox('roles[]', $value->name, in_array($value->name, $userRole), ['class' => 'checkbox icon', 'disabled' => $readonly]) !!}
-                                </span>
-                            </header>
-                        </div>
-                    @endforeach
+                    <div class="list has-visible-pointer-controls has-hoverable-list-items">
+                        @foreach ($roles as $role)
+                            <div class="list-item">
+                                <div class="list-item-content">
+                                    <div class="list-item-title">
+                                        {{ $role->name }}
+                                    </div>
+                                </div>
+                                <div class="list-item-controls">
+                                    {!! Form::checkbox('roles[]', $role->name, in_array($role->name, $userRole), ['class' => 'checkbox icon', 'disabled' => $readonly]) !!}
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </section>
             <section id="tab3-section" class="tab-panel is-hidden">
                 <p class="title">{{ __('message.children') }}</p>
-                @foreach ($children as $value)
-                    <div class="card mb-4">
-                        <header class="card-header mt-4">
-                            <table class="table card-header-title">
-                                <tr>
-                                    <td class="is-narrow">
-                                        @if ($value->image)
-                                            <div class="image is-rounded is-48x48"
-                                                style="background-image: url('{{ asset('/storage/images/' . $value->image) }}');">
+                <div class="list has-visible-pointer-controls has-hoverable-list-items">
+                    @foreach ($children as $child)
+                        <div class="list-item">
+                            <div class="list-item-image">
+                                @if ($child->image)
+                                    <div class="image is-rounded is-48x48"
+                                        style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');">
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="list-item-content">
+                                <div class="list-item-title">
+                                    {{ $child->full_name }}</div>
+                                <div class="list-item-description is-grouped is-grouped-multiline">
+                                    <div class="field is-grouped is-grouped-multiline">
+                                        @if ($child->remainingDaysBeforeBirthday())
+                                            <div class="control">
+                                                <div class="tags has-addons is-rounded">
+                                                    <span class="tag is-primary is-light">
+                                                        <i class="fa-solid fa-cake-candles"></i>
+                                                    </span>
+                                                    <span class="tag is-primary is-light" style="min-width: 47px;">
+                                                        {{ __('message.days') . $child->remainingDaysBeforeBirthday() }}
+                                                    </span>
+                                                </div>
                                             </div>
                                         @endif
-                                    </td>
-                                    <td>
-                                        {{ $value->full_name }}
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <span class="card-header-icon" aria-label="more options">
-                                {!! Form::checkbox('children[]', $value->id, in_array($value->id, $userChildren), ['class' => 'checkbox icon', 'disabled' => $readonly]) !!}
-                            </span>
-                        </header>
-                    </div>
-                @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-item-controls">
+                                {!! Form::checkbox('children[]', $child->id, in_array($child->id, $userChildren), ['class' => 'checkbox icon is-right', 'disabled' => $readonly]) !!}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </section>
         </div>
-
         @if (!$readonly)
             <div class="columns is-flex-direction-row-reverse pt-4">
                 <div class="column field is-pulled-right">
