@@ -65,7 +65,7 @@
                             <span class="icon">
                                 <i class="fa-solid fa-calendar"></i>
                             </span>
-                        </span> {{ __('message.timeEntriesManagement') }}
+                        </span> {{ __('message.attendanceEntriesManagement') }}
                     </a>
                 </li>
                 <li>

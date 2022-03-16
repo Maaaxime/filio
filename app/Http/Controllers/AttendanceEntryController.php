@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Child;
-use App\Models\TimeEntry;
+use App\Models\AttendanceEntry;
 use App\Models\AttendanceType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TimeEntryController extends Controller
+class AttendanceEntryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class TimeEntryController extends Controller
      */
     public function index(Request $request)
     {
-        $timeEntries = TimeEntry::orderBy('id', 'desc')->paginate(20);
-        return view('admin.attendances.entries.index', compact('timeEntries'))
+        $attendanceEntries = AttendanceEntry::orderBy('id', 'desc')->paginate(20);
+        return view('admin.attendances.entries.index', compact('attendanceEntries'))
             ->with('i', ($request->input('page', 1) - 1) * 20);
     }
 
@@ -57,7 +57,7 @@ class TimeEntryController extends Controller
             $time_end = $request->time_start_date . ' ' . $request->time_end_time;
         }
 
-        $timeEntry = TimeEntry::create([
+        $timeEntry = AttendanceEntry::create([
             'child_id' => Child::findOrFail($request->child)->id,
             'type_id' => AttendanceType::findOrFail($request->entry_type)->id,
             'time_start' => $time_start,
@@ -81,7 +81,7 @@ class TimeEntryController extends Controller
      */
     public function show($id)
     {
-        $timeEntry = TimeEntry::find($id);
+        $timeEntry = AttendanceEntry::find($id);
         return view('admin.attendances.entries.edit', compact('timeEntry'))->with('readonly', true);
     }
 
@@ -93,7 +93,7 @@ class TimeEntryController extends Controller
      */
     public function edit($id)
     {
-        $timeEntry = TimeEntry::find($id);
+        $timeEntry = AttendanceEntry::find($id);
         $children = Child::active()->get()->pluck('full_name', 'id');;
         $attendanceTypes = AttendanceType::all()->pluck('name', 'id');
 
@@ -125,7 +125,7 @@ class TimeEntryController extends Controller
                     $time_end = $request->time_start_date . ' ' . $request->time_end_time;
                 }
 
-                $timeEntry = TimeEntry::findOrFail($id);
+                $timeEntry = AttendanceEntry::findOrFail($id);
                 $timeEntry->update([
                     'child_id' => Child::findOrFail($request->child)->id,
                     'type_id' => AttendanceType::findOrFail($request->entry_type)->id,
@@ -152,7 +152,7 @@ class TimeEntryController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $timeEntry = TimeEntry::find($id);
+        $timeEntry = AttendanceEntry::find($id);
         $timeEntry->deleted_by_id = Auth::User()->id;
         $timeEntry->save();
 

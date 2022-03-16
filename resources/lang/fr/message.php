@@ -86,7 +86,7 @@ return [
     'attendanceTypeNeedProof' => 'Nécessite un justificatif',
     'attendanceTypeNeedPermission' => 'Utilis. habilité uniquement',
     'attendanceTypeDefault' => 'Par défaut',
-    'timeEntriesManagement' => 'Entrées',
+    'attendanceEntriesManagement' => 'Entrées',
     'attendanceType' => 'Type',
     'time_start_date' => 'Date',
     'time_start_time' => 'Arrivée',

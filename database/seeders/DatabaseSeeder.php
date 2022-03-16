@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             PermissionTableSeeder::class,
             AdminUserSeeder::class,
             ChildrenSeeder::class,
-            TimeEntriesSeeder::class,
+            AttendancesSeeder::class,
         ]);
     }
 }

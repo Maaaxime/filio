@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ __('message.timeEntriesManagement') }}</x-slot>
+        <x-slot name="header">{{ __('message.attendanceEntriesManagement') }}</x-slot>
         <x-slot name="headerSubtitle">
             <a href="{{ url()->previous() }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
@@ -46,7 +46,7 @@
                         <label class="label">{{ __('message.time_start_time') }}</label>
                         <div class="control">
                             <input type="time" name="time_start_time"
-                                value="{{ App\Models\TimeEntry::defaultStartTime()->format('H:i') }}"
+                                value="{{ App\Models\AttendanceEntry::defaultStartTime()->format('H:i') }}"
                                 class="input is-fullwidth bulma-calendar-time bulma-calendar">
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                         <div class="control">
                             <!-- value="$timeEntry->time_end" -->
                             <input type="time" name="time_end_time"
-                                value="{{ App\Models\TimeEntry::defaultEndTime()->format('H:i') }}"
+                                value="{{ App\Models\AttendanceEntry::defaultEndTime()->format('H:i') }}"
                                 class="input is-fullwidth bulma-calendar-time bulma-calendar">
                         </div>
                     </div>

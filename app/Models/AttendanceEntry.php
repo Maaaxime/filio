@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TimeEntry extends Model
+class AttendanceEntry extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public $table = 'time_entries';
+    public $table = 'attendance_entries';
 
     protected $dateFormat = 'Y-m-d H:i:s';
 

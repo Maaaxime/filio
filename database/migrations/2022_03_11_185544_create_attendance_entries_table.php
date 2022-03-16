@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimeEntriesTable extends Migration
+class CreateAttendanceEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -29,7 +29,8 @@ class CreateTimeEntriesTable extends Migration
         });
 
         Schema::dropIfExists('time_entries');
-        Schema::create('time_entries', function (Blueprint $table) {
+        Schema::dropIfExists('attendance_entries');
+        Schema::create('attendance_entries', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignIdFor(Child::class,'child_id');
             $table->foreignIdFor(AttendanceType::class,'type_id');
@@ -57,5 +58,8 @@ class CreateTimeEntriesTable extends Migration
     {
         Schema::dropIfExists('time_entries');
         Schema::dropIfExists('time_entry_types');
+
+        Schema::dropIfExists('attendance_entries');
+        Schema::dropIfExists('attendance_types');
     }
 }

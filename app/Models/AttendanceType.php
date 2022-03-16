@@ -30,8 +30,8 @@ class AttendanceType extends Model
         'need_permission' => 'boolean',
     ];
 
-    public function timeEntries()
+    public function attendanceEntries()
     {
-        return $this->belongsToMany(TimeEntry::class);
+        return $this->belongsToMany(AttendanceEntry::class);
     }
 }

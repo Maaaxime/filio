@@ -138,37 +138,37 @@ Route::prefix('admin')
                         // show attendances time entries list
                         Route::get('/')
                             ->name('admin.attendances.entries.index')
-                            ->uses('TimeEntryController@index');
+                            ->uses('AttendanceEntryController@index');
 
                         // show attendances time entry card
                         Route::get('/view/{id}')
                             ->name('admin.attendances.entries.show')
-                            ->uses('TimeEntryController@show');
+                            ->uses('AttendanceEntryController@show');
 
                         // show create attendances time entry form
                         Route::get('/create')
                             ->name('admin.attendances.entries.create')
-                            ->uses('TimeEntryController@create');
+                            ->uses('AttendanceEntryController@create');
 
                         // store attendances time entry
                         Route::post('/store')
                             ->name('admin.attendances.entries.store')
-                            ->uses('TimeEntryController@store');
+                            ->uses('AttendanceEntryController@store');
 
                         // show edit attendances time entry form
                         Route::get('/edit/{id}')
                             ->name('admin.attendances.entries.edit')
-                            ->uses('TimeEntryController@edit');
+                            ->uses('AttendanceEntryController@edit');
 
                         // update an attendances time entry
                         Route::patch('/edit/{id}')
                             ->name('admin.attendances.entries.update')
-                            ->uses('TimeEntryController@update');
+                            ->uses('AttendanceEntryController@update');
 
                         // remove an attendances time entry
                         Route::delete('/edit/{id}')
                             ->name('admin.attendances.entries.destroy')
-                            ->uses('TimeEntryController@destroy');
+                            ->uses('AttendanceEntryController@destroy');
                     });
             });
 

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ __('message.timeEntriesManagement') }}</x-slot>
+        <x-slot name="header">{{ __('message.attendanceEntriesManagement') }}</x-slot>
         <x-slot name="headerSubtitle">
             <a href="{{ url()->previous() }}">
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}

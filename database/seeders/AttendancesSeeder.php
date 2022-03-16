@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\AttendanceType;
 use Illuminate\Database\Seeder;
 
-class TimeEntriesSeeder extends Seeder
+class AttendancesSeeder extends Seeder
 {
     /**
      * Run the database seeds.

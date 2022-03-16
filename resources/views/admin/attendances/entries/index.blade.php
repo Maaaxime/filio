@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-content-page>
-        <x-slot name="header">{{ __('message.timeEntriesManagement') }}</x-slot>
+        <x-slot name="header">{{ __('message.attendanceEntriesManagement') }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
         <x-slot name="headerAction">
             <a href="{{ route('admin.attendances.entries.create') }}" class="button is-primary is-light">
@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($timeEntries as $key => $timeEntry)
+                    @foreach ($attendanceEntries as $key => $timeEntry)
                         <tr>
                             <th class="is-narrow" data-sortable="false">
                                 <a href="{{ route('admin.attendances.entries.edit', $timeEntry->id) }}" class="button is-primary">
@@ -64,6 +64,6 @@
                 </tbody>
             </table>
         </div>
-        {{ $timeEntries->links('vendor.pagination.custom') }}
+        {{ $attendanceEntries->links('vendor.pagination.custom') }}
     </x-content-page>
 </x-app-layout>
