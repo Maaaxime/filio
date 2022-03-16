@@ -19,7 +19,7 @@
                 <tbody>
                     @foreach ($roles as $key => $role)
                         <tr>
-                            <th class="is-narrow">
+                            <th class="is-narrow" data-sortable="false">
                                 <a href="{{ route('admin.roles.edit', $role->id) }}" class="button is-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
