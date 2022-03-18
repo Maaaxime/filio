@@ -35,9 +35,12 @@
                     <div class="field">
                         <label class="label">{{ __('message.time_start_date') }}</label>
                         <div class="control">
-                            <input type="date" name="time_start_date"
-                                value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
-                                class="input is-fullwidth bulma-calendar-date bulma-calendar">
+                            <input type="text" name="time_start_date" id="time_start_date"
+                                value="{{ \Carbon\Carbon::now()->format('d/m/Y') }}"
+                                min="{{ \Carbon\Carbon::now()->subDays(5)->format('d/m/Y') }}"
+                                max="{{ \Carbon\Carbon::now()->addDays(5)->format('d/m/Y') }}"
+                                class="input is-fullwidth js-mini-picker-date sr-only">
+                            <div class="js-mini-picker-container" id="time_start_date"></div>
                         </div>
                     </div>
                 </div>
@@ -45,18 +48,20 @@
                     <div class="field">
                         <label class="label">{{ __('message.time_start_time') }}</label>
                         <div class="control">
-                            <input type="time" name="time_start_time"
+                            <input type="time" name="time_start_time" id="time_start_time"
                                 value="{{ App\Models\AttendanceEntry::defaultStartTime()->format('H:i') }}"
-                                class="input is-fullwidth bulma-calendar-time bulma-calendar">
+                                class="input is-fullwidth js-mini-picker-time sr-only">
+                            <div class="js-mini-picker-container" id="time_start_time"></div>
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">{{ __('message.time_end_time') }}</label>
                         <div class="control">
                             <!-- value="$timeEntry->time_end" -->
-                            <input type="time" name="time_end_time"
+                            <input type="time" name="time_end_time" id="time_end_time"
                                 value="{{ App\Models\AttendanceEntry::defaultEndTime()->format('H:i') }}"
-                                class="input is-fullwidth bulma-calendar-time bulma-calendar">
+                                class="input is-fullwidth js-mini-picker-time sr-only">
+                            <div class="js-mini-picker-container" id="time_end_time"></div>
                         </div>
                     </div>
                 </div>

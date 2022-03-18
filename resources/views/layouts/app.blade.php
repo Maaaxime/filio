@@ -22,12 +22,12 @@
 
     <link rel="stylesheet" href="{{ asset('css/bulma-tooltip.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/bulma-calendar.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bulma-calendar.custom.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/bulma-list.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/bulma-sweetalert2.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/picker.min.css') }}">    
+    <link rel="stylesheet" href="{{ asset('css/picker.custom.css') }}">    
 
     <link rel="stylesheet" href="{{ asset('css/sortable-theme-minimal.css') }}">
 

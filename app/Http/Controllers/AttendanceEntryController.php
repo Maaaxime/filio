@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Child;
 use App\Models\AttendanceEntry;
 use App\Models\AttendanceType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AttendanceEntryController extends Controller
 {
@@ -160,5 +162,91 @@ class AttendanceEntryController extends Controller
 
         return redirect($request->url)
             ->with('success', __('message.successDeleted', ['name' => $timeEntry->name]));
+    }
+
+    public function checkIn(Request $request, $child_id = null)
+    {
+        if (($child_id != '') && ($child_id != null)) {
+            if (!Auth::user()->children->contains($child_id)) {
+                return redirect('dashboard')
+                    ->withErrors(__('message.notYourChild'));
+            }
+
+            $child = Child::findOrFail($child_id);
+            if ($child->hasOpenAttendanceEntry()) {
+                return redirect('dashboard')
+                    ->withErrors(__('message.activeAttendanceEntryExist'));
+            }
+
+            $children = Child::where('id', '=', $child_id)->get()->pluck('full_name', 'id');
+        } else {
+            $children = Auth::user()->children()->get()->pluck('full_name', 'id');
+        }
+
+        $attendanceTypes = AttendanceType::allowed()->orderBy('default', 'desc')->get()->pluck('name', 'id');
+
+        return view('my.attendances.checkin', compact('children', 'attendanceTypes'));
+    }
+
+    public function storeCheckIn(Request $request)
+    {
+        if (Child::findOrFail($request->child)->hasOpenAttendanceEntry()) {
+            return redirect('dashboard')
+                ->withErrors(__('message.activeAttendanceEntryExist'));
+        }
+
+        $this->store($request);
+        return redirect($request->url)
+            ->with('success', __('message.successCreated', ['name' => 'Check-In']));
+    }
+
+    public function checkOut(Request $request, $childId)
+    {
+        if (!Child::findOrFail($childId)->hasOpenAttendanceEntry()) {
+            return redirect('dashboard')
+                ->withErrors(__('message.noActiveAttendanceEntryExist'));
+        }
+
+        $attendanceEntry =
+            AttendanceEntry::where('child_id', '=', $childId)
+            ->whereBetween('time_start', [date("Y-m-d 00:00:00"), date("Y-m-d 23:59:59")])
+            ->whereNull('time_end')->get();
+
+        if ($attendanceEntry->count() == 0) {
+            return redirect('dashboard')
+                ->withErrors(__('message.noActiveAttendanceEntryExist'));
+        }
+
+        $attendanceEntry = $attendanceEntry->first();
+        return view('my.attendances.checkout', compact('attendanceEntry'));
+    }
+
+    public function storeCheckOut(Request $request, $entryId)
+    {
+        $this->validate($request, [
+            'time_end_time' => 'required',
+        ]);
+
+        $timeEntry = AttendanceEntry::findOrFail($entryId);
+
+
+        $time_end = null;
+        if (($request->time_end_time) && ($request->time_end_time != '00:00')) {
+            $time_end = $timeEntry->time_start_date . ' ' . $request->time_end_time;
+        }
+
+        if ($time_end < $timeEntry->time_start) {
+            return redirect($request->url)
+                ->withErrors(__('message.timeEndShouldBeGreaterThanStart'));
+        }
+
+        $timeEntry->update([
+            'time_end' => $time_end,
+            'updated_by_id' => Auth::User()->id,
+            'comment' => $request->comment,
+        ]);
+
+        return redirect($request->url)
+            ->with('success', __('message.successUpdated', ['name' => 'Check-Out']));
     }
 }

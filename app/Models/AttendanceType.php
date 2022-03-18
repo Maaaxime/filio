@@ -34,4 +34,11 @@ class AttendanceType extends Model
     {
         return $this->belongsToMany(AttendanceEntry::class);
     }
+
+    public function scopeAllowed($query)
+    {
+        $query->where(function ($query) {
+            $query->where('need_permission', '=', 0);
+        });
+    }
 }

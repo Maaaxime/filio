@@ -64,7 +64,7 @@ class ChildController extends Controller
         if ($children->count() == 1)
             return $this->edit($children->first()->id);
 
-        return view('admin.children.my', compact('children'));
+        return view('my.children.index', compact('children'));
     }
 
     /**

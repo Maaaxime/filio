@@ -257,4 +257,17 @@ class Child extends Model
     {
         return ((empty((int)$this->contract_ending_date)) || ((!empty((int)$this->contract_ending_date)) && ($this->contract_ending_date > (new \DateTime()))));
     }
+
+    public function hasOpenAttendanceEntry()
+    {
+        return AttendanceEntry::where('child_id', '=', $this->id)
+            ->whereBetween('time_start', [date("Y-m-d 00:00:00"), date("Y-m-d 23:59:59")])
+            ->whereNull('time_end')->count() > 0;
+    }
+
+    public function todaysAttendanceEntries()
+    {
+        return AttendanceEntry::where('child_id', '=', $this->id)
+            ->whereBetween('time_start', [date("Y-m-d 00:00:00"), date("Y-m-d 23:59:59")])->get();
+    }
 }

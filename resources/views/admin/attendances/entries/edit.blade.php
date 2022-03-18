@@ -20,7 +20,7 @@
                 <div class="field ">
                     <label class="label">{{ __('message.attendanceType') }}</label>
                     <div class="control select is-fullwidth">
-                        {{ Form::select('entry_type', $attendanceTypes, $timeEntry->type_id, ['class' => '','disabled' => $readonly]) }}
+                        {{ Form::select('entry_type', $attendanceTypes, $timeEntry->type_id, ['class' => '', 'disabled' => $readonly]) }}
                     </div>
                 </div>
                 <div class="field">
@@ -35,9 +35,10 @@
                     <div class="field">
                         <label class="label">{{ __('message.time_start_date') }}</label>
                         <div class="control">
-                            <input type="date" name="time_start_date" value="{{ $timeEntry->time_start_date }}"
-                                class="input is-fullwidth bulma-calendar-date {{ $readonly ? '' : 'bulma-calendar' }}"
+                            <input type="text" name="time_start_date" value="{{ $timeEntry->time_start->format('d/m/Y') }}"  id="time_start_date"
+                                class="input is-fullwidth js-mini-picker-date sr-only"
                                 {{ $readonly ? 'disabled' : '' }}>
+                            <div class="js-mini-picker-container" id="time_start_date"></div>
                         </div>
                     </div>
                 </div>
@@ -45,18 +46,20 @@
                     <div class="field">
                         <label class="label">{{ __('message.time_start_time') }}</label>
                         <div class="control">
-                            <input type="time" name="time_start_time" value="{{ $timeEntry->time_start_time }}"
-                                class="input is-fullwidth bulma-calendar-time {{ $readonly ? '' : 'bulma-calendar' }}"
+                            <input type="time" name="time_start_time" value="{{ $timeEntry->time_start_time }}" id="time_start_time"
+                                class="input is-fullwidth js-mini-picker-time sr-only"
                                 {{ $readonly ? 'disabled' : '' }}>
+                            <div class="js-mini-picker-container" id="time_start_time"></div>
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">{{ __('message.time_end_time') }}</label>
                         <div class="control">
                             <!-- value="$timeEntry->time_end" -->
-                            <input type="time" name="time_end_time" value="{{ $timeEntry->time_end_time }}"
-                                class="input is-fullwidth bulma-calendar-time {{ $readonly ? '' : 'bulma-calendar' }}"
+                            <input type="time" name="time_end_time" value="{{ $timeEntry->time_end_time }}" id="time_end_time"
+                                class="input is-fullwidth js-mini-picker-time sr-only"
                                 {{ $readonly ? 'disabled' : '' }}>
+                            <div class="js-mini-picker-container" id="time_end_time"></div>
                         </div>
                     </div>
                 </div>

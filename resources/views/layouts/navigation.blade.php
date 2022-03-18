@@ -16,7 +16,7 @@
         @if (Auth()->user()->children()->count() > 0)
             <li>
                 <a href="{{ url('/my/children') }}"
-                    class={{ request()->routeIs('my.children') ? 'is-active' : '' }}>{{ trans_choice('message.myChildren',Auth()->user()->children()->count()) }}</a>
+                    class={{ request()->routeIs('user.children.my') ? 'is-active' : '' }}>{{ trans_choice('message.myChildren',Auth()->user()->children()->count()) }}</a>
             </li>
         @endif
     </ul>

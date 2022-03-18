@@ -82,6 +82,7 @@ return [
     'successUpdated' => ':name a été mis à jour.',
     'successDeleted' => ':name a été supprimé.',
     'attendanceManagement' => 'Les pointages',
+    'attendanceCheckIn' => 'Check-In',
     'attendanceTypesManagement' => 'Types',
     'attendanceTypeNeedProof' => 'Nécessite un justificatif',
     'attendanceTypeNeedPermission' => 'Utilis. habilité uniquement',
