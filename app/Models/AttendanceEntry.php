@@ -7,45 +7,80 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Models\AttendanceEntry
+ *
+ * @property int $id
+ * @property int $child_id
+ * @property int $type_id
+ * @property \Illuminate\Support\Carbon $time_start
+ * @property \Illuminate\Support\Carbon|null $time_end
+ * @property string $system_time_start
+ * @property string|null $system_time_end
+ * @property string|null $comment
+ * @property int $created_by_id
+ * @property int $updated_by_id
+ * @property int|null $deleted_by_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Child|null $child
+ * @property-read \App\Models\User|null $createdBy
+ * @property-read \App\Models\User|null $deletedBy
+ * @property-read mixed $name
+ * @property-read mixed $time_end_date
+ * @property-read mixed $time_end_time
+ * @property-read mixed $time_start_date
+ * @property-read mixed $time_start_time
+ * @property-read mixed $total_time_hours
+ * @property-read mixed $total_time_hours_string
+ * @property-read mixed $total_time_minutes
+ * @property-read mixed $total_time_seconds
+ * @property-read \App\Models\AttendanceType|null $type
+ * @property-read \App\Models\User|null $updatedBy
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry newQuery()
+ * @method static \Illuminate\Database\Query\Builder|AttendanceEntry onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereChildId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereCreatedById($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereDeletedById($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereSystemTimeEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereSystemTimeStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereTimeEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereTimeStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceEntry whereUpdatedById($value)
+ * @method static \Illuminate\Database\Query\Builder|AttendanceEntry withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|AttendanceEntry withoutTrashed()
+ * @mixin \Eloquent
+ */
 class AttendanceEntry extends Model
 {
     use HasFactory, SoftDeletes;
 
     public $table = 'attendance_entries';
 
-    protected $dateFormat = 'Y-m-d H:i:s';
-
     protected $dates = [
         'time_end',
         'time_start',
-        'system_time_end',
-        'system_time_start',
         'created_at',
         'updated_at',
         'deleted_at',
-    ];
-
-    protected $casts = [
-        'time_end' => 'datetime',
-        'time_start' => 'datetime',
-        'system_time_end' => 'datetime',
-        'system_time_start' => 'datetime',
     ];
 
     protected $fillable = [
-        'child_id',
-        'type_id',
         'time_end',
         'time_start',
-        'system_time_end',
-        'system_time_start',
         'comment',
         'created_at',
-        'created_by_id',
         'updated_at',
-        'updated_by_id',
         'deleted_at',
-        'deleted_by_id'
     ];
 
     public function createdBy()

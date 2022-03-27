@@ -3,10 +3,126 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use DateTime;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\App;
+
+/**
+ * App\Models\Child
+ *
+ * @property int $id
+ * @property string $image
+ * @property string $first_name
+ * @property string $last_name
+ * @property int $gender
+ * @property string|null $birthdate
+ * @property string|null $city_of_birth
+ * @property string|null $phone_no
+ * @property string|null $email
+ * @property string|null $medical_conditions
+ * @property string|null $medical_medications
+ * @property string|null $medical_allergies
+ * @property string|null $blood_type
+ * @property string|null $doctor_name
+ * @property string|null $doctor_address
+ * @property string|null $doctor_phone_no
+ * @property string|null $address
+ * @property string|null $address2
+ * @property string|null $city
+ * @property string|null $postCode
+ * @property int|null $no_dependant_children
+ * @property int|null $no_children_less_7yo
+ * @property string|null $legal_regime
+ * @property string|null $legal_regime_other
+ * @property string|null $legal_tutor1_name
+ * @property string|null $legal_tutor1_socialsecurity
+ * @property string|null $legal_tutor1_caf
+ * @property string|null $legal_tutor1_job_title
+ * @property string|null $legal_tutor1_address
+ * @property string|null $legal_tutor1_phone_no
+ * @property string|null $legal_tutor2_name
+ * @property string|null $legal_tutor2_socialsecurity
+ * @property string|null $legal_tutor2_caf
+ * @property string|null $legal_tutor2_job_title
+ * @property string|null $legal_tutor2_address
+ * @property string|null $legal_tutor2_phone_no
+ * @property string|null $authorized_persons
+ * @property string|null $contract_starting_date
+ * @property string|null $contract_ending_date
+ * @property float|null $annual_resources
+ * @property float|null $children_care_expenses
+ * @property float|null $alimony_paid
+ * @property float|null $applicable_rate
+ * @property string|null $contract_edited_at
+ * @property int $schedule_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $full_name
+ * @property-read mixed $gender_color
+ * @property-read mixed $gender_name
+ * @property-read Collection|User[] $users
+ * @property-read int|null $users_count
+ * @method static Builder|Child active()
+ * @method static Builder|Child inactive()
+ * @method static Builder|Child newModelQuery()
+ * @method static Builder|Child newQuery()
+ * @method static Builder|Child orderedByName()
+ * @method static Builder|Child query()
+ * @method static Builder|Child whereAddress($value)
+ * @method static Builder|Child whereAddress2($value)
+ * @method static Builder|Child whereAlimonyPaid($value)
+ * @method static Builder|Child whereAnnualResources($value)
+ * @method static Builder|Child whereApplicableRate($value)
+ * @method static Builder|Child whereAuthorizedPersons($value)
+ * @method static Builder|Child whereBirthdate($value)
+ * @method static Builder|Child whereBloodType($value)
+ * @method static Builder|Child whereChildrenCareExpenses($value)
+ * @method static Builder|Child whereCity($value)
+ * @method static Builder|Child whereCityOfBirth($value)
+ * @method static Builder|Child whereContractEditedAt($value)
+ * @method static Builder|Child whereContractEndingDate($value)
+ * @method static Builder|Child whereContractStartingDate($value)
+ * @method static Builder|Child whereCreatedAt($value)
+ * @method static Builder|Child whereDoctorAddress($value)
+ * @method static Builder|Child whereDoctorName($value)
+ * @method static Builder|Child whereDoctorPhoneNo($value)
+ * @method static Builder|Child whereEmail($value)
+ * @method static Builder|Child whereFirstName($value)
+ * @method static Builder|Child whereGender($value)
+ * @method static Builder|Child whereId($value)
+ * @method static Builder|Child whereImage($value)
+ * @method static Builder|Child whereLastName($value)
+ * @method static Builder|Child whereLegalRegime($value)
+ * @method static Builder|Child whereLegalRegimeOther($value)
+ * @method static Builder|Child whereLegalTutor1Address($value)
+ * @method static Builder|Child whereLegalTutor1Caf($value)
+ * @method static Builder|Child whereLegalTutor1JobTitle($value)
+ * @method static Builder|Child whereLegalTutor1Name($value)
+ * @method static Builder|Child whereLegalTutor1PhoneNo($value)
+ * @method static Builder|Child whereLegalTutor1Socialsecurity($value)
+ * @method static Builder|Child whereLegalTutor2Address($value)
+ * @method static Builder|Child whereLegalTutor2Caf($value)
+ * @method static Builder|Child whereLegalTutor2JobTitle($value)
+ * @method static Builder|Child whereLegalTutor2Name($value)
+ * @method static Builder|Child whereLegalTutor2PhoneNo($value)
+ * @method static Builder|Child whereLegalTutor2Socialsecurity($value)
+ * @method static Builder|Child whereMedicalAllergies($value)
+ * @method static Builder|Child whereMedicalConditions($value)
+ * @method static Builder|Child whereMedicalMedications($value)
+ * @method static Builder|Child whereNoChildrenLess7yo($value)
+ * @method static Builder|Child whereNoDependantChildren($value)
+ * @method static Builder|Child wherePhoneNo($value)
+ * @method static Builder|Child wherePostCode($value)
+ * @method static Builder|Child whereScheduleId($value)
+ * @method static Builder|Child whereUpdatedAt($value)
+ * @mixin Eloquent
+ */
 
 class Child extends Model
 {
@@ -61,10 +177,11 @@ class Child extends Model
         'annual_resources',
         'children_care_expenses',
         'alimony_paid',
-        'applicable_rate'
+        'applicable_rate',
+        'schedule_id',
     ];
 
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
@@ -85,65 +202,42 @@ class Child extends Model
         );
     }
 
-    public function parents()
+    public function parents() : string
     {
-        switch (true) {
-            case (($this->legal_tutor1_name == '') && ($this->legal_tutor2_name == '')):
-                return '';
-                break;
-            case (($this->legal_tutor1_name == '') && ($this->legal_tutor2_name != '')):
-                return $this->legal_tutor2_name;
-                break;
-            case (($this->legal_tutor1_name != '') && ($this->legal_tutor2_name == '')):
-                return $this->legal_tutor1_name;
-                break;
-            case (($this->legal_tutor1_name != '') && ($this->legal_tutor2_name != '')):
-                return $this->legal_tutor1_name . ' | ' . $this->legal_tutor2_name;
-                break;
-        }
+        return match (true) {
+            ($this->legal_tutor1_name == '') && ($this->legal_tutor2_name != '') => $this->legal_tutor2_name,
+            ($this->legal_tutor1_name != '') && ($this->legal_tutor2_name == '') => $this->legal_tutor1_name,
+            ($this->legal_tutor1_name != '') && ($this->legal_tutor2_name != '') => $this->legal_tutor1_name . ' | ' . $this->legal_tutor2_name,
+            default => '',
+        };
     }
 
-    public function getGenderNameAttribute()
+    public function getGenderNameAttribute(): string
     {
-        switch ($this->gender) {
-            case 0:
-                return __('girl');
-                break;
-            case 1:
-                return __('boy');
-                break;
-            default:
-                return '';
-                break;
-        }
+        return match ($this->gender) {
+            0 => __('girl'),
+            1 => __('boy'),
+            default => '',
+        };
     }
-    public function getGenderColorAttribute()
+    public function getGenderColorAttribute(): string
     {
-        switch ($this->gender) {
-            case 0:
-                return '#ecacc5';
-                break;
-            case 1:
-                return '#439cfb';
-                break;
-            default:
-                return '';
-                break;
-        }
+        return match ($this->gender) {
+            0 => '#ecacc5',
+            1 => '#439cfb',
+            default => '',
+        };
     }
 
-    public function getFullNameAttribute()
+    public function getFullNameAttribute(): string
     {
         return $this->first_name . ' ' . $this->last_name;
     }
 
-    public function address()
+    public function address(): array
     {
         $cityFormat = '';
         switch (true) {
-            case (($this->postCode == '') && ($this->city == '')):
-                $cityFormat = '';
-                break;
             case (($this->postCode == '') && ($this->city != '')):
                 $cityFormat = $this->city;
                 break;
@@ -163,7 +257,7 @@ class Child extends Model
         return $addr;
     }
 
-    public function formatAsDate($value)
+    public function formatAsDate($value): string
     {
         if (!empty((int)$value)) {
             $date = Carbon::parse($value);
@@ -173,7 +267,7 @@ class Child extends Model
         return '-';
     }
 
-    public function formatAsDateTime($value)
+    public function formatAsDateTime($value): string
     {
         if (!empty((int)$value)) {
             $date = Carbon::parse($value);
@@ -183,7 +277,7 @@ class Child extends Model
         return '-';
     }
 
-    public function remainingDaysBeforeBirthday()
+    public function remainingDaysBeforeBirthday(): int|string
     {
         if (!$this->birthdate)
             return '';
@@ -191,21 +285,21 @@ class Child extends Model
         $today = Carbon::now();
         $today = $today->setTime(0, 0, 0, 0);
 
-        $nextbirthday = Carbon::parse($this->birthdate)->copy()->year(Carbon::now()->year);
-        $nextbirthday->setTime(0, 0, 0, 0);
-        if ($nextbirthday->isPast()) {
-            $nextbirthday = $nextbirthday->copy()->addYear();
+        $nextBirthday = Carbon::parse($this->birthdate)->copy()->year(Carbon::now()->year);
+        $nextBirthday->setTime(0, 0, 0, 0);
+        if ($nextBirthday->isPast()) {
+            $nextBirthday = $nextBirthday->copy()->addYear();
         }
 
-        $noOfDays = $today->diffInDays($nextbirthday);
+        $noOfDays = $today->diffInDays($nextBirthday);
 
         if ($noOfDays <= 30)
-            return $today->diffInDays($nextbirthday);
+            return $today->diffInDays($nextBirthday);
 
         return 0;
     }
 
-    public function age()
+    public function age(): string
     {
         $today = Carbon::now()->setTime(0, 0, 0, 0);
         $birthday = Carbon::parse($this->birthdate)->copy()->setTime(0, 0, 0, 0);
@@ -218,13 +312,11 @@ class Child extends Model
                 break;
             case ($noOfMonth % 12 == 0):
             case ($noOfMonth < 12):
+            case ($noOfMonth > 36):
                 $diffForHumans = $today->locale(App::currentLocale())->diffForHumans($birthday, true, false);
                 break;
             case (($noOfMonth > 12) && ($noOfMonth < 24)):
                 $diffForHumans = (12 + $today->diff($birthday->copy()->addYear())->format('%m')) . ' ' .  __('message.months');
-                break;
-            case ($noOfMonth > 36):
-                $diffForHumans = $today->locale(App::currentLocale())->diffForHumans($birthday, true, false);
                 break;
             default:
                 $diffForHumans = $today->diff($birthday)->format('%y') . ' ' .  __('message.years') .  ' ' .  __('message.and') . ' ' . $today->diff($birthday)->format('%m') . ' ' .  __('message.months');
@@ -236,14 +328,14 @@ class Child extends Model
     public function scopeActive($query)
     {
         $query->where(function ($query) {
-            $query->where('contract_ending_date', '>', new \DateTime());
+            $query->where('contract_ending_date', '>', new DateTime());
         })->orWhereNull('contract_ending_date');
     }
 
     public function scopeInactive($query)
     {
         $query->where(function ($query) {
-            $query->where('contract_ending_date', '<', new \DateTime());
+            $query->where('contract_ending_date', '<', new DateTime());
         });
     }
 
@@ -253,21 +345,21 @@ class Child extends Model
         });
     }
 
-    public function isActive()
+    public function isActive(): bool
     {
-        return ((empty((int)$this->contract_ending_date)) || ((!empty((int)$this->contract_ending_date)) && ($this->contract_ending_date > (new \DateTime()))));
+        return ((empty((int)$this->contract_ending_date)) || ((!empty((int)$this->contract_ending_date)) && ($this->contract_ending_date > (new DateTime()))));
     }
 
-    public function hasOpenAttendanceEntry()
+    public function hasOpenAttendanceEntry(): bool
     {
-        return AttendanceEntry::where('child_id', '=', $this->id)
+        return AttendanceEntry::whereChildId($this->id)
             ->whereBetween('time_start', [date("Y-m-d 00:00:00"), date("Y-m-d 23:59:59")])
             ->whereNull('time_end')->count() > 0;
     }
 
-    public function todaysAttendanceEntries()
+    public function todaysAttendanceEntries(): array|Collection|\Illuminate\Support\Collection
     {
-        return AttendanceEntry::where('child_id', '=', $this->id)
+        return AttendanceEntry::whereChildId($this->id)
             ->whereBetween('time_start', [date("Y-m-d 00:00:00"), date("Y-m-d 23:59:59")])->get();
     }
 }

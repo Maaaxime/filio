@@ -340,6 +340,12 @@
                                 {!! Form::date('contract_ending_date', null, ['class' => 'input', 'disabled' => $readonly]) !!}
                             </div>
                         </div>
+                        <div class="column field">
+                            <label class="label">{{ __('message.attendanceSchedulesManagement') }}</label>
+                            <div class="control">
+                                {!! Form::select('schedule_id', App\Models\AttendanceSchedule::all()->pluck('name','id'),null, ['class' => 'input']); !!}
+                            </div>
+                        </div>
                     </div>
                     <div class="columns">
                         <div class="column field">

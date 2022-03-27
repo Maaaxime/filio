@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AttendanceScheduleEntry;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,8 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionTableSeeder::class,
             AdminUserSeeder::class,
-            ChildrenSeeder::class,
             AttendancesSeeder::class,
+            AttendanceScheduleSeeder::class,
+            AttendanceScheduleEntrySeeder::class,
+            ChildrenSeeder::class,
         ]);
     }
 }

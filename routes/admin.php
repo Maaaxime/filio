@@ -174,6 +174,71 @@ Route::prefix('admin')
                             ->name('admin.attendances.entries.destroy')
                             ->uses('AttendanceEntryController@destroy');
                     });
+
+                Route::prefix('schedules')
+                    ->group(function () {
+                        // show attendances schedules list
+                        Route::get('/')
+                            ->name('admin.attendances.schedules.index')
+                            ->uses('AttendanceScheduleController@index');
+
+                        // show attendances schedule card
+                        Route::get('/view/{id}')
+                            ->name('admin.attendances.schedules.show')
+                            ->uses('AttendanceScheduleController@show');
+
+                        // show create attendances schedule form
+                        Route::get('/create')
+                            ->name('admin.attendances.schedules.create')
+                            ->uses('AttendanceScheduleController@create');
+
+                        // store attendances schedule
+                        Route::post('/store')
+                            ->name('admin.attendances.schedules.store')
+                            ->uses('AttendanceScheduleController@store');
+
+                        // show edit attendances schedule form
+                        Route::get('/edit/{id}')
+                            ->name('admin.attendances.schedules.edit')
+                            ->uses('AttendanceScheduleController@edit');
+
+                        // update an attendances schedule
+                        Route::patch('/edit/{id}')
+                            ->name('admin.attendances.schedules.update')
+                            ->uses('AttendanceScheduleController@update');
+
+                        // remove an attendances schedule
+                        Route::delete('/edit/{id}')
+                            ->name('admin.attendances.schedules.destroy')
+                            ->uses('AttendanceScheduleController@destroy');
+
+
+                        Route::prefix('entries')
+                            ->group(function () {
+                                Route::get('/{scheduleId}/view')
+                                    ->name('admin.attendances.schedules.entries')
+                                    ->uses('AttendanceScheduleEntryController@ajax');
+
+                                // store attendances schedule
+                                Route::post('/{scheduleId}/store')
+                                    ->name('admin.attendances.schedules.entries.store')
+                                    ->uses('AttendanceScheduleEntryController@store');
+
+                                // update an attendances schedule
+                                Route::patch('/{scheduleId}/edit/{id}')
+                                    ->name('admin.attendances.schedules.entries.update')
+                                    ->uses('AttendanceScheduleEntryController@update');
+
+                                // remove an attendances schedule
+                                Route::delete('/{scheduleId}/edit/{id}')
+                                    ->name('admin.attendances.schedules.entries.destroy')
+                                    ->uses('AttendanceScheduleEntryController@destroy');
+
+                                Route::post('/{scheduleId}/import/{type?}')
+                                    ->name('admin.attendances.schedules.entries.import')
+                                    ->uses('AttendanceScheduleEntryController@importJson');
+                            });
+                    });
             });
 
         Route::prefix('children')

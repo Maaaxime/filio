@@ -59,6 +59,12 @@
                         {{ __('message.attendanceTypesManagement') }}
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/admin/attendances/schedules') }}"
+                        class={{ request()->routeIs('admin.attendances.schedules.*') ? 'is-active' : '' }}>
+                        {{ __('message.attendanceSchedulesManagement') }}
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

@@ -38,21 +38,22 @@
 
                             <div class="card-content">
                                 <div class="content">
-                                    <?php
-                                    $noOfSteps = $child->todaysAttendanceEntries()->count();
-                                    $stepNo = 0;
-                                    ?>
+                                    @php
+                                        $noOfSteps = $child->todaysAttendanceEntries()->count();
+                                        $stepNo = 0
+                                    @endphp
                                     <ul class="steps is-vertical">
                                         @foreach ($child->todaysAttendanceEntries() as $attendanceEntry)
-                                            <?php
-                                            $stepNo += 1;
-                                            ?>
+                                            @php
+                                                $stepNo += 1;
+                                            @endphp
                                             @if ($attendanceEntry->time_end)
                                                 <li class="steps-segment">
                                                     <span href="#" class="steps-marker"></span>
                                                     <div class="steps-content">
                                                         <p class="is-size-6">
-                                                            {{ $attendanceEntry->time_start_time }} : Arrivée à la crèche
+                                                            {{ $attendanceEntry->time_start_time }} : Arrivée à la
+                                                            crèche
                                                         </p>
                                                     </div>
                                                 </li>
@@ -70,7 +71,8 @@
                                                     <span class="steps-marker"></span>
                                                     <div class="steps-content">
                                                         <p class="is-size-6">
-                                                            {{ $attendanceEntry->time_start_time }} : Arrivée à la crèche
+                                                            {{ $attendanceEntry->time_start_time }} : Arrivée à la
+                                                            crèche
                                                         </p>
                                                     </div>
                                                     <div class="steps-content is-divider-content">
@@ -90,9 +92,9 @@
                             </div>
                             <footer class="card-footer">
                                 <a href="{{ url("my/attendances/check-in/$child->id") }}"
-                                    class="card-footer-item">Check-In</a>
+                                   class="card-footer-item">Check-In</a>
                                 <a href="{{ url("my/attendances/check-out/$child->id") }}"
-                                    class="card-footer-item">Check-Out</a>
+                                   class="card-footer-item">Check-Out</a>
                             </footer>
                         </div>
                     </div>

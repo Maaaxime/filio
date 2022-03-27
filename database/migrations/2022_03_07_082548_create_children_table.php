@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AttendanceSchedule;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -70,6 +71,7 @@ class CreateChildrenTable extends Migration
             $table->float('alimony_paid')->nullable();
             $table->float('applicable_rate')->nullable();
             $table->timestamp('contract_edited_at')->nullable();
+            $table->foreignIdFor(AttendanceSchedule::class, 'schedule_id');
             
             $table->timestamps();
         });

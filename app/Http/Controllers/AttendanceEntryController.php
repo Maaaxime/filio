@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Child;
 use App\Models\AttendanceEntry;
 use App\Models\AttendanceType;
-use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class AttendanceEntryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index(Request $request)
     {
@@ -27,11 +31,11 @@ class AttendanceEntryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        $children = Child::active()->get()->pluck('full_name', 'id');;
+        $children = Child::active()->get()->pluck('full_name', 'id');
         $attendanceTypes = AttendanceType::orderBy('default', 'desc')->get()->pluck('name', 'id');
 
         return view('admin.attendances.entries.create', compact('children', 'attendanceTypes'));
@@ -40,8 +44,8 @@ class AttendanceEntryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
      */
     public function store(Request $request)
     {
@@ -79,7 +83,7 @@ class AttendanceEntryController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function show($id)
     {
@@ -91,12 +95,12 @@ class AttendanceEntryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
         $timeEntry = AttendanceEntry::find($id);
-        $children = Child::active()->get()->pluck('full_name', 'id');;
+        $children = Child::active()->get()->pluck('full_name', 'id');
         $attendanceTypes = AttendanceType::all()->pluck('name', 'id');
 
         return view('admin.attendances.entries.edit', compact('timeEntry', 'children', 'attendanceTypes'))->with('readonly', false);
@@ -105,9 +109,9 @@ class AttendanceEntryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Application|RedirectResponse|Redirector
      */
     public function update(Request $request, $id)
     {
@@ -150,7 +154,7 @@ class AttendanceEntryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Application|RedirectResponse|Redirector
      */
     public function destroy(Request $request, $id)
     {

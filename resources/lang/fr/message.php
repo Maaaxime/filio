@@ -102,5 +102,21 @@ return [
     'onlyInactiveChilds' => 'Inactifs',
     'allChilds' => 'Tous',
     'allUsers' => 'Tous',
+    'attendanceSchedulesManagement' => 'Plannings',
+    'openingDays' => 'Jours d\'ouverture',
+    'closingDays' =>  'Congés',
+    'monday' => 'Lundi',
+    'tuesday' => 'Mardi',
+    'wednesday' => 'Mercredi',
+    'thursday' => 'Jeudi',
+    'friday' => 'Vendredi',
+    'saturday' => 'Samedi',
+    'sunday' => 'Dimanche',
+    'date' => 'Date',
+    'default_time_start' => 'Heure début',
+    'default_time_end' => 'Heure de fin',
+    'importFrance' => 'Métropole',
+    'importAlsace' => 'Alsace-Moselle',
+    
 
 ];

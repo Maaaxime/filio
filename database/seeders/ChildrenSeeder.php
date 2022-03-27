@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AttendanceSchedule;
 use App\Models\Child;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Sarreguemines',
             'postCode' => '57200',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Olivie',
@@ -39,6 +41,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Cergy',
             'postCode' => '95800',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Margaret',
@@ -51,6 +54,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Manosque',
             'postCode' => '04100',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Susan',
@@ -63,6 +67,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Saint-louis',
             'postCode' => '68300',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Rémy',
@@ -75,6 +80,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Les Ulis',
             'postCode' => '91940',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Margot',
@@ -87,6 +93,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Champs-sur-marne',
             'postCode' => '77420',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Arthur',
@@ -99,6 +106,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Palaiseau',
             'postCode' => '91120',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Julie',
@@ -111,6 +119,7 @@ class ChildrenSeeder extends Seeder
             'address2' => 'Chez Mme Letellier',
             'city' => 'Agde',
             'postCode' => '34300',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Henri',
@@ -123,6 +132,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Sainte-marie',
             'postCode' => '97438',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Martine',
@@ -135,6 +145,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Marseille',
             'postCode' => '13014',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
         Child::create([
             'first_name' => 'Alix',
@@ -147,6 +158,7 @@ class ChildrenSeeder extends Seeder
             'address2' => '',
             'city' => 'Nogent-sur-marne',
             'postCode' => '94130',
+            'schedule_id' => AttendanceSchedule::first()->id,
         ]);
     }
 }
