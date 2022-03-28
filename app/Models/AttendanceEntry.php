@@ -69,14 +69,23 @@ class AttendanceEntry extends Model
     protected $dates = [
         'time_end',
         'time_start',
+        'system_time_start',
+        'system_time_end',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
     protected $fillable = [
+        'child_id',
+        'type_id',
+        'created_by_id',
+        'updated_by_id',
+        'deleted_by_id',
         'time_end',
         'time_start',
+        'system_time_start',
+        'system_time_end',
         'comment',
         'created_at',
         'updated_at',

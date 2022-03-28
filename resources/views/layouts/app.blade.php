@@ -44,6 +44,7 @@
 <body>
     <x-banner />
     {{ $slot }}
-</body>
 
+    @yield('scripts')
+</body>
 </html>

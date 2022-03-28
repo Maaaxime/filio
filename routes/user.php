@@ -18,7 +18,10 @@ Route::prefix('my')
     ->group(function () {
 
         Route::prefix('attendances')
-            ->group(function () {
+            ->group(function () {                    
+                Route::post('/update-current')
+                    ->name('user.attendances.updateCurrent')
+                    ->uses('AttendanceEntryController@updateCurrent');
 
                 Route::get('/check-in/{id?}')
                     ->name('user.attendances.checkin')

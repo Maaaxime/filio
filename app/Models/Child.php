@@ -202,7 +202,7 @@ class Child extends Model
         );
     }
 
-    public function parents() : string
+    public function parents(): string
     {
         return match (true) {
             ($this->legal_tutor1_name == '') && ($this->legal_tutor2_name != '') => $this->legal_tutor2_name,
@@ -339,7 +339,8 @@ class Child extends Model
         });
     }
 
-    public function scopeOrderedByName($query) {
+    public function scopeOrderedByName($query)
+    {
         $query->where(function ($query) {
             $query->orderBy('first_name', 'asc');
         });
@@ -348,6 +349,18 @@ class Child extends Model
     public function isActive(): bool
     {
         return ((empty((int)$this->contract_ending_date)) || ((!empty((int)$this->contract_ending_date)) && ($this->contract_ending_date > (new DateTime()))));
+    }
+
+    public function showCurrentAttendanceEntry()
+    {
+        $timeEntry = AttendanceEntry::whereChildId($this->id)
+            ->whereNull('time_end')
+            ->first();
+
+        if ($timeEntry != null)
+            return 'Check-Out';
+
+        return 'Check-In';
     }
 
     public function hasOpenAttendanceEntry(): bool

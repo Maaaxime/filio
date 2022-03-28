@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Log;
 
 class AttendanceEntryController extends Controller
 {
@@ -166,6 +167,52 @@ class AttendanceEntryController extends Controller
 
         return redirect($request->url)
             ->with('success', __('message.successDeleted', ['name' => $timeEntry->name]));
+    }
+
+    public function updateCurrent(Request $request)
+    {
+        $child_id = Child::findOrFail($request->child)->id;
+
+        if (!Auth::user()->children->contains($child_id)) {
+            return redirect('dashboard')
+                ->withErrors(__('message.notYourChild'));
+        }
+
+        $timeEntry = AttendanceEntry::whereNull('time_end')
+            ->where('child_id', $child_id)
+            ->first();
+
+        if ($timeEntry) {
+            $timeEntry->update([
+                'time_end' => now(),
+                'system_time_end' => now(),
+                'updated_by_id' => Auth::User()->id,
+            ]);
+
+            return response()->json([
+                'status' =>  __('message.successCreated', ['name' => 'Check-Out'])
+            ]);
+        } else {
+            $defaultType_id = AttendanceType::whereDefault(true)->first()->id;
+
+            Log::debug('ici');
+
+            AttendanceEntry::create([
+                'child_id' => $child_id,
+                'type_id' =>  $defaultType_id,
+                'time_start' => now(),
+                'system_time_start' => now(),
+                'time_end' => null,
+                'system_time_end' => null,
+                'created_by_id' => Auth::User()->id,
+                'updated_by_id' => Auth::User()->id,
+                'comment' => null
+            ]);
+
+            return response()->json([
+                'status' =>  __('message.successCreated', ['name' => 'Check-In'])
+            ]);
+        };
     }
 
     public function checkIn(Request $request, $child_id = null)
