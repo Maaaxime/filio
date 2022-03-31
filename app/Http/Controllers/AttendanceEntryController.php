@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Child;
 use App\Models\AttendanceEntry;
 use App\Models\AttendanceType;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -57,11 +58,11 @@ class AttendanceEntryController extends Controller
             'time_start_time' => 'required',
         ]);
 
-        $time_start = $request->time_start_date . ' ' . $request->time_start_time;
+        $time_start = Carbon::createFromFormat('d/m/Y H:i', $request->time_start_date . ' ' . $request->time_start_time);
 
         $time_end = null;
         if (($request->time_end_time) && ($request->time_end_time != '00:00')) {
-            $time_end = $request->time_start_date . ' ' . $request->time_end_time;
+            $time_end = Carbon::createFromFormat('d/m/Y H:i', $request->time_start_date . ' ' . $request->time_end_time);
         }
 
         $timeEntry = AttendanceEntry::create([
@@ -125,11 +126,11 @@ class AttendanceEntryController extends Controller
                     'time_start_time' => 'required',
                 ]);
 
-                $time_start = $request->time_start_date . ' ' . $request->time_start_time;
+                $time_start = Carbon::createFromFormat('d/m/Y H:i', $request->time_start_date . ' ' . $request->time_start_time);
 
                 $time_end = null;
                 if (($request->time_end_time) && ($request->time_end_time != '00:00')) {
-                    $time_end = $request->time_start_date . ' ' . $request->time_end_time;
+                    $time_end = Carbon::createFromFormat('d/m/Y H:i', $request->time_start_date . ' ' . $request->time_end_time);
                 }
 
                 $timeEntry = AttendanceEntry::findOrFail($id);
