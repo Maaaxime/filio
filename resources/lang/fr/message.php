@@ -21,6 +21,8 @@ return [
     'whoops' => 'Oups !',
     'whoopsDetails' => 'Il y a eu un problème avec votre saisie.',
     'whoopsFull' => 'Oups ! Il y a un problème.',
+    'whoopsUnauthorized' => 'Vous n\'êtes pas autorisé à effectuer cette opération.',
+    'whoopsMissing' => 'Il semblerait que ce lien soit cassé !',
 
     'user' => 'Utilisateur',
     'first_name' => 'Prénom',

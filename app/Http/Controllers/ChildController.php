@@ -12,10 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 
 class ChildController extends Controller
 {
@@ -24,6 +21,8 @@ class ChildController extends Controller
         $this->middleware('auth');
     }
 
+    
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +30,8 @@ class ChildController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Child::class);
+
         $children = Child::active()->OrderedByName()->get();
         $filter = 'active';
 
@@ -45,7 +46,7 @@ class ChildController extends Controller
                     $children = Child::OrderedByName()->get();
                     break;
                 case 'active':
-                     // Nothing to do - set by default
+                    // Nothing to do - set by default
                     break;
                 case 'inactive':
                     $children = Child::inactive()->OrderedByName()->get();
@@ -55,7 +56,7 @@ class ChildController extends Controller
             }
         }
 
-        return view('admin.children.index', compact('children','filter','totalChildrenCount','activeChildrenCount','inactiveChildrenCount'));
+        return view('admin.children.index', compact('children', 'filter', 'totalChildrenCount', 'activeChildrenCount', 'inactiveChildrenCount'));
     }
 
     /**
@@ -65,9 +66,11 @@ class ChildController extends Controller
      */
     public function my()
     {
+        $this->authorize('viewAny', Child::class);
+
         $children = Auth::User()->children;
         if ($children->count() == 1)
-            return $this->edit($children->first()->id);
+            return $this->edit($children->first());
 
         return view('my.children.index', compact('children'));
     }
@@ -79,7 +82,7 @@ class ChildController extends Controller
      */
     public function create()
     {
-        Auth::user()->hasAnyPermission(['child-create']);
+        $this->authorize('create', Child::class);
         return view('admin.children.create');
     }
 
@@ -91,7 +94,7 @@ class ChildController extends Controller
      */
     public function store(Request $request)
     {
-        Auth::user()->hasAnyPermission(['child-create']);
+        $this->authorize('create', Child::class);
 
         $this->validate($request, [
             'first_name' => 'required',
@@ -119,13 +122,10 @@ class ChildController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show(Child $child)
     {
-        Auth::user()->hasAnyPermission([
-            'child-read-general', 'child-read-medical', 'child-read-family', 'child-read-contract',
-        ]);
+        $this->authorize('view', $child);
 
-        $child = Child::find($id);
         return view('admin.children.edit', compact('child'))->with('readonly', true);
     }
 
@@ -135,21 +135,14 @@ class ChildController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Child $child)
     {
-        Auth::user()->hasAnyPermission([
-            'child-read-general', 'child-read-medical', 'child-read-family', 'child-read-contract',
-            'child-update-general', 'child-update-medical', 'child-update-family', 'child-update-contract'
-        ]);
-
-        if (!(Auth::user()->hasAnyPermission([
-            'child-update-general', 'child-update-medical', 'child-update-family', 'child-update-contract'
-        ]))) {
-            return $this->show($id);
+        if (Auth::user()->cant('update', $child)) {
+            return $this->show($child);
         }
 
+        $this->authorize('update', $child);
 
-        $child = Child::find($id);
         return view('admin.children.edit', compact('child'))->with('readonly', false);
     }
 
@@ -160,48 +153,35 @@ class ChildController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Child $child)
     {
-        switch ($request->input('action')) {
-            case 'save':
+        $this->authorize('update', $child);
 
-                Auth::user()->hasAnyPermission([
-                    'child-update-general', 'child-update-medical', 'child-update-family', 'child-update-contract'
-                ]);
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+        ]);
 
-                $this->validate($request, [
-                    'first_name' => 'required',
-                    'last_name' => 'required',
-                ]);
+        $input = $request->all();
 
-                $input = $request->all();
+        $oldImage = 'public/images/' . $child->image;
 
-                $child = Child::find($id);
-                $oldImage = 'public/images/' . $child->image;
+        $child->update($input);
 
-                $child->update($input);
+        if ($request->hasFile('image')) {
+            $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
+            $filename = 'Child_' . $child->id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
+            $child->update(['image' => $filename]);
 
-                if ($request->hasFile('image')) {
-                    $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
-                    $filename = 'Child_' . $id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
-                    $child->update(['image' => $filename]);
+            $request->image->storeAs('images',  $filename, 'public');
 
-                    $request->image->storeAs('images',  $filename, 'public');
-
-                    if ((Storage::exists($oldImage)) && ($oldImage != 'public/images/child.png')) {
-                        Storage::delete($oldImage);
-                    }
-                }
-
-                return redirect($request->url)
-                    ->with('success', __('message.successUpdated', ['name' => $child->full_name]));
-                break;
-            case 'delete':
-
-                Auth::user()->hasAnyPermission(['child-delete']);
-                return  $this->destroy($request, $id);
-                break;
+            if ((Storage::exists($oldImage)) && (!str_contains($oldImage,'public/images/samples'))) {
+                Storage::delete($oldImage);
+            }
         }
+
+        return redirect($request->url)
+            ->with('success', __('message.successUpdated', ['name' => $child->full_name]));
     }
 
     /**
@@ -210,11 +190,10 @@ class ChildController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, Child $child)
     {
-        Auth::user()->hasAnyPermission(['child-delete']);
+        $this->authorize('delete', $child);
 
-        $child = Child::find($id);
         $child->delete();
 
         return redirect($request->url)

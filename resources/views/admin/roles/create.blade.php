@@ -45,7 +45,7 @@
                 @endforeach
             </div>
         </div>
-        @canany(['role-create', 'role-update'])
+        @canany(['role.create', 'role.update'])
             <div class="field is-pulled-right pt-4">
                 <div class="control is-pulled-right">
                     {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-plus"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}

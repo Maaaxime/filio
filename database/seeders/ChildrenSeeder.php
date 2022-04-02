@@ -20,6 +20,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Astrid',
             'last_name' => 'Grenier',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2019-06-13'),
             'gender' => 0,
             'legal_tutor1_name' => 'Honoré Grenier',
@@ -33,6 +34,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Olivie',
             'last_name' => 'Bonnet',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2019-08-23'),
             'gender' => 0,
             'legal_tutor1_name' => 'Sébastien-Alphonse Bonnet',
@@ -46,6 +48,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Margaret',
             'last_name' => 'Perrin',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2019-08-13'),
             'gender' => 0,
             'legal_tutor1_name' => 'Denis Perrin',
@@ -59,6 +62,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Susan',
             'last_name' => 'Laroche Berger-Bonneau',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2020-11-14'),
             'gender' => 0,
             'legal_tutor1_name' => 'Roland Laroche',
@@ -72,6 +76,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Rémy',
             'last_name' => 'Boulanger de la Morin',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2021-01-26'),
             'gender' => 1,
             'legal_tutor1_name' => 'Pierre Boulanger de la Morin',
@@ -85,6 +90,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Margot',
             'last_name' => 'Jean',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2021-06-20'),
             'gender' => 0,
             'legal_tutor1_name' => 'Jules Jean',
@@ -98,6 +104,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Arthur',
             'last_name' => 'Gaillard',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2020-06-08'),
             'gender' => 0,
             'legal_tutor1_name' => 'Auguste Gaillard',
@@ -111,6 +118,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Julie',
             'last_name' => 'Briand',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2020-11-09'),
             'gender' => 0,
             'legal_tutor1_name' => 'René Briand',
@@ -124,6 +132,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Henri',
             'last_name' => 'Chauveau',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2021-06-18'),
             'gender' => 1,
             'legal_tutor1_name' => 'Marcel Chauveau',
@@ -137,6 +146,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Martine',
             'last_name' => 'Dufour-Alves',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2021-10-06'),
             'gender' => 0,
             'legal_tutor1_name' => 'André Dufour-Alves',
@@ -150,6 +160,7 @@ class ChildrenSeeder extends Seeder
         Child::create([
             'first_name' => 'Alix',
             'last_name' => 'Lebrun de la Barbe',
+            'image' => 'samples/' . rand(1,20) . '.webp',
             'birthdate' => Carbon::parse('2021-10-06'),
             'gender' => 0,
             'legal_tutor1_name' => 'Gilbert Lebrun de la Barbe',

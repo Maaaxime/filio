@@ -90,6 +90,14 @@ class UserController extends Controller
 
         $user->assignChildren($request->input('children'));
 
+        if ($request->hasFile('image')) {
+            $timestamp = Carbon::now()->isoFormat('YYYYMMDD_HHmmssSS');
+            $filename = 'User_' . $user->id . '_Picture_' . $timestamp . '.' . $request->image->getClientOriginalExtension();
+            $user->update(['image' => $filename]);
+
+            $request->image->storeAs('images',  $filename, 'public');
+        }
+
         return redirect($request->url)
             ->with('success', __('message.successCreated', ['name' => $user->name]));
     }
@@ -173,7 +181,7 @@ class UserController extends Controller
 
                     $request->image->storeAs('images',  $filename, 'public');
 
-                    if ((Storage::exists($oldImage)) && ($oldImage != 'public/images/user.png')) {
+                    if ((Storage::exists($oldImage)) && (!str_contains($oldImage,'public/images/samples'))) {
                         Storage::delete($oldImage);
                     }
                 }

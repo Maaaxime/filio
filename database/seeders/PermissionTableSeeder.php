@@ -19,20 +19,23 @@ class PermissionTableSeeder extends Seeder
 
             /*
             |--------------------------------------------------------------------------
+            | Admin
+            |--------------------------------------------------------------------------
+            */
+
+            'admin.routes',
+            
+            /*
+            |--------------------------------------------------------------------------
             | Users
             |--------------------------------------------------------------------------
             */
 
-            'user-create',
-            'user-read',
-            'user-update',
-            'user-delete',
-
-            // Only "My" User Account
-            // 'user-create-my', // Non-sense
-            'user-read-my',
-            'user-update-my',
-            'user-delete-my',
+            'user.create',
+            'user.read',
+            'user.update',
+            'user.delete',
+            'user.list',
 
             /*
             |--------------------------------------------------------------------------
@@ -40,10 +43,11 @@ class PermissionTableSeeder extends Seeder
             |--------------------------------------------------------------------------
             */
 
-            'role-create',
-            'role-read',
-            'role-update',
-            'role-delete',
+            'role.create',
+            'role.read',
+            'role.update',
+            'role.delete',
+            'role.list',
 
             /*
             |--------------------------------------------------------------------------
@@ -51,35 +55,15 @@ class PermissionTableSeeder extends Seeder
             |--------------------------------------------------------------------------
             */
 
-            'child-create',
-            'child-read-general',
-            'child-read-medical',
-            'child-read-family',
-            'child-read-contract',
-            'child-update',
-            'child-update-general',
-            'child-update-medical',
-            'child-update-family',
-            'child-update-contract',
-            'child-delete',
-
-            // Only "My" Children
-            'child-create-my',
-            'child-create-general-my',
-            'child-create-medical-my',
-            'child-create-family-my',
-            'child-create-contract-my',
-            'child-read-my',
-            'child-read-general-my',
-            'child-read-medical-my',
-            'child-read-family-my',
-            'child-read-contract-my',
-            'child-update-my',
-            'child-update-general-my',
-            'child-update-medical-my',
-            'child-update-family-my',
-            'child-update-contract-my',
-            'child-delete-my',
+            'child.create',
+            'child.read-general',
+            'child.read-medical',
+            'child.read-family',
+            'child.read-contract',
+            'child.update',
+            'child.delete',
+            'child.list-all',
+            'child.list-my',
 
             /*
             |--------------------------------------------------------------------------
@@ -87,21 +71,24 @@ class PermissionTableSeeder extends Seeder
             |--------------------------------------------------------------------------
             */
 
-            'attendances.type-create',
-            'attendances.type-read',
-            'attendances.type-update',
-            'attendances.type-delete',
+            'attendances-type.create',
+            'attendances-type.read',
+            'attendances-type.update',
+            'attendances-type.delete',
+            'attendances-type.list',
 
-            'attendances.entry-create',
-            'attendances.entry-read',
-            'attendances.entry-update',
-            'attendances.entry-delete',
+            'attendances-entry.create',
+            'attendances-entry.read',
+            'attendances-entry.update',
+            'attendances-entry.delete',
+            'attendances-entry.list-all',
+            'attendances-entry.list-my',
 
-            // Only "My" Children
-            'attendances.entry-create-my',
-            'attendances.entry-read-my',
-            'attendances.entry-update-my',
-            'attendances.entry-delete-my',
+            'attendances-schedule.create',
+            'attendances-schedule.read',
+            'attendances-schedule.update',
+            'attendances-schedule.delete',
+            'attendances-schedule.list',
         );
 
         foreach ($permissions as $permission) {

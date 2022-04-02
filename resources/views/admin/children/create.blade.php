@@ -11,7 +11,7 @@
         {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">
             <ul class="steps is-medium is-centered has-content-centered is-horizontal">
-                @canany(['child-read-general', 'child-update-general'])
+                @can('child.read-general')
                     <li class="steps-segment is-active">
                         <a hef="#" class="has-text-dark" aria-controls="tab1-section">
                             <span class="steps-marker">
@@ -24,8 +24,8 @@
                             </div>
                         </a>
                     </li>
-                @endcanany
-                @canany(['child-read-medical', 'child-update-medical'])
+                @endcan
+                @can('child.read-medical')
                     <li class="steps-segment">
                         <a hef="#" class="has-text-dark" aria-controls="tab2-section">
                             <span class="steps-marker">
@@ -38,8 +38,8 @@
                             </div>
                         </a>
                     </li>
-                @endcanany
-                @canany(['child-read-family', 'child-update-family'])
+                @endcan
+                @can('child.read-family')
                     <li class="steps-segment">
                         <a hef="#" class="has-text-dark" aria-controls="tab3-section">
                             <span class="steps-marker">
@@ -52,8 +52,8 @@
                             </div>
                         </a>
                     </li>
-                @endcanany
-                @canany(['child-read-contract', 'child-update-contract'])
+                @endcan
+                @can('child.read-contract')
                     <li class="steps-segment">
                         <a hef="#" class="has-text-dark" aria-controls="tab4-section">
                             <span class="steps-marker">
@@ -66,11 +66,11 @@
                             </div>
                         </a>
                     </li>
-                @endcanany
+                @endcan
             </ul>
         </div>
         <div class="tab-panels">
-            @canany(['child-read-general', 'child-update-general'])
+            @can('child.read-general')
                 <section id="tab1-section" class="tab-panel">
                     <div class="columns pt-6">
                         <div class="column">
@@ -175,8 +175,8 @@
                         </div>
                     </div>
                 </section>
-            @endcanany
-            @canany(['child-read-medical', 'child-update-medical'])
+            @endcan
+            @can('child.read-medical')
                 <section id="tab2-section" class="tab-panel is-hidden">
                     <div class="field">
                         <label class="label">{{ __('message.blood_type') }}</label>
@@ -228,8 +228,8 @@
                         </div>
                     </div>
                 </section>
-            @endcanany
-            @canany(['child-read-family', 'child-update-family'])
+            @endcan
+            @can('child.read-family')
                 <section id="tab3-section" class="tab-panel is-hidden">
                     <div class="columns">
                         <div class="column">
@@ -318,8 +318,8 @@
                         </div>
                     </div>
                 </section>
-            @endcanany
-            @canany(['child-read-contract', 'child-update-contract'])
+            @endcan
+            @can('child.read-contract')
                 <section id="tab4-section" class="tab-panel is-hidden">
                     <div class="columns">
                         <div class="column field">
@@ -362,17 +362,16 @@
                         </div>
                     </div>
                 </section>
-            @endcanany
+            @endcan
         </div>
-        @canany(['child-create', 'child-update-general', 'child-update-medical', 'child-update-family',
-            'child-update-contract'])
+        @can('child.create')
             <div class="field is-pulled-right pt-4">
                 <div class="control is-pulled-right">
                     {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save']) !!}
                 </div>
             </div>
             <div class="is-clearfix"></div>
-        @endcanany
+        @endcan
         {!! Form::close() !!}
     </x-content-page>
 </x-app-layout>

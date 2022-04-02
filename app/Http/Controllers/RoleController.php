@@ -14,10 +14,10 @@ class RoleController extends Controller
     function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:role-create')->only('create', 'store');
-        $this->middleware('permission:role-read')->only('index', 'show','edit');
-        $this->middleware('permission:role-update')->only('edit', 'update');
-        $this->middleware('permission:role-delete')->only('destroy');
+        $this->middleware('permission:role.create')->only('create', 'store');
+        $this->middleware('permission:role.read')->only('index', 'show','edit');
+        $this->middleware('permission:role.update')->only('edit', 'update');
+        $this->middleware('permission:role.delete')->only('destroy');
     }
 
     /**
@@ -71,8 +71,6 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        Log::debug('Show');
-
         $role = Role::find($id);
         $permission = Permission::get();
         $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
@@ -93,8 +91,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        Log::debug(Auth::user()->can('role-update'));
-        if (!Auth::user()->can('role-update'))
+    
+        if (Auth::user()->cant('role.update'))
             return $this->show($id);
 
         $role = Role::find($id);

@@ -36,7 +36,7 @@
                         </div>
                         <div class="list-item-controls">
                             <div class="buttons is-right">
-                                <a href="{{ route('admin.children.edit', $child->id) }}" class="button is-primary">
+                                <a href="{{ route('user.children.edit', $child->id) }}" class="button is-primary">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Auth;
 use Carbon\Carbon;
 use DateTime;
 use Eloquent;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\App;
+use Log;
 
 /**
  * App\Models\Child
@@ -180,6 +182,30 @@ class Child extends Model
         'applicable_rate',
         'schedule_id',
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('user', function (Builder $builder) {
+
+            if (Auth::hasUser()) {
+                if (Auth::User()->hasPermissionTo('child.list-all')) {
+                    return;
+                };
+
+                if (Auth::User()->hasPermissionTo('child.list-my')) {
+                    $childIds = Auth::User()->children()->allRelatedIds()->toArray();
+                    $builder = $builder->whereIn('children.id',$childIds);
+                };
+            }
+        });
+    }
 
     public function users(): BelongsToMany
     {

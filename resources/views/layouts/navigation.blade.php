@@ -13,13 +13,14 @@
             <a href="{{ url('/dashboard') }}"
                 class={{ request()->routeIs('dashboard') ? 'is-active' : '' }}>{{ __('message.dashboard') }}</a>
         </li>
-        @if (Auth()->user()->children()->count() > 0)
+        @if (Auth::hasUser() && (Auth()->user()->children()->count() > 0))
             <li>
                 <a href="{{ url('/my/children') }}"
                     class={{ request()->routeIs('user.children.my') ? 'is-active' : '' }}>{{ trans_choice('message.myChildren',Auth()->user()->children()->count()) }}</a>
             </li>
         @endif
     </ul>
+    @can('admin.routes')
     <p class="menu-label">
         {{ __('message.administration') }}
     </p>
@@ -68,6 +69,7 @@
             </ul>
         </li>
     </ul>
+    @endcan
     <hr />
     <ul class="menu-list">
         <li>

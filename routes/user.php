@@ -46,6 +46,36 @@ Route::prefix('my')
                 Route::get('/')
                     ->name('user.children.my')
                     ->uses('ChildController@my');
+
+                // show attendances time entry card
+                Route::get('/view/{child}')
+                    ->name('user.children.show')
+                    ->uses('ChildController@show');
+
+                // show create attendances time entry form
+                Route::get('/create')
+                    ->name('user.children.create')
+                    ->uses('ChildController@create');
+
+                // store attendances time entry
+                Route::post('/store')
+                    ->name('user.children.store')
+                    ->uses('ChildController@store');
+
+                // show edit attendances time entry form
+                Route::get('/edit/{child}')
+                    ->name('user.children.edit')
+                    ->uses('ChildController@edit');
+
+                // update an attendances time entry
+                Route::patch('/edit/{child}')
+                    ->name('user.children.update')
+                    ->uses('ChildController@update');
+
+                // remove an attendances time entry
+                Route::delete('/edit/{child}')
+                    ->name('user.children.destroy')
+                    ->uses('ChildController@destroy');
             });
 
         Route::prefix('profile')

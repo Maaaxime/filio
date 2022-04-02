@@ -23,7 +23,7 @@ class AdminUserSeeder extends Seeder
         $permissions = Permission::pluck('id','id')->all();
         $adminRole->syncPermissions($permissions);
 
-        $employeeRole = Role::create(['name' => 'Employee']);
+        $employeeRole = Role::create(['name' => 'Salarié']);
         $permissions = Permission::pluck('id','id')->all();
         $employeeRole->syncPermissions($permissions);
 
@@ -41,8 +41,8 @@ class AdminUserSeeder extends Seeder
 
         // Employee User
         $employeeUser = User::create([
-            'name' => 'Employee',
-            'email' => 'employee@filio.local',
+            'name' => 'Salarié',
+            'email' => 'salarie@filio.local',
             'password' => bcrypt('123456'),
         ]);
         $employeeUser->assignRole([$employeeRole->id]);

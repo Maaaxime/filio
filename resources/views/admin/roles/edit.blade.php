@@ -47,25 +47,23 @@
             </div>
         </div>
         @if (!$readonly)
-            @canany(['role-update', 'role-delete'])
-                <div class="columns is-flex-direction-row-reverse pt-4">
-                    @can('role-update')
-                        <div class="column field is-pulled-right">
-                            <div class="control is-pulled-right">
-                                {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
-                            </div>
+            <div class="columns is-flex-direction-row-reverse pt-4">
+                @can('role.update')
+                    <div class="column field is-pulled-right">
+                        <div class="control is-pulled-right">
+                            {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-floppy-disk"></i></span><span>' . __('message.save') . '</span>', ['class' => 'button is-primary', 'type' => 'submit', 'name' => 'action', 'value' => 'save', 'disabled' => $readonly]) !!}
                         </div>
-                    @endcan
-                    @can('role-delete')
-                        <div class="column field is-pulled-left">
-                            <div class="control">
-                                {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-minus"></i></span><span>' . __('message.remove') . '</span>', ['class' => 'button is-danger is-outlined confirmDelete', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
-                            </div>
+                    </div>
+                @endcan
+                @can('role.delete')
+                    <div class="column field is-pulled-left">
+                        <div class="control">
+                            {!! Form::button('<span class="icon is-small"><i class="fa-solid fa-circle-minus"></i></span><span>' . __('message.remove') . '</span>', ['class' => 'button is-danger is-outlined confirmDelete', 'type' => 'submit', 'name' => 'action', 'value' => 'delete', 'disabled' => $readonly]) !!}
                         </div>
-                    @endcan
-                    <div class="is-clearfix"></div>
-                </div>
-            @endcanany
+                    </div>
+                @endcan
+                <div class="is-clearfix"></div>
+            </div>
         @endif
         {!! Form::close() !!}
     </x-content-page>

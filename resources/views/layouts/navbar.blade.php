@@ -3,7 +3,7 @@
         @if (Route::has('login'))
             <div class="navbar-item columns">
                 <div class="column is-nested">
-                    @if (Auth::user()->image)
+                    @if (Auth::hasUser() && Auth::user()->image)
                         <div class="image is-rounded is-48x48"
                             style="background-image: url('{{ asset('/storage/images/' . Auth::user()->image) }}');">
                         </div>
@@ -11,7 +11,7 @@
                 </div>
                 <div class="colum is-nested">
                     <a href="{{ route('user.profile.my') }}">
-                        <p class="title is-6">{{ Auth::user()->name }}</p>
+                        <p class="title is-6">{{ Auth::hasUser() ? Auth::user()->name : '' }}</p>
                         <p class="subtitle is-7">{{ __('message.showProfile') }}</p>
                     </a>
                 </div>

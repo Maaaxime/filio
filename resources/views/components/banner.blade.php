@@ -1,6 +1,6 @@
 <script src="{{ asset('js/sweetalert2.js') }}"></script>
 
-@if (count($errors) > 0)
+@if (isset($errors) && (count($errors) > 0))
 
     <script type="text/javascript">
         $(document).ready(function() {

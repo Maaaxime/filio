@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')
     ->middleware('auth')
+    
     ->group(function () {
 
         Route::prefix('roles')
@@ -253,7 +254,7 @@ Route::prefix('admin')
                     ->uses('ChildController@index');
 
                 // show attendances time entry card
-                Route::get('/view/{id}')
+                Route::get('/view/{child}')
                     ->name('admin.children.show')
                     ->uses('ChildController@show');
 
@@ -268,17 +269,17 @@ Route::prefix('admin')
                     ->uses('ChildController@store');
 
                 // show edit attendances time entry form
-                Route::get('/edit/{id}')
+                Route::get('/edit/{child}')
                     ->name('admin.children.edit')
                     ->uses('ChildController@edit');
 
                 // update an attendances time entry
-                Route::patch('/edit/{id}')
+                Route::patch('/edit/{child}')
                     ->name('admin.children.update')
                     ->uses('ChildController@update');
 
                 // remove an attendances time entry
-                Route::delete('/edit/{id}')
+                Route::delete('/edit/{child}')
                     ->name('admin.children.destroy')
                     ->uses('ChildController@destroy');
             });
