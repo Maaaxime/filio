@@ -212,22 +212,27 @@ class Child extends Model
         return $this->belongsToMany(User::class);
     }
 
-    protected function firstName(): Attribute
+
+    public function getFirstNameAttribute($value)
     {
-        return new Attribute(
-            get: fn ($value) => ucfirst($value),
-            set: fn ($value) => ucfirst($value),
-        );
+        return ucfirst($value);
+    }
+     
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucfirst($value);
     }
 
-    protected function lastName(): Attribute
+    public function getLastNameAttribute($value)
     {
-        return new Attribute(
-            get: fn ($value) => strtoupper($value),
-            set: fn ($value) => ucfirst($value),
-        );
+        return strtoupper($value);
     }
-
+     
+    public function setLastNameAttribute($value)
+    {
+        $this->attributes['last_name'] = ucfirst($value);
+    }
+    
     public function parents(): string
     {
         return match (true) {
