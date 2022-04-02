@@ -194,6 +194,8 @@ class Child extends Model
 
         static::addGlobalScope('user', function (Builder $builder) {
 
+            $builder = $builder->orderBy('first_name');
+            
             if (Auth::hasUser()) {
                 if (Auth::User()->hasPermissionTo('child.list-all')) {
                     return;
