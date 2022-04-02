@@ -36,6 +36,7 @@ class AdminUserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@filio.local',
             'password' => bcrypt('123456'),
+            'image' => 'samples/' . rand(1,96) . '.png',
         ]);
         $adminUser->assignRole([$adminRole->id]);
 
@@ -44,6 +45,7 @@ class AdminUserSeeder extends Seeder
             'name' => 'Salarié',
             'email' => 'salarie@filio.local',
             'password' => bcrypt('123456'),
+            'image' => 'samples/' . rand(1,96) . '.png',
         ]);
         $employeeUser->assignRole([$employeeRole->id]);
 
@@ -52,6 +54,7 @@ class AdminUserSeeder extends Seeder
             'name' => 'Parent',
             'email' => 'parent@filio.local',
             'password' => bcrypt('123456'),
+            'image' => 'samples/' . rand(1,96) . '.png',
         ]);
         $parentUser->assignRole([$parentRole->id]);
     }

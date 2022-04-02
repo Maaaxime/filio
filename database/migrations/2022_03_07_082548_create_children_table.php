@@ -19,7 +19,7 @@ class CreateChildrenTable extends Migration
             $table->increments('id');
 
             /* General Informations */
-            $table->string('image')->default('child.png');
+            $table->string('image')->default('samples/child.png');
             $table->string('first_name', 100);
             $table->string('last_name', 100);
             $table->integer('gender');
