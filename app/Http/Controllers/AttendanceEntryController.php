@@ -174,11 +174,6 @@ class AttendanceEntryController extends Controller
     {
         $child_id = Child::findOrFail($request->child)->id;
 
-        if (!Auth::user()->children->contains($child_id)) {
-            return redirect('dashboard')
-                ->withErrors(__('message.notYourChild'));
-        }
-
         $timeEntry = AttendanceEntry::whereNull('time_end')
             ->where('child_id', $child_id)
             ->first();

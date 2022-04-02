@@ -109,7 +109,6 @@
                     let childId = $(this).data("child");
                     let $timer = $(this);
 
-                    console.log(childId);
                     $.ajax({
                         method: "POST",
                         url: "{{ route('user.attendances.updateCurrent') }}",
