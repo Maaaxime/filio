@@ -26,7 +26,6 @@
                             <div class="column">
                                 <p class="title">{{ $child->first_name }}</p>
                             </div>
-                            
                         </div>
                         <div class="content">
                             @php
@@ -81,12 +80,14 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <footer class="card-footer">
-                            <a href="#" class="card-footer-item timer" data-child="{{ $child->id }}">
+                        <div class="is-block ">
+                        <a href="#" class="button is-primary is-block timer" data-child="{{ $child->id }}">
+                            <span class="icon is-small">
                                 <i class="fa-fw fas fa-clock nav-icon"></i>
-                                <span>{{ $child->showCurrentAttendanceEntry() }}</span>
-                            </a>
-                        </footer>
+                            </span>
+                            <span>{{ $child->showCurrentAttendanceEntry() }}</span>
+                        </a>
+                    </div>
                     </article>
                 </div>
 
