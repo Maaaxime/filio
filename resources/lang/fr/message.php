@@ -8,7 +8,7 @@ return [
     'rolesManagement' => 'Rôles',
     'roles' => 'Rôles',
     'permissions' => 'Autorisations',
-    
+
     'name' => 'Nom',
     'description' => 'Description',
     'add' => 'Ajouter',
@@ -84,6 +84,7 @@ return [
     'successUpdated' => ':name a été mis à jour.',
     'successDeleted' => ':name a été supprimé.',
     'attendanceManagement' => 'Les pointages',
+    'attendanceReport' => 'Rapports',
     'attendanceCheckIn' => 'Check-In',
     'attendanceTypesManagement' => 'Types',
     'attendanceTypeNeedProof' => 'Nécessite un justificatif',
@@ -119,6 +120,11 @@ return [
     'default_time_end' => 'Heure de fin',
     'importFrance' => 'Métropole',
     'importAlsace' => 'Alsace-Moselle',
-    
-
+    'refresh' => 'Actualiser',
+    'filters' => 'Filtres',
+    'reportsManagement' => 'Analyses',
+    'chartTotalChildrenPerDay' => 'Nbre d\'enfants par jour',
+    'chartTotalHoursPerDay' => 'Nbre d\'heures de garde par jour',
+    'noDataToDisplay' => 'Aucune donnée à afficher',
+    'quantity' => 'Quantité'
 ];

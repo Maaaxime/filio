@@ -52,6 +52,7 @@ class AttendanceTypeController extends Controller
         $attendanceType = AttendanceType::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
+            'color' => $request->input('color'),
             'default' => $request->input('default') ? true : false,
             'need_proof' => $request->input('need_proof') ? true : false,
             'need_permission' => $request->input('need_permission') ? true : false,
@@ -111,6 +112,7 @@ class AttendanceTypeController extends Controller
                 $attendanceType = AttendanceType::find($id);
                 $attendanceType->name = $request->input('name');
                 $attendanceType->description = $request->input('description');
+                $attendanceType->color = $request->input('color');
                 $attendanceType->default = $request->input('default') ? true : false;
                 $attendanceType->need_proof = $request->input('need_proof') ? true : false;
                 $attendanceType->need_permission = $request->input('need_permission') ? true : false;

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')
     ->middleware('auth')
-    
+
     ->group(function () {
 
         Route::prefix('roles')
@@ -239,6 +239,12 @@ Route::prefix('admin')
                                     ->name('admin.attendances.schedules.entries.import')
                                     ->uses('AttendanceScheduleEntryController@importJson');
                             });
+                    });
+                    Route::prefix('reports')
+                    ->group(function () {
+                        Route::get('/')
+                            ->name('admin.attendances.reports.index')
+                            ->uses('AttendanceReportController@index');
                     });
             });
 

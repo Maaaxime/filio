@@ -13,6 +13,8 @@
                 <div class="list-item">
                     <div class="list-item-content">
                         <div class="list-item-title">
+                            <span class="mx-1 px-1" style="color: {{ $attendanceType->font_color }}; background-color:{{ $attendanceType->background_color }}; text-align: center;
+                                line-height: 2em;">&#9632;</span>
                             {{ $attendanceType->name }}
                             @if ($attendanceType->default)
                                 <span class="tag is-primary is-light">{{ __('message.attendanceTypeDefault') }}</span>

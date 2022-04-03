@@ -17,6 +17,7 @@ class AttendancesSeeder extends Seeder
         AttendanceType::create([
             'name' => 'Présent',
             'description' => 'L\'enfant est présent.',
+            'color' => "0",
             'need_proof' => false,
             'need_permission' => false,
             'default' => true
@@ -25,14 +26,16 @@ class AttendancesSeeder extends Seeder
         AttendanceType::create([
             'name' => 'Maladie',
             'description' => 'L\'enfant est absent pour maladie.',
+            'color' => 5,
             'need_proof' => true,
             'need_permission' => false,
             'default' => false
         ]);
 
         AttendanceType::create([
-            'name' => 'Vacance',
-            'description' => 'L\'enfant est absent pour vacance.',
+            'name' => 'Vacances',
+            'description' => 'L\'enfant est absent pour vacances.',
+            'color' => 3,
             'need_proof' => false,
             'need_permission' => false,
             'default' => false
@@ -41,6 +44,7 @@ class AttendancesSeeder extends Seeder
         AttendanceType::create([
             'name' => 'Fermeture',
             'description' => 'L\'établissement est fermé.',
+            'color' => 4,
             'need_proof' => false,
             'need_permission' => true,
             'default' => false

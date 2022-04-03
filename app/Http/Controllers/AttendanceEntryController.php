@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Log;
 
 class AttendanceEntryController extends Controller
 {
@@ -190,8 +189,6 @@ class AttendanceEntryController extends Controller
             ]);
         } else {
             $defaultType_id = AttendanceType::whereDefault(true)->first()->id;
-
-            Log::debug('ici');
 
             AttendanceEntry::create([
                 'child_id' => $child_id,

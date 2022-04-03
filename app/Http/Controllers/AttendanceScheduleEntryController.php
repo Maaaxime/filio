@@ -40,9 +40,6 @@ class AttendanceScheduleEntryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Log::debug($id);
-        Log::debug($request);
-
         $attendanceScheduleEntry = AttendanceScheduleEntry::findOrFail($id);
         $attendanceScheduleEntry->schedule_id = $request->input('schedule_id');
         $attendanceScheduleEntry->name = $request->input('name');

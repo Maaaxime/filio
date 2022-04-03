@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Models\AttendanceType
  *
@@ -46,6 +45,7 @@ class AttendanceType extends Model
     protected $fillable = [
         'name',
         'description',
+        'color',
         'need_proof',
         'need_permission',
         'created_at',
@@ -57,9 +57,40 @@ class AttendanceType extends Model
         'need_permission' => 'boolean',
     ];
 
+    public $colors = [
+        ["name" => "primary-light", "background-color" => "#ebfffc", "font-color" => "#00d1b2"],
+        ["name" => "link-light", "background-color" => "#eff1fa", "font-color" => "#485fc7"],
+        ["name" => "info-light", "background-color" => "#eff5fb", "font-color" => "#3e8ed0"],
+        ["name" => "success-light", "background-color" => "#effaf5", "font-color" => "#48c78e"],
+        ["name" => "warning-light", "background-color" => "#fffaeb", "font-color" => "#ffe08a"],
+        ["name" => "danger-light", "background-color" => "#feecf0", "font-color" => "#f14668"],
+        ["name" => "primary-dark", "background-color" => "#00947e", "font-color" => "#fff"],
+        ["name" => "link-dark", "background-color" => "#3850b7", "font-color" => "#fff"],
+        ["name" => "info-dark", "background-color" => "#296fa8", "font-color" => "#fff"],
+        ["name" => "success-dark", "background-color" => "#257953", "font-color" => "#fff"],
+        ["name" => "warning-dark", "background-color" => "#946c00", "font-color" => "#fff"],
+        ["name" => "danger-dark", "background-color" => "#cc0f35", "font-color" => "#fff"]
+    ];
+
     public function attendanceEntries()
     {
         return $this->belongsToMany(AttendanceEntry::class);
+    }
+
+    public function getBackgroundColorAttribute()
+    {
+        if (empty($this->color))
+            $this->color = 0;
+
+        return $this->colors[$this->color]["background-color"];
+    }
+
+    public function getFontColorAttribute()
+    {
+        if (empty($this->color))
+            $this->color = 0;
+
+        return $this->colors[$this->color]["font-color"];
     }
 
     public function scopeAllowed($query)

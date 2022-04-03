@@ -25,6 +25,7 @@ class CreateAttendanceEntriesTable extends Migration
             $table->boolean('default')->default(false);
             $table->boolean('need_proof')->default(false);
             $table->boolean('need_permission')->default(false);
+            $table->string('color')->nullable();
             $table->timestamps();
         });
 

@@ -35,7 +35,6 @@ class UserController extends Controller
                 case 'all':
                     break; // Nothing to do - set by default
                 default:
-                Log::debug($request->action);
                     $selectedRole = Role::where('name',$request->action)->first();
                     $users = $selectedRole->users()->get();
                     break;
