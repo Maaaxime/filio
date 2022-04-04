@@ -20,6 +20,10 @@
                     class={{ request()->routeIs('user.children.my') ? 'is-active' : '' }}>{{ trans_choice('message.myChildren',Auth()->user()->children()->count()) }}</a>
             </li>
         @endif
+        <li>
+            <a href="{{ url('/posts') }}"
+                class={{ request()->routeIs('posts') ? 'is-active' : '' }}>{{ __('message.posts') }}</a>
+        </li>
     </ul>
     @can('admin.routes')
         <p class="menu-label">

@@ -126,5 +126,20 @@ return [
     'chartTotalChildrenPerDay' => 'Nbre d\'enfants par jour',
     'chartTotalHoursPerDay' => 'Nbre d\'heures de garde par jour',
     'noDataToDisplay' => 'Aucune donnée à afficher',
-    'quantity' => 'Quantité'
+    'quantity' => 'Quantité',
+
+    'posts' => 'Articles',
+    'postsManagement' => 'Article',
+    'title' => 'Titre',
+    'body' => 'Contenu',
+    'promoted' => 'Promu',
+    'publish' => 'Publier',
+    'postAlreadyExistErr' => 'Il existe déjà un article avec ce titre.',
+    'postSuccessfullySaved' => 'L\'article a bien été mis à jour.',
+    'postSuccessfullyPublished' => 'L\'article a bien été mis à jour et publié.',
+    'postInfo' => 'Par :name, le :datetime',
+    'postDraft' => 'Brouillon',
+    'postView' => 'En savoir plus >',
+    'postSaveDraft' => 'Brouillon',
+    'color' => 'Accent',
 ];

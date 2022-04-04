@@ -101,4 +101,9 @@ class User extends Authenticatable
     {
         $this->children()->attach($children);
     }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Posts', 'user_id');
+    }
 }

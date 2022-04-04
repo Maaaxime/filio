@@ -240,12 +240,47 @@ Route::prefix('admin')
                                     ->uses('AttendanceScheduleEntryController@importJson');
                             });
                     });
-                    Route::prefix('reports')
+                Route::prefix('reports')
                     ->group(function () {
                         Route::get('/')
                             ->name('admin.attendances.reports.index')
                             ->uses('AttendanceReportController@index');
                     });
+            });
+
+        Route::prefix('posts')
+            ->group(function () {
+                Route::get('/')
+                    ->name('admin.posts.index')
+                    ->uses('PostController@index');
+
+                Route::get('/view/{slug}')
+                    ->name('admin.posts.show')
+                    ->uses('PostController@show');
+
+                // show create attendances time entry form
+                Route::get('/create')
+                    ->name('admin.posts.create')
+                    ->uses('PostController@create');
+
+                // store attendances time entry
+                Route::post('/store')
+                    ->name('admin.posts.store')
+                    ->uses('PostController@store');
+
+                Route::get('/edit/{slug}')
+                    ->name('admin.posts.edit')
+                    ->uses('PostController@edit');
+
+                // update an attendances time entry
+                Route::patch('/edit/{slug}')
+                    ->name('admin.posts.update')
+                    ->uses('PostController@update');
+
+                // remove an attendances time entry
+                Route::delete('/edit/{slug}')
+                    ->name('admin.posts.destroy')
+                    ->uses('PostController@destroy');
             });
 
         Route::prefix('children')

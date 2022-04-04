@@ -2,6 +2,20 @@
     <x-content-page>
         <x-slot name="header">{{ __('message.dashboard') }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
+        @if ($posts)
+            <section class="section">
+                @foreach ($posts as $post)
+                    <article class="message {{ $post->color_name }}">
+                        <div class="message-header">
+                            <p>{{ $post->title }}</p>
+                        </div>
+                        <div class="message-body">
+                            <a href="{{ route('user.posts.show', $post->slug) }}">{{ __('message.postView') }}</a>
+                        </div>
+                    </article>
+                @endforeach
+            </section>
+        @endif
         <section class="section">
             <div class="tile is-ancestor">
                 @php
@@ -81,13 +95,13 @@
                             </ul>
                         </div>
                         <div class="is-block ">
-                        <a href="#" class="button is-primary is-block timer" data-child="{{ $child->id }}">
-                            <span class="icon is-small">
-                                <i class="fa-fw fas fa-clock nav-icon"></i>
-                            </span>
-                            <span>{{ $child->showCurrentAttendanceEntry() }}</span>
-                        </a>
-                    </div>
+                            <a href="#" class="button is-primary is-block timer" data-child="{{ $child->id }}">
+                                <span class="icon is-small">
+                                    <i class="fa-fw fas fa-clock nav-icon"></i>
+                                </span>
+                                <span>{{ $child->showCurrentAttendanceEntry() }}</span>
+                            </a>
+                        </div>
                     </article>
                 </div>
 

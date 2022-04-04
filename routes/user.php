@@ -18,7 +18,7 @@ Route::prefix('my')
     ->group(function () {
 
         Route::prefix('attendances')
-            ->group(function () {                    
+            ->group(function () {
                 Route::post('/update-current')
                     ->name('user.attendances.updateCurrent')
                     ->uses('AttendanceEntryController@updateCurrent');
@@ -85,4 +85,15 @@ Route::prefix('my')
                     ->name('user.profile.my')
                     ->uses('UserController@my');
             });
+    });
+
+Route::prefix('posts')
+    ->group(function () {
+        Route::get('/')
+            ->name('user.posts.index')
+            ->uses('PostController@index');
+
+        Route::get('/view/{slug}')
+            ->name('user.posts.show')
+            ->uses('PostController@show');
     });

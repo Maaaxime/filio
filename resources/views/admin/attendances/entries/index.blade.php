@@ -12,7 +12,6 @@
             <table class="table is-striped is-hoverable is-fullwidth sortable-theme-minimal" data-sortable>
                 <thead>
                     <tr>
-                        <th scope="col" class="has-text-centered" data-sortable="false">#</th>
                         <th scope="col" data-sortable="false">{{ __('message.child') }}</th>
                         <th scope="col" class="is-hidden-touch"></th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.user') }}</th>
@@ -21,16 +20,12 @@
                         <th scope="col" class="is-hidden-touch">{{ __('message.time_start_time') }}</th>
                         <th scope="col" class="is-hidden-touch">{{ __('message.time_end_time') }}</th>
                         <th scope="col" class="has-text-right">{{ __('message.time_duration') }}</th>
+                        <th scope="col" class="has-text-centered" data-sortable="false">#</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($attendanceEntries as $key => $timeEntry)
                         <tr>
-                            <th class="is-narrow" data-sortable="false">
-                                <a href="{{ route('admin.attendances.entries.edit', $timeEntry->id) }}" class="button is-primary">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                            </th>
                             <td class="is-narrow">
                                 @if ($timeEntry->child->image)
                                     <div class="image is-rounded is-48x48"
@@ -59,6 +54,12 @@
                             <td class="has-text-right">
                                 {{ $timeEntry->total_time_hours_string }}
                             </td>
+                            <th class="is-narrow" data-sortable="false">
+                                <a href="{{ route('admin.attendances.entries.edit', $timeEntry->id) }}"
+                                    class="button is-primary">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </th>
                         </tr>
                     @endforeach
                 </tbody>

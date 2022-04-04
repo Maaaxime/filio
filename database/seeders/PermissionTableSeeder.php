@@ -89,6 +89,18 @@ class PermissionTableSeeder extends Seeder
             'attendances-schedule.update',
             'attendances-schedule.delete',
             'attendances-schedule.list',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Posts
+            |--------------------------------------------------------------------------
+            */
+
+            'post.create',
+            'post.read',
+            'post.update',
+            'post.delete',
+
         );
 
         foreach ($permissions as $permission) {

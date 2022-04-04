@@ -57,6 +57,10 @@ div.image.is-rounded {
     vertical-align: middle;
 }
 
+.content table td, .content table th {
+    vertical-align: middle !important;
+}
+
 table.table.card-header-title {
     padding-top: 1rem;
     margin-bottom: 0;

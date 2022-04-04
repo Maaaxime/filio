@@ -39,6 +39,8 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/sortable.min.js') }}"></script>
     <script src="{{ asset('js/bulma.custom.js') }}"></script>
+
+    @yield('stylesheets')
 </head>
 
 <body>
