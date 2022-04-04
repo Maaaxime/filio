@@ -27,9 +27,7 @@
                     </div>
                 </section>
             @endif
-            <div class="content">
-                {{ $slot }}
-            </div>
+            {{ $slot }}
             @include('layouts.footer')
         </div>
     </div>
