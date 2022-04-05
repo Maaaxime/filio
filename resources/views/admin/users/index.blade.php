@@ -38,21 +38,26 @@
                                 </div>
 
                                 <div class="list-item-content">
-                                    <div class="list-item-title">{{ $user->name }}</div>
-                                    <div class="list-item-description">{{ $user->email }}</div>
+                                    <div class="columns">
+                                        <div class="column">
+                                            <div class="list-item-title">{{ $user->name }}</div>
+                                            <div class="list-item-description">{{ $user->email }}</div>
+                                        </div>
+                                        <div class="column is-inline-block is-hidden-touch">
+                                            @foreach ($user->children as $child)
+                                                @if ($child->image)
+                                                    <a href="{{ route('admin.children.show', $child->id) }}">
+                                                        <div class="image is-rounded img-multi is-48x48"
+                                                            style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');"
+                                                            data-tooltip="{{ $child->full_name }}">
+                                                        </div>
+                                                    </a>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="list-item-content is-inline-block is-hidden-touch">
-                                    @foreach ($user->children as $child)
-                                        @if ($child->image)
-                                            <a href="{{ route('admin.children.show', $child->id) }}">
-                                                <div class="image is-rounded img-multi is-48x48"
-                                                    style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');"
-                                                    data-tooltip="{{ $child->full_name }}">
-                                                </div>
-                                            </a>
-                                        @endif
-                                    @endforeach
-                                </div>
+
                                 <div class="list-item-controls">
                                     <div class="buttons is-right">
                                         <a href="mailto:{{ $user->email }}" class="button is-primary">
