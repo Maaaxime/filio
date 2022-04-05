@@ -33,7 +33,7 @@
                                     </div>
                                 @endif
                             </td>
-                            <td class="is-hidden-touch">
+                            <td class="is-hidden-touch"  style="color: {{ $timeEntry->child->gender_color }}">
                                 {{ $timeEntry->child->full_name }}
                             </td>
                             <td class="is-hidden-touch">

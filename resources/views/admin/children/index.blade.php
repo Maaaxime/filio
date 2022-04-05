@@ -36,7 +36,7 @@
                             @endif
                         </div>
                         <div class="list-item-content">
-                            <div class="list-item-title">
+                            <div class="list-item-title" style="color: {{ $child->gender_color }}">
                                 {{ $child->full_name }}</div>
                             <div class="list-item-description is-grouped is-grouped-multiline">
                                 <div class="field is-grouped is-grouped-multiline">

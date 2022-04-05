@@ -40,7 +40,7 @@
                                     @endif
                                 </div>
                                 <div class="column">
-                                    <p class="title">{{ $child->first_name }}</p>
+                                    <p class="title" style="color: {{ $child->gender_color }}">{{ $child->first_name }}</p>
                                 </div>
                             </div>
                             <div class="content">
