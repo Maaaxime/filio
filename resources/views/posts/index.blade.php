@@ -22,10 +22,10 @@
                                     <div class="list-item-description">
                                         {{ __('message.postInfo', ['name' => $post->author->name,'datetime' => $post->created_at->format('d/m/Y H:i')]) }}
                                         @if ($post->promoted)
-                                            <span class="tag is-primary"><i class="fa-solid fa-star"></i></span>
+                                            <span class="tag is-primary"  data-tooltip="{{ __('message.promoted') }}"><i class="fa-solid fa-star"></i></span>
                                         @endif
                                         @if ($post->color_name)
-                                            <span class="tag {{ $post->color_name }}"
+                                            <span class="tag {{ $post->color_name }}"  data-tooltip="{{ __('message.color') }}"
                                                 style="text-align: center; line-height: 2em;">&#9632;</span>
                                         @endif
                                         @if ($post->active == 0)
@@ -37,7 +37,7 @@
                                     <div class="list-item-controls">
                                         <div class="buttons is-right">
                                             <a href="{{ route('admin.posts.edit', $post->slug) }}"
-                                                class="button is-primary">
+                                                class="button is-primary" data-tooltip="{{ __('message.edit') }}">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                         </div>

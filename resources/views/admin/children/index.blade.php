@@ -60,7 +60,7 @@
                                 <div class="list-item-controls">
                                     <div class="buttons is-right">
                                         <a href="{{ route('admin.children.edit', $child->id) }}"
-                                            class="button is-primary">
+                                            class="button is-primary"  data-tooltip="{{ __('message.edit') }}">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </div>

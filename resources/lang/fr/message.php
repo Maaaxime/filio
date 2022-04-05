@@ -143,5 +143,6 @@ return [
     'postView' => 'En savoir plus >',
     'postSaveDraft' => 'Brouillon',
     'color' => 'Accent',
-    'postRecents' => 'Articles récents'
+    'postRecents' => 'Articles récents',
+    'sendMail' => 'Envoyer un e-mail',
 ];

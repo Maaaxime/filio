@@ -57,7 +57,7 @@
                                     </td>
                                     <th class="is-narrow" data-sortable="false">
                                         <a href="{{ route('admin.attendances.entries.edit', $timeEntry->id) }}"
-                                            class="button is-primary">
+                                            class="button is-primary" data-tooltip="{{ __('message.edit') }}">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </th>

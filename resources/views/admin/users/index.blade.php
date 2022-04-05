@@ -60,11 +60,11 @@
 
                                 <div class="list-item-controls">
                                     <div class="buttons is-right">
-                                        <a href="mailto:{{ $user->email }}" class="button is-primary">
+                                        <a href="mailto:{{ $user->email }}" class="button is-primary is-hidden-mobile"  data-tooltip="{{ __('message.sendMail') }}">
                                             <i class="fa-solid fa-envelope"></i>
                                         </a>
                                         <a href="{{ route('admin.users.edit', $user->id) }}"
-                                            class="button is-primary">
+                                            class="button is-primary" data-tooltip="{{ __('message.edit') }}">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </div>
