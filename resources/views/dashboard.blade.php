@@ -2,27 +2,30 @@
     <x-content-page>
         <x-slot name="header">{{ __('message.dashboard') }}</x-slot>
         <x-slot name="headerSubtitle"></x-slot>
-        <div class="content">
-            @if ($posts->count() > 0)
-                <section class="section">
+        <div class="box-no-shadow">
+            <div class="content">
+                @if ($posts->count() > 0)
                     @foreach ($posts as $post)
-                        <article class="message {{ $post->color_name }}">
-                            <div class="message-header">
-                                <p>{{ $post->title }}<br />
-                                    <span class="is-size-7">
-                                        {{ __('message.postInfo', ['name' => $post->author->name,'datetime' => $post->created_at->format('d/m/Y H:i')]) }}
-                                    </span>
-                                </p>
+                        <div class="notification  {{ $post->color_name }}">
+                            <div class="columns">
+                                <div class="column">
+                                    <p>{{ $post->title }}<br />
+                                        <span class="is-size-7">
+                                            {{ __('message.postInfo', ['name' => $post->author->name,'datetime' => $post->created_at->format('d/m/Y H:i')]) }}
+                                        </span>
+                                    </p>
+                                </div>
+                                <div
+                                    class="column is-flex is-justify-content-center is-align-content-center is-flex-direction-column is-flex-grow-0">
+                                    <a class="button {{ $post->color_name }} is-light"
+                                        href="{{ route('user.posts.show', $post->slug) }}">
+                                        {{ __('message.postView') }}</a>
+                                </div>
                             </div>
-                            <div class="message-body">
-                                <a
-                                    href="{{ route('user.posts.show', $post->slug) }}">{{ __('message.postView') }}</a>
-                            </div>
-                        </article>
+                        </div>
                     @endforeach
-                </section>
-            @endif
-            <section class="section">
+                @endif
+
                 <div class="tile is-ancestor">
                     @php
                         $noOfColumns = 3;
@@ -34,7 +37,8 @@
                 <div class="tile is-ancestor">
                     @endif
                     <div class="tile is-parent">
-                        <article class="tile is-child box">
+                        <article
+                            class="tile is-child box is-flex is-flex-direction-column is-justify-content-space-between">
                             <div class="columns is-mobile is-vcentered">
                                 <div class="column is-narrow">
                                     @if ($child->image)
@@ -101,7 +105,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                            <div class="is-block ">
+                            <div>
                                 <a href="#" class="button is-primary is-block timer" data-child="{{ $child->id }}">
                                     <span class="icon is-small">
                                         <i class="fa-fw fas fa-clock nav-icon"></i>
@@ -117,7 +121,7 @@
                     @endphp
                     @endforeach
                 </div>
-            </section>
+            </div>
         </div>
     </x-content-page>
 
