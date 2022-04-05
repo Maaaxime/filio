@@ -6,7 +6,6 @@
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
-
         {!! Form::model($attendanceEntry, ['method' => 'PATCH', 'route' => ['user.attendances.checkout.store', $attendanceEntry->id], 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="columns">
@@ -28,22 +27,22 @@
                 <div class="field">
                     <label class="label">{{ __('message.time_start_date') }}</label>
                     <div class="control">
-                        {{ Form::text('time_start_date', $attendanceEntry->time_start->format('d/m/Y'), ['id' => 'time_start_date', 'class' => 'input is-fullwidth js-mini-picker-date sr-only disabled','disabled' => true]) }}
+                        {{ Form::text('time_start_date', $attendanceEntry->time_start->format('d/m/Y'), ['id' => 'time_start_date','class' => 'input is-fullwidth js-mini-picker-date sr-only disabled','disabled' => true]) }}
                         <div class="js-mini-picker-container" id="time_start_date"></div>
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">{{ __('message.time_start_time') }}</label>
                     <div class="control">
-                        {{ Form::time('time_start_time', $attendanceEntry->time_start_time, ['id' => 'time_start_time', 'class' => 'input is-fullwidth js-mini-picker-time sr-only disabled','disabled' => true]) }}
+                        {{ Form::time('time_start_time', $attendanceEntry->time_start_time, ['id' => 'time_start_time','class' => 'input is-fullwidth js-mini-picker-time sr-only disabled','disabled' => true]) }}
                         <div class="js-mini-picker-container" id="time_start_time"></div>
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">{{ __('message.time_end_time') }}</label>
                     <div class="control">
-                        <input type="time" name="time_end_time" value="{{ \Carbon\Carbon::now()->format('H:i') }}"  id="time_end_time"
-                            min="{{ \Carbon\Carbon::now()->format('H:i') }}"
+                        <input type="time" name="time_end_time" value="{{ \Carbon\Carbon::now()->format('H:i') }}"
+                            id="time_end_time" min="{{ \Carbon\Carbon::now()->format('H:i') }}"
                             class="input is-fullwidth js-mini-picker-time sr-only">
                         <div class="js-mini-picker-container" id="time_end_time"></div>
                     </div>

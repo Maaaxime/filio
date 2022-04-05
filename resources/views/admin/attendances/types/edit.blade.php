@@ -6,7 +6,6 @@
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
-
         {!! Form::model($attendanceType, ['method' => 'PATCH', 'route' => ['admin.attendances.types.update', $attendanceType->id], 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="field">
@@ -25,7 +24,7 @@
         <div class="field">
             <label class="label">{{ __('message.color') }}</label>
             <div class="control select">
-                {!! Form::select('color', collect($attendanceType->colors)->pluck("name"), old($attendanceType->color), ['class' => '','disabled' => $readonly]) !!}
+                {!! Form::select('color', collect($attendanceType->colors)->pluck('name'), old($attendanceType->color), ['class' => '', 'disabled' => $readonly]) !!}
             </div>
         </div>
         <div class="field">

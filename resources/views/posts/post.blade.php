@@ -21,8 +21,11 @@
                 </a>
             @endcan
         </x-slot>
+
         <div class="box-no-shadow">
-            {!! $post->body !!}
+            <div class="content">
+                {!! $post->body !!}
+            </div>
         </div>
     </x-content-page>
 </x-app-layout>

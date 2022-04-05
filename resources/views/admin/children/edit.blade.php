@@ -7,7 +7,6 @@
             </a>
         </x-slot>
         <x-slot name="headerPicture">{{ $child->image }}</x-slot>
-
         {!! Form::model($child, ['method' => 'PATCH', 'route' => ['admin.children.update', $child->id], 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">

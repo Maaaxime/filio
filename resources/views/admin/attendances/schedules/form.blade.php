@@ -8,7 +8,6 @@
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
-
         {!! Form::model($attendanceSchedule, ['method' => $methodName, 'route' => [$actionRoute, $attendanceSchedule->id], 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">

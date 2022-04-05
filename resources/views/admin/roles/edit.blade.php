@@ -6,7 +6,6 @@
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
-
         {!! Form::model($role, ['method' => 'PATCH', 'route' => ['admin.roles.update', $role->id], 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="field">

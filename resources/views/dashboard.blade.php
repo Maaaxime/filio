@@ -8,7 +8,11 @@
                     @foreach ($posts as $post)
                         <article class="message {{ $post->color_name }}">
                             <div class="message-header">
-                                <p>{{ $post->title }}</p>
+                                <p>{{ $post->title }}<br />
+                                    <span class="is-size-7">
+                                        {{ __('message.postInfo', ['name' => $post->author->name,'datetime' => $post->created_at->format('d/m/Y H:i')]) }}
+                                    </span>
+                                </p>
                             </div>
                             <div class="message-body">
                                 <a
@@ -40,7 +44,8 @@
                                     @endif
                                 </div>
                                 <div class="column">
-                                    <p class="title" style="color: {{ $child->gender_color }}">{{ $child->first_name }}</p>
+                                    <p class="title" style="color: {{ $child->gender_color }}">
+                                        {{ $child->first_name }}</p>
                                 </div>
                             </div>
                             <div class="content">

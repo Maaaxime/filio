@@ -8,7 +8,6 @@
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
-
         {!! Form::model($post, ['method' => $methodName, 'route' => [$actionRoute, $post->slug], 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         {{ Form::hidden('post_id', $post->id) }}
@@ -65,7 +64,6 @@
                 </div>
             @endcanany
         @endif
-
         {!! Form::close() !!}
     </x-content-page>
 

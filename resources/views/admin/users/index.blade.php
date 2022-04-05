@@ -11,7 +11,8 @@
         <div>
             {!! Form::open(['route' => 'admin.users.index.filtered', 'method' => 'POST', 'class' => 'box-no-shadow']) !!}
             <div class="buttons has-addons is-centered">
-                <button type="submit" class="button {{ (($filter == 'all') || ($filter == '')) ? 'is-primary is-selected' : '' }}"
+                <button type="submit"
+                    class="button {{ $filter == 'all' || $filter == '' ? 'is-primary is-selected' : '' }}"
                     name="action" value="all">
                     <span>{{ __('message.allUsers') }}</span>
                 </button>
@@ -23,45 +24,50 @@
                 @endforeach
             </div>
             {!! Form::close() !!}
-            <div class="list has-hoverable-list-items">
-                @foreach ($users as $key => $user)
-                    <div class="list-item">
-                        <div class="list-item-image">
-                            @if ($user->image)
-                                <div class="image is-rounded is-48x48"
-                                    style="background-image: url('{{ asset('/storage/images/' . $user->image) }}');">
-                                </div>
-                            @endif
-                        </div>
-
-                        <div class="list-item-content">
-                            <div class="list-item-title">{{ $user->name }}</div>
-                            <div class="list-item-description">{{ $user->email }}</div>
-                        </div>
-                        <div class="list-item-content is-inline-block is-hidden-touch">
-                            @foreach ($user->children as $child)
-                                @if ($child->image)
-                                    <a href="{{ route('admin.children.show', $child->id) }}">
-                                        <div class="image is-rounded img-multi is-48x48"
-                                            style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');"
-                                            data-tooltip="{{ $child->full_name }}">
+            <div class="box-no-shadow">
+                <div class="content">
+                    <div class="list has-hoverable-list-items">
+                        @foreach ($users as $key => $user)
+                            <div class="list-item">
+                                <div class="list-item-image">
+                                    @if ($user->image)
+                                        <div class="image is-rounded is-48x48"
+                                            style="background-image: url('{{ asset('/storage/images/' . $user->image) }}');">
                                         </div>
-                                    </a>
-                                @endif
-                            @endforeach
-                        </div>
-                        <div class="list-item-controls">
-                            <div class="buttons is-right">
-                                <a href="mailto:{{ $user->email }}" class="button is-primary">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </a>
-                                <a href="{{ route('admin.users.edit', $user->id) }}" class="button is-primary">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
+                                    @endif
+                                </div>
+
+                                <div class="list-item-content">
+                                    <div class="list-item-title">{{ $user->name }}</div>
+                                    <div class="list-item-description">{{ $user->email }}</div>
+                                </div>
+                                <div class="list-item-content is-inline-block is-hidden-touch">
+                                    @foreach ($user->children as $child)
+                                        @if ($child->image)
+                                            <a href="{{ route('admin.children.show', $child->id) }}">
+                                                <div class="image is-rounded img-multi is-48x48"
+                                                    style="background-image: url('{{ asset('/storage/images/' . $child->image) }}');"
+                                                    data-tooltip="{{ $child->full_name }}">
+                                                </div>
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                                <div class="list-item-controls">
+                                    <div class="buttons is-right">
+                                        <a href="mailto:{{ $user->email }}" class="button is-primary">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </a>
+                                        <a href="{{ route('admin.users.edit', $user->id) }}"
+                                            class="button is-primary">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
     </x-content-page>

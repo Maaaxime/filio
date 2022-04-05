@@ -6,7 +6,6 @@
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
-
         {!! Form::open(['route' => 'user.attendances.checkin.store', 'method' => 'POST', 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         {{ Form::hidden('time_start_date', \Carbon\Carbon::now()->format('Y-m-d')) }}

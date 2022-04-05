@@ -6,7 +6,6 @@
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
-
         {!! Form::open(['route' => 'admin.children.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'box-no-shadow']) !!}
         {{ Form::hidden('url', URL::previous()) }}
         <div class="pb-6 sticky">
@@ -337,7 +336,7 @@
                         <div class="column field">
                             <label class="label">{{ __('message.attendanceSchedulesManagement') }}</label>
                             <div class="control">
-                                {!! Form::select('schedule_id', App\Models\AttendanceSchedule::all()->pluck('name','id'),null, ['class' => 'input']); !!}
+                                {!! Form::select('schedule_id', App\Models\AttendanceSchedule::all()->pluck('name', 'id'), null, ['class' => 'input']) !!}
                             </div>
                         </div>
                     </div>

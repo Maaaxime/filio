@@ -6,9 +6,8 @@
                 <i class="fa-solid fa-circle-chevron-left"></i> {{ __('message.back') }}
             </a>
         </x-slot>
-
         {!! Form::open(['route' => 'admin.attendances.types.store', 'method' => 'POST', 'class' => 'box-no-shadow']) !!}
-        {{  Form::hidden('url',URL::previous())  }}
+        {{ Form::hidden('url', URL::previous()) }}
         <div class="field">
             <label class="label">{{ __('message.name') }}</label>
             <div class="control">
@@ -25,7 +24,7 @@
         <div class="field">
             <label class="label">{{ __('message.color') }}</label>
             <div class="control select">
-                {!! Form::select('color', collect($attendanceType->colors)->pluck("name"), old($attendanceType->color), ['class' => '','disabled' => $readonly]) !!}
+                {!! Form::select('color', collect($attendanceType->colors)->pluck('name'), old($attendanceType->color), ['class' => '', 'disabled' => $readonly]) !!}
             </div>
         </div>
         <div class="field">

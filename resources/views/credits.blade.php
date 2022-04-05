@@ -2,7 +2,6 @@
     <x-content-page>
         <x-slot name="header">{{ __('message.credits') }}</x-slot>
         <x-slot name="headerSubtitle">Thank's</x-slot>
-
         <div class="tile">
             <div class="tile is-parent">
                 <article class="tile is-child notification content">
