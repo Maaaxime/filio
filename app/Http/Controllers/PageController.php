@@ -10,9 +10,10 @@ class PageController extends Controller
 {
     public function dashboard(Request $request)
     {
-        $children = Child::active()->get();    
-        $posts = Post::active()->promoted()->get();
+        $children = Child::active()->get();
+        $promotedPosts = Post::active()->promoted()->get();
+        $recentPosts = Post::active()->orderBy('created_at', 'desc')->take(5)->get();
 
-        return view('dashboard',compact('posts','children'));
+        return view('dashboard', compact('promotedPosts', 'recentPosts', 'children'));
     }
 }

@@ -55,7 +55,7 @@ class ChildPolicy
      */
     public function create(User $user)
     {
-        if ($user->hasPermissionTo('child-create')) {
+        if ($user->hasPermissionTo('child.create')) {
             return true;
         }
 

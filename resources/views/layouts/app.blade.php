@@ -26,6 +26,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/bulma-sweetalert2.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/bulma-divider.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/picker.min.css') }}">    
     <link rel="stylesheet" href="{{ asset('css/picker.custom.css') }}">    
 

@@ -90,8 +90,9 @@ return [
     'attendanceTypeNeedProof' => 'Nécessite un justificatif',
     'attendanceTypeNeedPermission' => 'Utilis. habilité uniquement',
     'attendanceTypeDefault' => 'Par défaut',
-    'attendanceEntriesManagement' => 'Entrées',
+    'attendanceEntriesManagement' => 'Écritures',
     'attendanceType' => 'Type',
+    'attentances' => 'Pointages',
     'time_start_date' => 'Date',
     'time_start_time' => 'Arrivée',
     'time_end_date' => 'Date',
@@ -142,4 +143,5 @@ return [
     'postView' => 'En savoir plus >',
     'postSaveDraft' => 'Brouillon',
     'color' => 'Accent',
+    'postRecents' => 'Articles récents'
 ];

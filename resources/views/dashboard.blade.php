@@ -4,8 +4,8 @@
         <x-slot name="headerSubtitle"></x-slot>
         <div class="box-no-shadow">
             <div class="content">
-                @if ($posts->count() > 0)
-                    @foreach ($posts as $post)
+                @if ($promotedPosts->count() > 0)
+                    @foreach ($promotedPosts as $post)
                         <div class="notification  {{ $post->color_name }}">
                             <div class="columns">
                                 <div class="column">
@@ -25,6 +25,10 @@
                         </div>
                     @endforeach
                 @endif
+
+                <div>
+                    <div class="divider"><p class="is-size-4">{{ __('message.attentances') }}</p></div>
+                </div>
 
                 <div class="tile is-ancestor">
                     @php
@@ -121,6 +125,28 @@
                     @endphp
                     @endforeach
                 </div>
+                @if ($recentPosts->count() > 0)
+                    <div>
+                        <div class="divider"><p class="is-size-4">{{ __('message.postRecents') }}</p></div>
+                    </div>
+
+                    <div class="list has-hoverable-list-items">
+                        @foreach ($recentPosts as $key => $post)
+                            <a href="{{ route('user.posts.show', $post->slug) }}">
+                                <div class="list-item">
+                                    <div class="list-item-content">
+                                        <div class="list-item-title">
+                                            {{ $post->title }}
+                                        </div>
+                                        <div class="list-item-description">
+                                            {{ __('message.postInfo', ['name' => $post->author->name,'datetime' => $post->created_at->format('d/m/Y H:i')]) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
     </x-content-page>
