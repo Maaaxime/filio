@@ -68,6 +68,7 @@
                             <div class="tab-panels">
                                 @php $first = true; @endphp
                                 @foreach ($table as $type => $entries)
+                                    @php $total = 0; @endphp
                                     <section id="tab-{{ $type }}"
                                         class="tab-panel {{ $first ? '' : 'is-hidden' }}">
                                         <div class="table-container pr-2 pl-2">
@@ -83,7 +84,9 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @php ksort($entries); @endphp
                                                     @foreach ($entries as $date => $value)
+                                                        @php $total += $value; @endphp
                                                         <tr>
                                                             <td>{{ $date }}</td>
                                                             <td class="has-text-right">
@@ -91,7 +94,16 @@
                                                             </td>
                                                         </tr>
                                                     @endforeach
+                                                    
                                                 </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Total</th>
+                                                        <th class="has-text-right">
+                                                            {{ number_format($total, 2, ',', ' ') }}
+                                                        </th>
+                                                    </tr>
+                                                </tfoot>
                                             </table>
                                         </div>
                                     </section>
