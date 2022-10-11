@@ -126,6 +126,7 @@ return [
     'reportsManagement' => 'Analyses',
     'chartTotalChildrenPerDay' => 'Nbre d\'enfants par jour',
     'chartTotalHoursPerDay' => 'Nbre d\'heures de garde par jour',
+    'chartTableChildPerDay' => 'Récap. heures par enfant',
     'noDataToDisplay' => 'Aucune donnée à afficher',
     'quantity' => 'Quantité',
 

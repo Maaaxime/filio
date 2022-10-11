@@ -193,7 +193,7 @@ class Child extends Model
         static::addGlobalScope('user', function (Builder $builder) {
 
             $builder = $builder->orderBy('first_name');
-            
+
             if (Auth::hasUser()) {
                 if (Auth::User()->hasPermissionTo('child.list-all')) {
                     return;
@@ -201,7 +201,7 @@ class Child extends Model
 
                 if (Auth::User()->hasPermissionTo('child.list-my')) {
                     $childIds = Auth::User()->children()->allRelatedIds()->toArray();
-                    $builder = $builder->whereIn('children.id',$childIds);
+                    $builder = $builder->whereIn('children.id', $childIds);
                 };
             }
         });
@@ -217,7 +217,7 @@ class Child extends Model
     {
         return ucfirst($value);
     }
-     
+
     public function setFirstNameAttribute($value)
     {
         $this->attributes['first_name'] = ucfirst($value);
@@ -227,12 +227,12 @@ class Child extends Model
     {
         return strtoupper($value);
     }
-     
+
     public function setLastNameAttribute($value)
     {
         $this->attributes['last_name'] = ucfirst($value);
     }
-    
+
     public function parents(): string
     {
         return match (true) {
@@ -356,11 +356,19 @@ class Child extends Model
         return  $diffForHumans;
     }
 
-    public function scopeActive($query)
+    public function scopeActive($query, $dateFilters = null)
     {
-        $query->where(function ($query) {
-            $query->where('contract_ending_date', '>', new DateTime());
-        })->orWhereNull('contract_ending_date');
+        if (isset($dateFilters)) {
+            $query->where(function ($query) use ($dateFilters) {
+                $query->where('contract_starting_date', '<=', $dateFilters["firstDay"]->toDateString())->orWhereNull('contract_starting_date');
+            })->where(function ($query) use ($dateFilters) {
+                $query->where('contract_ending_date', '>=', $dateFilters["lastDay"]->toDateString())->orWhereNull('contract_ending_date');
+            });
+        } else {
+            $query->where(function ($query) {
+                $query->where('contract_ending_date', '>', new DateTime());
+            })->orWhereNull('contract_ending_date');
+        }
     }
 
     public function scopeInactive($query)

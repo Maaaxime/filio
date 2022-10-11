@@ -27,24 +27,35 @@ class AttendanceReportController extends Controller
         $chart = null;
         $table = null;
         switch ($reportFilters["selectedReport"]) {
-            case 0: // 
+            case 0: // chartTotalChildrenPerDay
                 $datasets = $this->getChartTotalChildrenPerDay($dateFilters, $childFilters["selectedChild"]);
                 $chart = $datasets[0];
                 $table = $datasets[1];
+                $viewType = "graph";
                 break;
-            case 1: //
+            case 1: // chartTotalHoursPerDay
                 $datasets = $this->getChartTotalHoursPerDay($dateFilters, $childFilters["selectedChild"]);
                 $chart = $datasets[0];
                 $table = $datasets[1];
+                $viewType = "graph";
+                break;
+            case 2: // chartTableChildPerDay
+                $childrenArray = Child::active($dateFilters)->get()->pluck('full_name', 'id')->toArray();
+
+                $datasets = $this->getChartTableChildPerDay($dateFilters, $childrenArray);
+                $chart = $datasets[0];
+                $table = array('children' => $childrenArray, 'dates' => $dateFilters);
+                $viewType = "table";
                 break;
             default:
                 $datasets = null;
                 $chart = null;
                 $table = null;
+                $viewType = "none";
                 break;
         }
 
-        return view('admin.attendances.reports.index', compact('dateFilters', 'reportFilters', 'childFilters', 'chart','table'));
+        return view('admin.attendances.reports.index', compact('dateFilters', 'reportFilters', 'childFilters', 'chart', 'table', 'viewType'));
     }
 
     private function getReportFilters($fromReport): array
@@ -52,7 +63,8 @@ class AttendanceReportController extends Controller
         $selectedReport =  isset($fromReport) ? $fromReport : 0;
         $availableReports = array(
             0 => __('message.chartTotalChildrenPerDay'),
-            1 => __('message.chartTotalHoursPerDay')
+            1 => __('message.chartTotalHoursPerDay'),
+            2 => __('message.chartTableChildPerDay')
         );
 
         return array(
@@ -129,6 +141,50 @@ class AttendanceReportController extends Controller
         return $monthArray;
     }
 
+    private function getChartTableChildPerDay(array $dateFilters, array $childrenArray)
+    {
+        $chartDatasets = [];
+        $defaultEntryType = AttendanceType::whereDefault(1)->first();
+
+        foreach ($childrenArray as $childId => $childName) {
+            $data = AttendanceEntry::whereNotNull('time_end')
+                ->whereBetween('time_start', [$dateFilters["firstDay"], $dateFilters["lastDay"]])
+                ->where('type_id', '=', $defaultEntryType->id)
+                ->where('child_id', '=', $childId);
+
+            $data = $data->get(
+                array(
+                    DB::raw(' DATE_FORMAT(Date(time_start),"%d") as date_start'),
+                    'time_start',
+                    'time_end',
+                )
+            )
+                ->groupBy(['date_start'])
+                ->map(function ($items) {
+                    $sum = 0;
+
+                    foreach ($items as $item) {
+                        $sum += $item->total_time_hours;
+                    }
+
+                    return $sum;
+                })
+                ->toArray();
+
+            if ($data) {
+                $dataset = array(
+                    "childId" => $childId,
+                    "childName" => $childName,
+                    "data" => $data
+                );
+
+                array_push($chartDatasets, $dataset);
+            }
+        }
+
+        return [$chartDatasets];
+    }
+
     private function getChartTotalChildrenPerDay(array $dateFilters, int $child_id = null)
     {
         $chartDatasets = [];
@@ -136,8 +192,6 @@ class AttendanceReportController extends Controller
 
         $entryTypes = AttendanceType::all();
         foreach ($entryTypes as $type) {
-
-
             $data = AttendanceEntry::whereNotNull('time_end')
                 ->whereBetween('time_start', [$dateFilters["firstDay"], $dateFilters["lastDay"]])
                 ->where('type_id', '=', $type->id);
@@ -166,7 +220,7 @@ class AttendanceReportController extends Controller
                 );
 
                 array_push($chartDatasets, $dataset);
-                $tableDatasets = array_merge($tableDatasets,array($type->name => $data));
+                $tableDatasets = array_merge($tableDatasets, array($type->name => $data));
             }
         }
 
@@ -217,7 +271,7 @@ class AttendanceReportController extends Controller
                 );
 
                 array_push($chartDatasets, $dataset);
-                $tableDatasets = array_merge($tableDatasets,array($type->name => $data));
+                $tableDatasets = array_merge($tableDatasets, array($type->name => $data));
             }
         }
 
