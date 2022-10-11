@@ -366,8 +366,10 @@ class Child extends Model
             });
         } else {
             $query->where(function ($query) {
-                $query->where('contract_ending_date', '>', new DateTime());
-            })->orWhereNull('contract_ending_date');
+                $query->where('contract_starting_date', '<=', new DateTime())->orWhereNull('contract_starting_date');
+            })->where(function ($query) {
+                $query->where('contract_ending_date', '>=', new DateTime())->orWhereNull('contract_ending_date');
+            });
         }
     }
 
