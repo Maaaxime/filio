@@ -376,6 +376,8 @@ class Child extends Model
     public function scopeInactive($query)
     {
         $query->where(function ($query) {
+            $query->where('contract_starting_date', '>', new DateTime());
+        })->orWhere(function ($query) {
             $query->where('contract_ending_date', '<', new DateTime());
         });
     }
