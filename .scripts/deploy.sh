@@ -12,15 +12,13 @@ git pull origin production
 
 # Install composer dependencies
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+composer update
 
 # Clear the old cache
 php artisan clear-compiled
 
 # Recreate cache
 php artisan optimize
-
-# Compile npm assets
-npm run prod
 
 # Run database migrations
 php artisan migrate --force
