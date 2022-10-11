@@ -177,6 +177,9 @@ return [
 
         Spatie\Permission\PermissionServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
+
+
     ],
 
     /*
@@ -231,6 +234,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
 
     ],
 
